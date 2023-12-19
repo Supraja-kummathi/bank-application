@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Layout from "../Layout";
-import LandingPage from "../components/landingpage/LandingPage";
+import LandingPage from "../components/Home/Home";
 
 const router = createBrowserRouter([
   {
@@ -11,7 +11,7 @@ const router = createBrowserRouter([
         index: true,
         element: <LandingPage />,
       },
-      { path: "*", element: <h1>Page not found</h1>},
+      { path: "*", element: <h1>Page not found</h1> },
     ],
   },
 ]);
