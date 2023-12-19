@@ -1,3 +1,4 @@
+
 import React from "react";
 import { FaEdit } from "react-icons/fa";
 import Button from "../../../utilities/Button";
@@ -53,3 +54,4 @@ const AllBank = () => {
 };
 
 export default AllBank;
+
