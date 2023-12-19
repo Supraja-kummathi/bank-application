@@ -1,11 +1,12 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
+import Navbar from './components/pages/navbar/Navbar'
+import LandingPage from './components/landingpage/LandingPage'
 
 const Layout = () => {
   return (
     <div>
-     <h1 className='bg-red-500'>react</h1>
-     <Outlet/>
+      <Outlet/>
     </div>
   )
 }

@@ -1,11 +1,12 @@
-import React from 'react'
+import React from "react";
+import Navbar from "../pages/navbar/Navbar";
+import { Outlet } from "react-router-dom";
 
 const LandingPage = () => {
-  return (
-    <div>
-     landing page 
-    </div>
-  )
-}
+  return <div>
+     <Navbar/>
+     <Outlet/>
+  </div>;
+};
 
-export default LandingPage
+export default LandingPage;
