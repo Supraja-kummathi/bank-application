@@ -1,7 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
 import Layout from "../Layout";
-import LandingPage from "../components/landingpage/LandingPage";
-import LeftSideSection from "../components/landingpage/LeftSideSection";
+import Home from "../components/Home/Home";
+import Dashboard from "../components/pages/dashboard/Dashboard";
+import CreateBank from "../components/pages/bank/CreateBank";
+import AllBank from "../components/pages/bank/AllBank";
+import CreateMD from "../components/pages/managingDirector/CreateMD";
+import AllMD from "../components/pages/managingDirector/AllMD";
 
 const router = createBrowserRouter([
   {
@@ -10,13 +14,31 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <LandingPage />,
-        children:[{
-          index:true,
-          element: <LeftSideSection />,
-        }]
+        element: <Home />,
+        children: [
+          {
+            index: true,
+            element: <Dashboard />,
+          },
+          {
+            path:"create-bank",
+            element: <CreateBank />,
+          },
+          {
+            path:"all-bank",
+            element: <AllBank />,
+          },
+          {
+            path:"create-md",
+            element: <CreateMD />,
+          },
+          {
+            path:"all-md",
+            element: <AllMD />,
+          },
+        ],
       },
-      { path: "*", element: <h1>Page not found</h1>},
+      { path: "*", element: <h1>Page not found</h1> },
     ],
   },
 ]);

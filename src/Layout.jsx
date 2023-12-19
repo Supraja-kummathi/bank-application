@@ -1,14 +1,18 @@
-import React from 'react'
-import { Outlet } from 'react-router-dom'
-import Navbar from './components/pages/navbar/Navbar'
-import LandingPage from './components/landingpage/LandingPage'
+import React from "react";
+import { Outlet } from "react-router-dom";
+import Navbar from "./components/navbar/Navbar";
 
 const Layout = () => {
   return (
-    <div>
-      <Outlet/>
-    </div>
-  )
-}
+    <section>
+      <article>
+        <Navbar />
+      </article>
+      <article>
+        <Outlet />
+      </article>
+    </section>
+  );
+};
 
-export default Layout
+export default Layout;
