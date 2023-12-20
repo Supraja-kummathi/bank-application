@@ -61,12 +61,12 @@ const Login = () => {
           />
         </div>
 
-        <div className="form-group pt-12">
+        <div className="form-group pt-10">
           <button className="py-1 px-[9.8rem] mx-6 rounded-md bg-blue-600 text-white" type="submit">Login</button>
           
         </div>
         <footer className="flex items-center justify-center py-4  text-[rgb(157,155,155)]">
-        <FaLock className="pe-1" /><span className="me-4"><Link> Forgot Password?</Link> </span> <span><Link>Register</Link> </span>
+        <FaLock className="pe-1" /><span className="me-4"><Link> Forgot Password?</Link> </span> <span><Link to="/register">Register</Link> </span>
         </footer>
         <div className="flex items-center justify-evenly pt-4 pb-10 text-[rgb(157,155,155)] text-sm">
           <button onClick={()=>{setName("Switch To MD Login")}} className="md">Switch To MD Login</button>
