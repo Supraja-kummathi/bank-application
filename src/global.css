@@ -1,8 +1,8 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;1,300&family=Roboto+Flex:opsz,wght@8..144,100;8..144,300;8..144,400;8..144,500;8..144,900&family=Roboto:ital@0;1&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;1,300&family=Roboto+Flex:opsz,wght@8..144,100;8..144,300;8..144,400;8..144,500;8..144,900&family=Roboto:ital@0;1&display=swap");
 
 * {
   margin: 0;
@@ -10,7 +10,6 @@
   box-sizing: border-box;
 }
 body {
-background-color: rgb(243, 244, 245);
-font-family: 'Poppins', sans-serif;
-
+  background-color: rgb(243, 244, 245);
+  font-family: "Poppins", sans-serif;
 }

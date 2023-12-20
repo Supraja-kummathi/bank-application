@@ -10,7 +10,7 @@ const Login = () => {
   const navigate = useNavigate();
   const { userToken } = useSelector(state => state.auth);
   let dispatch = useDispatch();
-  let [name,setName]=useState("customer login")
+  let [name, setName] = useState("customer login");
   let [state, setState] = useState({
     email: "",
     password: "",
@@ -29,12 +29,11 @@ const Login = () => {
   let handleSubmit = e => {
     e.preventDefault();
     dispatch(userLogin(state));
-  
   };
- 
+
   return (
-    <FormComp name={name} >
-       <form onSubmit={handleSubmit}>
+    <FormComp name={name}>
+      <form onSubmit={handleSubmit}>
         <div className="form-group">
           {/* <label htmlFor="email">email</label> */}
           <input
@@ -57,26 +56,46 @@ const Login = () => {
             value={password}
             onChange={handleChange}
             placeholder="Password"
-          
           />
         </div>
 
-        <div className="form-group pt-12">
-          <button className="py-1 px-[9.8rem] mx-6 rounded-md bg-blue-600 text-white" type="submit">Login</button>
-          
+        <div className="form-group mx-6 pt-12 w-[88%]">
+          <button
+            className="py-1 w-full  rounded-md bg-blue-600 text-white"
+            type="submit"
+          >
+            Login
+          </button>
         </div>
         <footer className="flex items-center justify-center py-4  text-[rgb(157,155,155)]">
-        <FaLock className="pe-1" /><span className="me-4"><Link> Forgot Password?</Link> </span> <span><Link>Register</Link> </span>
+          <FaLock className="pe-1" />
+          <span className="me-4">
+            <Link> Forgot Password?</Link>{" "}
+          </span>{" "}
+          <span>
+            <Link>Register</Link>{" "}
+          </span>
         </footer>
         <div className="flex items-center justify-evenly pt-4 pb-10 text-[rgb(157,155,155)] text-sm">
-          <button onClick={()=>{setName("Switch To MD Login")}} className="md">Switch To MD Login</button>
-          <button onClick={()=>{setName("Switch To Bank Manager Login")}} className="manager">Switch To Bank Manager Login</button>
+          <button
+            onClick={() => {
+              setName("Switch To MD Login");
+            }}
+            className="md"
+          >
+            Switch To MD Login
+          </button>
+          <button
+            onClick={() => {
+              setName("Switch To Bank Manager Login");
+            }}
+            className="manager"
+          >
+            Switch To Bank Manager Login
+          </button>
         </div>
       </form>
     </FormComp>
-   
-     
-
   );
 };
 

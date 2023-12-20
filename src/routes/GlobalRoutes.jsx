@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+
 import AdminLayout from "../AdminLayout";
 
 import Home from "../components/Home/Home";
@@ -6,10 +7,10 @@ import CreateBank from "../components/pages/bank/CreateBank";
 import AllBank from "../components/pages/bank/AllBank";
 import CreateMD from "../components/pages/managingDirector/CreateMD";
 import AllMD from "../components/pages/managingDirector/AllMD";
-import Register from './../components/auth/Register';
+import Register from "./../components/auth/Register";
 import Login from "../components/auth/Login";
 import AdminDashboard from "../components/pages/AdminDashboard/AdminDashboard";
-
+import ForgotPassword from "../components/auth/ForgotPassword";
 
 const router = createBrowserRouter([
   {
@@ -22,7 +23,7 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <AdminDashboard/>,
+            element: <AdminDashboard />,
           },
           {
             path: "create-bank",
@@ -42,11 +43,14 @@ const router = createBrowserRouter([
           },
         ],
       },
+
       { path: "*", element: <h1>Page not found</h1> },
     ],
   },
   { path: "/register", element: <Register /> },
-  { index:true, element: <Login /> },
+  { index: true, element: <ForgotPassword /> },
+  ,
+  { path:"/forgotpassword", element: <ForgotPassword /> },
 ]);
 
 export default router;
