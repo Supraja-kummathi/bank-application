@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { registerThunk } from "../../redux/reducers/auth/authSlice";
-import FormComp from "../../utils/FormComp";
-import { useNavigate } from "react-router-dom";
+// import { registerThunk } from "../../redux/reducers/auth/authSlice";
+// import FormComp from "../../utils/FormComp";
+// import { useNavigate } from "react-router-dom";
 const Register = () => {
   let dispatch = useDispatch();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   let [state, setState] = useState({
     name: "",
     email: "",
@@ -19,13 +19,14 @@ const Register = () => {
 
   let handleSubmit = e => {
     e.preventDefault();
-    dispatch(registerThunk(state));
+    // dispatch(registerThunk(state));
+    console.log(state)
     navigate("/")
     
   };
   return (
     <div>
-      <FormComp>
+      <FormComp name={"Register"}>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           {/* <label htmlFor="name">name</label> */}

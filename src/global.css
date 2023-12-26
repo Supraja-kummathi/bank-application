@@ -4,14 +4,16 @@
 @tailwind utilities;
 
 
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 body {
-background-color: rgb(243, 244, 245);
-font-family: 'Poppins', sans-serif;
+  background-color: rgb(243, 244, 245);
+  font-family: "Poppins", sans-serif;
+}
 
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }

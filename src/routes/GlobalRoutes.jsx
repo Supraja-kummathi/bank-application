@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+
 import AdminLayout from "../AdminLayout";
 
 import Home from "../components/Home/Home";
@@ -6,27 +7,37 @@ import CreateBank from "../components/pages/bank/CreateBank";
 import AllBank from "../components/pages/bank/AllBank";
 import CreateMD from "../components/pages/managingDirector/CreateMD";
 import AllMD from "../components/pages/managingDirector/AllMD";
-import Register from './../components/auth/Register';
+import Register from "./../components/auth/Register";
 import Login from "../components/auth/Login";
 import AdminDashboard from "../components/pages/AdminDashboard/AdminDashboard";
-
+import ForgotPassword from "../components/auth/ForgotPassword";
+import PublicRoute from "../helpers/PublicRoutes";
+import PrivateRoute from "../helpers/PrivateRoutes";
+import UpdateBank from "../components/pages/bank/UpdateBank";
 
 const router = createBrowserRouter([
   {
-    path: "/adminlayout",
+   // path: "/adminlayout",
+    // element: <PrivateRoute><AdminLayout /></PrivateRoute>,
+   path: "/",
+
     element: <AdminLayout />,
     children: [
       {
-        path: "/adminlayout",
-        element: <Home />,
+        path: "/",
+        element:<Home />,
         children: [
           {
             index: true,
-            element: <AdminDashboard/>,
+            element: <AdminDashboard />,
           },
           {
-            path: "create-bank",
+            path: "/create-bank",
             element: <CreateBank />,
+          },
+          {
+            path: "/update-bank/:bankId",
+            element: <UpdateBank />,
           },
           {
             path: "all-bank",
@@ -42,11 +53,13 @@ const router = createBrowserRouter([
           },
         ],
       },
+
       { path: "*", element: <h1>Page not found</h1> },
     ],
   },
-  { path: "/register", element: <Register /> },
-  { index:true, element: <Login /> },
+  { path: "/register", element: <PublicRoute><Register /></PublicRoute> },
+  //{ index: true, element: <PublicRoute><Login/></PublicRoute> },
+  { path:"/forgotpassword", element: <ForgotPassword /> },
 ]);
 
 export default router;

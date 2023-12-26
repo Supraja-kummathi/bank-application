@@ -1,11 +1,11 @@
 import { useDispatch } from "react-redux";
-import useGlobalState from "./useGlobalState";
+import useBankState from "./useBankState";
 import { useEffect } from "react";
 import { GetProfile } from "./../redux/reducers/auth/authSlice";
 
 const useGetProfile = () => {
   const dispatch = useDispatch();
-  const data = useGlobalState();
+  const data = useBankState();
   useEffect(() => {
     dispatch(GetProfile());
   }, [dispatch]);
