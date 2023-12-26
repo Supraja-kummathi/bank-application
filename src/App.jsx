@@ -4,9 +4,8 @@ import router from "./routes/GlobalRoutes";
 
 const App = () => {
   return (
-    <div>
+    <div className="h-[100vh]">
       <RouterProvider router={router}></RouterProvider>
-     
     </div>
   );
 };

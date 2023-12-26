@@ -13,7 +13,7 @@ const userToken = localStorage.getItem("access_token")
 
 const initialState = {
   data: [],
-  userInfo: {},
+  userInfo: null,
   error: null,
   userToken,
   status: false,

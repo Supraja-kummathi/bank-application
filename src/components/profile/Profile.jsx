@@ -1,7 +1,7 @@
-import useGetProfile from "./../../utils/useGetProfile";
+// import useGetProfile from "./../../utils/useGetProfile";
 const Profile = () => {
-  let user = useGetProfile();
-  console.log(user);
+  // let user = useGetProfile();
+  // console.log(user);
   return <div>Profile</div>;
 };
 

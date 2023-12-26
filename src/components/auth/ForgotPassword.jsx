@@ -37,9 +37,9 @@ const ForgotPassword = () => {
         </div>
         <footer className="flex items-center justify-center py-4  text-[rgb(157,155,155)]">
           <span className="me-4">
-            Return To{" "}
+            Return To
             <span className="text-blue-700">
-              <Link>Login</Link>
+              <Link to={"/"}>Login</Link>
             </span>
           </span>
         </footer>

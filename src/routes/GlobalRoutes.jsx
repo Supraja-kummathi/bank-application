@@ -11,23 +11,33 @@ import Register from "./../components/auth/Register";
 import Login from "../components/auth/Login";
 import AdminDashboard from "../components/pages/AdminDashboard/AdminDashboard";
 import ForgotPassword from "../components/auth/ForgotPassword";
+import PublicRoute from "../helpers/PublicRoutes";
+import PrivateRoute from "../helpers/PrivateRoutes";
+import UpdateBank from "../components/pages/bank/UpdateBank";
 
 const router = createBrowserRouter([
   {
-    path: "/adminlayout",
+   // path: "/adminlayout",
+    // element: <PrivateRoute><AdminLayout /></PrivateRoute>,
+   path: "/",
+
     element: <AdminLayout />,
     children: [
       {
-        path: "/adminlayout",
-        element: <Home />,
+        path: "/",
+        element:<Home />,
         children: [
           {
             index: true,
             element: <AdminDashboard />,
           },
           {
-            path: "create-bank",
+            path: "/create-bank",
             element: <CreateBank />,
+          },
+          {
+            path: "/update-bank/:bankId",
+            element: <UpdateBank />,
           },
           {
             path: "all-bank",
@@ -47,9 +57,8 @@ const router = createBrowserRouter([
       { path: "*", element: <h1>Page not found</h1> },
     ],
   },
-  { path: "/register", element: <Register /> },
-  { index: true, element: <ForgotPassword /> },
-  ,
+  { path: "/register", element: <PublicRoute><Register /></PublicRoute> },
+  //{ index: true, element: <PublicRoute><Login/></PublicRoute> },
   { path:"/forgotpassword", element: <ForgotPassword /> },
 ]);
 

@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { userLogin } from "../../redux/reducers/auth/authSlice";
-import { Link, useNavigate } from "react-router-dom";
-import Button from "../../utils/Button";
+// import { userLogin } from "../../redux/reducers/auth/authSlice";
+// import { Link, useNavigate } from "react-router-dom";
 import FormComp from "../../utils/FormComp";
 import { FaLock } from "react-icons/fa";
 
 const Login = () => {
-  const navigate = useNavigate();
-  const { userToken } = useSelector(state => state.auth);
+  // const navigate = useNavigate();
+  // const { userToken } = useSelector(state => state.auth);
   let dispatch = useDispatch();
   let [name, setName] = useState("customer login");
   let [state, setState] = useState({
@@ -21,15 +20,17 @@ const Login = () => {
   };
 
   useEffect(() => {
-    if (userToken) {
-      navigate("/");
-    }
+    // if (userToken) {
+    //   navigate("/adminlayout");
+    // }
   }, [navigate, userToken]);
 
   let handleSubmit = e => {
     e.preventDefault();
     dispatch(userLogin(state));
-  };
+    console.log(state)
+    navigate("/adminlayout");
+   };
 
   return (
     <FormComp name={name}>
@@ -70,10 +71,10 @@ const Login = () => {
         <footer className="flex items-center justify-center py-4  text-[rgb(157,155,155)]">
           <FaLock className="pe-1" />
           <span className="me-4">
-            <Link> Forgot Password?</Link>{" "}
-          </span>{" "}
+            <Link to={"/forgotpassword"}> Forgot Password?</Link>
+          </span>
           <span>
-            <Link>Register</Link>{" "}
+            <Link to={"/register"} >Register</Link>
           </span>
         </footer>
         <div className="flex items-center justify-evenly pt-4 pb-10 text-[rgb(157,155,155)] text-sm">
