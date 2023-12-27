@@ -14,7 +14,7 @@ const LeftSideSection = () => {
   // console.log(user)
   return (
     <>
-      <section className="text-sm w-[100%] bg-black">
+      <section className="text-sm h-[100%] w-[100%] bg-black">
         <div className="flex flex-col items-center">
           <img
             src={
@@ -36,7 +36,9 @@ const LeftSideSection = () => {
         </NavLink>
       </li> */}
         <div className="flex mt-6 items-center">
-          <div><CiBank className="ms-6 text-xl" /></div>
+          <div>
+            <CiBank className="ms-6 text-xl" />
+          </div>
           <p className="ms-4">Bank</p>
           <span>
             <RiArrowDropRightLine className="text-2xl ms-[8rem]" />
@@ -87,7 +89,7 @@ const LeftSideSection = () => {
             </NavLink>
           </li>
         </div>
-        <div className="ms-24 mt-72">
+        <div className="ms-16 mt-[10rem]">
           <button
             className="fixed text-white bg-gradient-to-r from-blue-500 via-blue-700 to-blue-900 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
             onClick={() => dispatch(logout())}
