@@ -18,7 +18,7 @@ const initialState = {
 export const createMd = createAsyncThunk("createMd", async (payload) => {
   try {
     // eslint-disable-next-line no-undef
-    const { data } = await AxiosInstanceProtected.post(`/managingDirectors`, payload);
+    const { data } = await AxiosInstanceProtected.post(`/managingDirectors/save`, payload);
     console.log(data)
     return data;
   } catch (error) {
