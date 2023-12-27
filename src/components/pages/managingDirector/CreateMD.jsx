@@ -1,12 +1,26 @@
-import React from "react";
+import React, { Fragment, useEffect } from "react";
 import { useState } from "react";
+
+import { v4 as uuidv4 } from "uuid";
+
 import Button from "../../../utilities/Button";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { createMd } from "../../../redux/reducers/md/mdSlice";
+import useGetBank from "../../../utils/useGetAllBanks";
+
 const CreateMD = () => {
   let dispatch = useDispatch();
   const navigate = useNavigate();
+  let { data } = useGetBank();
+
+  // const [searchParams, setSearchParams] = useSearchParams();
+  // let [query, setQuery] = React.useState(searchParams.get("bankId"));
+  // console.log(query);
+
+  // useEffect(() => {
+  //   setSearchParams({ bankId: query });
+  // }, [query]);
 
   const [state, setState] = useState({
     name: "",
@@ -28,7 +42,9 @@ const CreateMD = () => {
     email: state.email,
     gender: state.gender,
     dateOfBirth: state.dateOfBirth,
+    bankId: state.bankId,
     address: {
+      addressId: Math.random() * 1000,
       addressLine: state.addressLine,
       pincode: "qsp5160003",
       country: "India",
@@ -36,12 +52,18 @@ const CreateMD = () => {
     },
   };
 
-  const handleSubmit = (e) => {
+  let handleQueryChange = e => {
+    setQuery(e.target.value);
+  };
+
+  const handleSubmit = e => {
     e.preventDefault();
+
     dispatch(createMd(payload));
     console.log(state);
     navigate("/all-md");
   };
+
   return (
     <section className="h-[100%] w-[100%] relative">
       <section className="rounded-md border-2 py-1.5 w-[97%] bg-white absolute top-4 left-3">
@@ -226,6 +248,7 @@ const CreateMD = () => {
           </section>
           <div className="flex justify-end pt-4">
             <Button type="submit" name="Create Bank"></Button>
+
           </div>
         </form>
       </section>

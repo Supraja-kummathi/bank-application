@@ -21,10 +21,10 @@ const CreateBank = () => {
   // let randomId = Math.round(Math.random() * 10000);
 
   let payload = {
-    bankId: "",
+    bankId: Math.round(Math.random() * 100),
     bankName: state.bankName,
     address: {
-      addressId: "",
+      addressId: Math.random() * 1000,
       addressLine: state.address,
       pincode: "qsp5160003",
       country: "India",
@@ -32,7 +32,7 @@ const CreateBank = () => {
     },
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
     dispatch(createBank(payload));
     console.log(state);
@@ -54,7 +54,7 @@ const CreateBank = () => {
               placeholder="Enter bankname"
               id="bankname"
               value={state.bankName}
-              onChange={(e) => {
+              onChange={e => {
                 setState({ ...state, bankName: e.target.value });
               }}
             />
@@ -69,7 +69,7 @@ const CreateBank = () => {
               id="branchaddress"
               name="branchaddress"
               value={state.address}
-              onChange={(e) => {
+              onChange={e => {
                 setState({ ...state, address: e.target.value });
               }}
               cols={30}
@@ -125,6 +125,7 @@ const CreateBank = () => {
               }}
             />
           </div>
+
           <div className="flex justify-end pt-4">
             <Button type="submit" name="Create Bank"></Button>
           </div>
