@@ -3,7 +3,7 @@ import { useState } from "react";
 import Button from "../../../utilities/Button";
 import { useDispatch } from "react-redux";
 import { createBank } from "../../../redux/reducers/bank/bankSlice";
-import {useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 const CreateBank = () => {
   let dispatch = useDispatch();
   const navigate = useNavigate();
@@ -21,10 +21,10 @@ const CreateBank = () => {
   // let randomId = Math.round(Math.random() * 10000);
 
   let payload = {
-    bankId: "",
+    bankId: Math.round(Math.random() * 100),
     bankName: state.bankName,
     address: {
-      addressId: "",
+      addressId: Math.random() * 1000,
       addressLine: state.address,
       pincode: "qsp5160003",
       country: "India",
@@ -32,7 +32,7 @@ const CreateBank = () => {
     },
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
     dispatch(createBank(payload));
     console.log(state);
@@ -59,7 +59,7 @@ const CreateBank = () => {
                     placeholder="Enter here..."
                     id="bankname"
                     value={state.bankName}
-                    onChange={(e) => {
+                    onChange={e => {
                       setState({ ...state, bankName: e.target.value });
                     }}
                   />
@@ -80,7 +80,7 @@ const CreateBank = () => {
                     id="branchaddress"
                     type="text"
                     value={state.address}
-                    onChange={(e) => {
+                    onChange={e => {
                       setState({ ...state, address: e.target.value });
                     }}
                     cols={30}

@@ -41,13 +41,13 @@ const Navbar = () => {
 
           <img
             src={
-              // user?.avatar || 
+              // user?.avatar ||
               "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBAK2Ud4gQr9pQFT6rc3xbeq74MhZe7bOdvQ&usqp=CAU"
             }
             alt=""
             className="h-[1.8rem] w-[1.8rem] rounded-full"
           />
-          <PiDotsNineBold className="me-2"/>
+          <PiDotsNineBold className="me-2" />
         </section>
       </div>
     </section>

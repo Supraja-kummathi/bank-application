@@ -15,11 +15,14 @@ const initialState = {
 };
 
 //=================Create Bank==============/
-export const createMd = createAsyncThunk("createMd", async (payload) => {
+export const createMd = createAsyncThunk("createMd", async payload => {
   try {
     // eslint-disable-next-line no-undef
-    const { data } = await AxiosInstanceProtected.post(`/managingDirectors`, payload);
-    console.log(data)
+    const { data } = await AxiosInstancePublic.post(
+      `/managingDirectors/save?bankId=${payload.bankId}`,
+      payload
+    );
+    console.log(data);
     return data;
   } catch (error) {
     return error.message;
@@ -29,14 +32,14 @@ export const createMd = createAsyncThunk("createMd", async (payload) => {
 export const getMd = createAsyncThunk("getMd", async () => {
   try {
     // eslint-disable-next-line no-undef
-    const { data } = await AxiosInstancePublic.get(`/banks`);
+    const { data } = await AxiosInstancePublic.get(`/managingDirectors/getAll`);
     return data;
   } catch (error) {
     return error.message;
   }
 });
 
-export const updateMd = createAsyncThunk("updateMd", async (payload) => {
+export const updateMd = createAsyncThunk("updateMd", async payload => {
   try {
     const { data } = await AxiosInstancePublic.put(
       `/banks/bankId/${payload.bankId}`,
@@ -49,10 +52,12 @@ export const updateMd = createAsyncThunk("updateMd", async (payload) => {
   }
 });
 
-export const deleteMd = createAsyncThunk("deleteMd", async (bankId) => {
+export const deleteMd = createAsyncThunk("deleteMd", async employeeId => {
   try {
-    console.log(bankId);
-    const { data } = await AxiosInstancePublic.delete(`/banks/bankId/${bankId}`);
+    console.log(employeeId);
+    const { data } = await AxiosInstancePublic.delete(
+      `/managingDirectors/delete/${employeeId}`
+    );
     return data;
   } catch (error) {
     return error.message;
@@ -65,16 +70,17 @@ export const mdSlice = createSlice({
   name: "bank",
   initialState,
   reducers: {},
-  extraReducers: (builder) => {
+  extraReducers: builder => {
     //REGISTER
     builder
-      .addCase(createMd.pending, (state) => {
+      .addCase(createMd.pending, state => {
         state.status = true;
         state.success = false;
       })
       .addCase(createMd.fulfilled, (state, action) => {
         state.status = false;
         state.success = true;
+        console.log(action.meta.requestStatus);
         state.data.push(action.payload);
       })
       .addCase(createMd.rejected, (state, action) => {
@@ -85,7 +91,7 @@ export const mdSlice = createSlice({
 
     // fetch bank
     builder
-      .addCase(getMd.pending, (state) => {
+      .addCase(getMd.pending, state => {
         state.status = true;
         state.success = false;
       })
@@ -102,14 +108,14 @@ export const mdSlice = createSlice({
 
     // update bank
     builder
-      .addCase(updateMd.pending, (state) => {
+      .addCase(updateMd.pending, state => {
         state.status = true;
         state.success = false;
       })
       .addCase(updateMd.fulfilled, (state, action) => {
         state.status = false;
         state.success = true;
-        state.data = state.data.map((el) =>
+        state.data = state.data.map(el =>
           action.payload.bankId === el.bankId ? action.payload : el
         );
       })
@@ -122,15 +128,15 @@ export const mdSlice = createSlice({
 
     // delete bank
     builder
-      .addCase(deleteMd.pending, (state) => {
+      .addCase(deleteMd.pending, state => {
         state.status = true;
         state.success = false;
       })
       .addCase(deleteMd.fulfilled, (state, action) => {
         state.status = false;
         state.success = true;
-        state.data = state.data.map((el) =>
-          action.payload.bankId === el.bankId ? action.payload : el
+        state.data = state.data.map(el =>
+          action.payload.employeeId === el.employeeId ? action.payload : el
         );
       })
 

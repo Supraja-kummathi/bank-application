@@ -14,7 +14,7 @@ const LeftSideSection = () => {
   // console.log(user)
   return (
     <>
-      <section className="text-sm h-[92%] w-[100%] bg-black">
+      <section className="text-sm  w-[100%] bg-black">
         <div className="flex flex-col items-center ">
           <img
             src={

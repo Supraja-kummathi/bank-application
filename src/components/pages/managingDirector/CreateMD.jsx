@@ -1,26 +1,36 @@
-import React from "react";
+import React, { Fragment, useEffect } from "react";
 import { useState } from "react";
-// import { v4 as uuidv4 } from "uuid";
+import { v4 as uuidv4 } from "uuid";
 import Button from "../../../utilities/Button";
 import { useDispatch } from "react-redux";
 import { createBank } from "../../../redux/reducers/bank/bankSlice";
 import { useLocation, useNavigate } from "react-router-dom";
 import { createMd } from "../../../redux/reducers/md/mdSlice";
+import useGetBank from "../../../utils/useGetAllBanks";
+
 const CreateMD = () => {
   let dispatch = useDispatch();
   const navigate = useNavigate();
+  let { data } = useGetBank();
+
+  // const [searchParams, setSearchParams] = useSearchParams();
+  // let [query, setQuery] = React.useState(searchParams.get("bankId"));
+  // console.log(query);
+
+  // useEffect(() => {
+  //   setSearchParams({ bankId: query });
+  // }, [query]);
 
   const [state, setState] = useState({
     name: "",
-    phoneNumber: "" ,
+    phoneNumber: "",
     email: "",
     gender: "",
     dateOfBirth: "",
-      addressLine: "",
-      pincode: "",
-      country: "",
-      city: "",
-
+    addressLine: "",
+    pincode: "",
+    country: "",
+    city: "",
   });
 
   // let randomId = Math.round(Math.random() * 10000);
@@ -29,9 +39,11 @@ const CreateMD = () => {
     name: state.name,
     phoneNumber: state.phoneNumber,
     email: state.email,
-    gender:state.gender,
+    gender: state.gender,
     dateOfBirth: state.dateOfBirth,
+    bankId: state.bankId,
     address: {
+      addressId: Math.random() * 1000,
       addressLine: state.addressLine,
       pincode: "qsp5160003",
       country: "India",
@@ -39,12 +51,18 @@ const CreateMD = () => {
     },
   };
 
-  const handleSubmit = (e) => {
+  let handleQueryChange = e => {
+    setQuery(e.target.value);
+  };
+
+  const handleSubmit = e => {
     e.preventDefault();
+
     dispatch(createMd(payload));
     console.log(state);
     navigate("/all-md");
   };
+
   return (
     <section className="h-[100%] w-[100%] relative">
       <section className="block rounded-md border-2 py-1.5 w-[97%] bg-white absolute top-4 left-3">
@@ -67,10 +85,9 @@ const CreateMD = () => {
                     placeholder="Enter Name"
                     id="name"
                     value={state.name}
-                    onChange={(e)=>{setState(
-                      {...state,name:e.target.value}
-                    )}
-                    }
+                    onChange={e => {
+                      setState({ ...state, name: e.target.value });
+                    }}
                   />
                 </td>
               </tr>
@@ -87,10 +104,9 @@ const CreateMD = () => {
                     placeholder="Enter Email"
                     id="email"
                     value={state.email}
-                    onChange={(e)=>{setState(
-                      {...state,email:e.target.value}
-                    )}
-                    }
+                    onChange={e => {
+                      setState({ ...state, email: e.target.value });
+                    }}
                   />
                 </td>
               </tr>
@@ -108,10 +124,9 @@ const CreateMD = () => {
                     placeholder="Enter Name"
                     id="name"
                     value={state.phoneNumber}
-                    onChange={(e)=>{setState(
-                      {...state,phoneNumber:e.target.value}
-                    )}
-                    }
+                    onChange={e => {
+                      setState({ ...state, phoneNumber: e.target.value });
+                    }}
                   />
                 </td>
               </tr>
@@ -130,10 +145,9 @@ const CreateMD = () => {
                     id="branchaddress"
                     type="text"
                     value={state.addressLine}
-                    onChange={(e)=>{setState(
-                      {...state,addressLine:e.target.value}
-                    )}
-                    }
+                    onChange={e => {
+                      setState({ ...state, addressLine: e.target.value });
+                    }}
                     cols={30}
                     rows={3}
                   />
@@ -145,7 +159,9 @@ const CreateMD = () => {
                   <section className="w-[30%] mt-4 ms-23">
                     <div className="text-[rgb(145,142,143)] w-[100%]">
                       <div className="mb-4">
-                        <label htmlFor="gender" value={state.gender}>Gender</label>
+                        <label htmlFor="gender" value={state.gender}>
+                          Gender
+                        </label>
                       </div>
                       <input
                         type="radio"
@@ -153,7 +169,6 @@ const CreateMD = () => {
                         name="gender"
                         value="male"
                         className=" w-4 h-4"
-                 
                       />
                       <label htmlFor="male" className="ms-2">
                         MALE
@@ -196,12 +211,36 @@ const CreateMD = () => {
                   </section>
                 </td>
               </tr>
+              <tr>
+                <td className="w-1/5">
+                  <label htmlFor="name" className="text-[rgb(145,142,143)]">
+                    banks
+                  </label>
+                </td>
+                <td className="w-4/5 p-2">
+                  <select
+                    className="block w-full rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
+                    // value={query}
+                    // onChange={handleQueryChange}
+                    value={state.bankId}
+                    onChange={e => {
+                      setState({ ...state, bankId: e.target.value });
+                    }}
+                  >
+                    <option>select bank</option>
+                    {data?.length >= 0 &&
+                      data?.map(bank => (
+                        <Fragment key={bank.bankId}>
+                          <option value={bank.bankId}>{bank.bankName}</option>
+                        </Fragment>
+                      ))}
+                  </select>
+                </td>
+              </tr>
             </tbody>
           </table>
           <div className="flex justify-end pt-4">
-            <Button type="submit" name="Create Bank">
-              hhhh
-            </Button>
+            <Button type="submit" name="Create Md"></Button>
           </div>
         </form>
       </section>
