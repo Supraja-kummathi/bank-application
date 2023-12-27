@@ -18,11 +18,13 @@ const initialState = {
 export const createMd = createAsyncThunk("createMd", async payload => {
   try {
     // eslint-disable-next-line no-undef
+
     const { data } = await AxiosInstancePublic.post(
       `/managingDirectors/save?bankId=${payload.bankId}`,
       payload
     );
     console.log(data);
+
     return data;
   } catch (error) {
     return error.message;
@@ -42,7 +44,7 @@ export const getMd = createAsyncThunk("getMd", async () => {
 export const updateMd = createAsyncThunk("updateMd", async payload => {
   try {
     const { data } = await AxiosInstancePublic.put(
-      `/banks/bankId/${payload.bankId}`,
+      `/managingDirectors/update?managerId=${payload.employeeId}`,
       payload
     );
     console.log(data);

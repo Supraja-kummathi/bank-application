@@ -1,10 +1,11 @@
 import React, { Fragment, useEffect } from "react";
 import { useState } from "react";
+
 import { v4 as uuidv4 } from "uuid";
+
 import Button from "../../../utilities/Button";
 import { useDispatch } from "react-redux";
-import { createBank } from "../../../redux/reducers/bank/bankSlice";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { createMd } from "../../../redux/reducers/md/mdSlice";
 import useGetBank from "../../../utils/useGetAllBanks";
 
@@ -65,182 +66,137 @@ const CreateMD = () => {
 
   return (
     <section className="h-[100%] w-[100%] relative">
-      <section className="block rounded-md border-2 py-1.5 w-[97%] bg-white absolute top-4 left-3">
-        <div className="ps-4 pt-3 uppercase font-semibold">
+      <section className="rounded-md border-2 py-1.5 w-[97%] bg-white absolute top-4 left-3">
+        <div className="ps-4 py-3 uppercase font-semibold">
           Create Managing director
         </div>
         <form className="p-2 ps-4" onSubmit={handleSubmit}>
-          <table className="w-full">
-            <tbody>
-              <tr>
-                <td className="w-1/5">
-                  <label htmlFor="name" className="text-[rgb(145,142,143)]">
-                    Name
-                  </label>
-                </td>
-                <td className="w-4/5 p-2">
-                  <input
-                    className="block w-full rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
-                    type="text"
-                    placeholder="Enter Name"
-                    id="name"
-                    value={state.name}
-                    onChange={e => {
-                      setState({ ...state, name: e.target.value });
-                    }}
-                  />
-                </td>
-              </tr>
-              <tr>
-                <td className="w-1/5">
-                  <label htmlFor="email" className="text-[rgb(145,142,143)]">
-                    Email
-                  </label>
-                </td>
-                <td className="w-4/5 p-2">
-                  <input
-                    className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
-                    type="email"
-                    placeholder="Enter Email"
-                    id="email"
-                    value={state.email}
-                    onChange={e => {
-                      setState({ ...state, email: e.target.value });
-                    }}
-                  />
-                </td>
-              </tr>
-              <tr>
-                <td className="w-1/5">
-                  <label htmlFor="name" className="text-[rgb(145,142,143)]">
-                    Phone number
-                  </label>
-                </td>
-                <td className="w-4/5 p-2">
-                  <input
-                    className="block w-full rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
-                    type="tel"
-                    pattern="[0-9]{10}"
-                    placeholder="Enter Name"
-                    id="name"
-                    value={state.phoneNumber}
-                    onChange={e => {
-                      setState({ ...state, phoneNumber: e.target.value });
-                    }}
-                  />
-                </td>
-              </tr>
-              <tr>
-                <td className="w-1/5 pb-18">
-                  <label
-                    htmlFor="branchaddress"
-                    className="text-[rgb(145,142,143)]"
-                  >
-                    Address
-                  </label>
-                </td>
-                <td className="w-4/5 p-2">
-                  <textarea
-                    className="block w-full rounded-md border-0 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
-                    id="branchaddress"
-                    type="text"
-                    value={state.addressLine}
-                    onChange={e => {
-                      setState({ ...state, addressLine: e.target.value });
-                    }}
-                    cols={30}
-                    rows={3}
-                  />
-                </td>
-              </tr>
-              <tr>
-                <td className="w-1/5 pb-18"></td>
-                <td className=" flex justify-start ms-3">
-                  <section className="w-[30%] mt-4 ms-23">
-                    <div className="text-[rgb(145,142,143)] w-[100%]">
-                      <div className="mb-4">
-                        <label htmlFor="gender" value={state.gender}>
-                          Gender
-                        </label>
-                      </div>
-                      <input
-                        type="radio"
-                        id="male"
-                        name="gender"
-                        value="male"
-                        className=" w-4 h-4"
-                      />
-                      <label htmlFor="male" className="ms-2">
-                        MALE
-                      </label>
-                      <input
-                        type="radio"
-                        id="female"
-                        name="gender"
-                        value="female"
-                        className="ms-4 w-4 h-4"
-                      />
-                      <label htmlFor="female" className="ms-2">
-                        FEMALE
-                      </label>
-                      <input
-                        type="radio"
-                        id="others"
-                        name="gender"
-                        value="others"
-                        className="ms-4 w-4 h-4"
-                      />
-                      <label htmlFor="others" className="ms-2">
-                        OTHERS
-                      </label>
-                    </div>
-                  </section>
-                  <section className="w-[30%] mt-4 ms-16">
-                    <div className="text-[rgb(145,142,143)] w-[100%]">
-                      <div className="mb-4">
-                        <label htmlFor="dob">DOB</label>
-                      </div>
-                      <input
-                        type="date"
-                        id="dob"
-                        name="dob"
-                        // value={state.dateOfBirth}
-                        className="text-base border-2 ps-2 pe-32 py-1 rounded-md"
-                      />
-                    </div>
-                  </section>
-                </td>
-              </tr>
-              <tr>
-                <td className="w-1/5">
-                  <label htmlFor="name" className="text-[rgb(145,142,143)]">
-                    banks
-                  </label>
-                </td>
-                <td className="w-4/5 p-2">
-                  <select
-                    className="block w-full rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
-                    // value={query}
-                    // onChange={handleQueryChange}
-                    value={state.bankId}
-                    onChange={e => {
-                      setState({ ...state, bankId: e.target.value });
-                    }}
-                  >
-                    <option>select bank</option>
-                    {data?.length >= 0 &&
-                      data?.map(bank => (
-                        <Fragment key={bank.bankId}>
-                          <option value={bank.bankId}>{bank.bankName}</option>
-                        </Fragment>
-                      ))}
-                  </select>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <div className="flex justify-between w-[99%] mb-4">
+            <label htmlFor="name" className="text-[rgb(145,142,143)]">
+              Name
+            </label>
+            <input
+              className="w-[80%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
+              type="text"
+              placeholder="Enter Name"
+              id="name"
+              value={state.name}
+              onChange={(e) => {
+                setState({ ...state, name: e.target.value });
+              }}
+            />
+          </div>
+          <div className="flex justify-between w-[99%] mb-4">
+            <label htmlFor="email" className="text-[rgb(145,142,143)]">
+              Email
+            </label>
+            <input
+              className="w-[80%] rounded-md border-0 py-1.5 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
+              type="email"
+              placeholder="Enter Email"
+              id="email"
+              value={state.email}
+              onChange={(e) => {
+                setState({ ...state, email: e.target.value });
+              }}
+            />
+          </div>
+          <div className="flex justify-between w-[99%] mb-4">
+            <label htmlFor="name" className="text-[rgb(145,142,143)]">
+              Phone number
+            </label>
+            <input
+              className=" w-[80%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
+              type="tel"
+              pattern="[0-9]{10}"
+              placeholder="Enter Name"
+              id="name"
+              value={state.phoneNumber}
+              onChange={(e) => {
+                setState({ ...state, phoneNumber: e.target.value });
+              }}
+            />
+          </div>
+          <div className="flex justify-between w-[99%] mb-4">
+            <label htmlFor="branchaddress" className="text-[rgb(145,142,143)]">
+              Address
+            </label>
+            <textarea
+              className="w-[80%] rounded-md border-0 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
+              id="branchaddress"
+              type="text"
+              value={state.addressLine}
+              onChange={(e) => {
+                setState({ ...state, addressLine: e.target.value });
+              }}
+              cols={30}
+              rows={3}
+            />
+          </div>
+          <section className="w-[80%] flex ms-64">
+            <div className="text-[rgb(145,142,143)] w-[60%]">
+              <div className="mb-4">
+                <label htmlFor="gender">Gender</label>
+              </div>
+              <input
+                type="radio"
+                id="male"
+                name="gender"
+                value="male"
+                className=" w-4 h-4"
+                onChange={(e) => {
+                  setState({ ...state, gender: e.target.value });
+                }}
+              />
+              <label htmlFor="male" className="ms-2">
+                MALE
+              </label>
+              <input
+                type="radio"
+                id="female"
+                name="gender"
+                value="female"
+                className="ms-4 w-4 h-4"
+                onChange={(e) => {
+                  setState({ ...state, gender: e.target.value });
+                }}
+              />
+              <label htmlFor="female" className="ms-2">
+                FEMALE
+              </label>
+              <input
+                type="radio"
+                id="others"
+                name="gender"
+                value="others"
+                className="ms-4 w-4 h-4"
+                onChange={(e) => {
+                  setState({ ...state, gender: e.target.value });
+                }}
+              />
+              <label htmlFor="others" className="ms-2">
+                OTHERS
+              </label>
+            </div>
+            <div className="text-[rgb(145,142,143)] w-[100%]">
+              <div className="mb-3">
+                <label htmlFor="dob">DOB</label>
+              </div>
+              <input
+                type="date"
+                id="dob"
+                name="dob"
+                value={state.dateOfBirth}
+                onChange={(e) => {
+                  setState({ ...state, dateOfBirth: e.target.value });
+                }}
+                className="text-base border-2 px-2 py-1 rounded-md w-[50%] "
+              />
+            </div>
+          </section>
           <div className="flex justify-end pt-4">
-            <Button type="submit" name="Create Md"></Button>
+            <Button type="submit" name="Create Bank"></Button>
+
           </div>
         </form>
       </section>
