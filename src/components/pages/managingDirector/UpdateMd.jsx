@@ -10,74 +10,35 @@ const UpdateMd = () => {
   let navigate = useNavigate();
   let { data } = GetMds();
   let dispatch = useDispatch();
-  let [updatedState, setUpdatedState] = useState({
-    addressId: "bharat0012",
-    addressLine: "Jaynagara",
-    pincode: "5663435",
-    country: "India",
-    city: "Bangalore",
-    dateOfBirth: "1999-12-26T00:00:00.000+00:00",
-    dateOfJoining: "2023-12-27T12:19:25.81351",
-    docsContainer: null,
-    email: "ram@testyantra.in",
-    employeeId: "FF0004",
-    gender: "Male",
-    name: "ram1",
-    phoneNumber: 8765607385,
-    role: "MANAGING_DIRECTOR",
-    status: null,
-    token: null,
-  });
-  let payload = {
-    address: {
-      addressId: "bharat0012",
-      addressLine: "Jaynagara",
-      pincode: "5663435",
-      country: "India",
-      city: "Bangalore",
-    },
-    dateOfBirth: "1999-12-26T00:00:00.000+00:00",
-    dateOfJoining: "2023-12-27T12:19:25.81351",
-    docsContainer: null,
-    email: "ram@testyantra.in",
-    employeeId: "FF0004",
-    gender: "Male",
-    name: "ram1",
-    phoneNumber: 8765607385,
-    role: "MANAGING_DIRECTOR",
-    status: null,
-    token: null,
-  };
+  let [updatedState, setUpdatedState] = useState();
+  
   useEffect(() => {
     if (employeeId) {
       let filteredData = data?.data?.filter(md => md.employeeId == employeeId);
-      payload = filteredData && filteredData[0];
+      
       setUpdatedState(filteredData && filteredData[0]);
-      console.log(payload);
+      
     }
   }, [employeeId, data]);
 
-  let handleChange = e => {
-    setUpdatedState({ ...updatedState, [e.target.name]: e.target.value });
-  };
+  const handleChange = (e) => {
+    if (Object.keys(updatedState.address).includes(e.target.name)) {
+       setUpdatedState({
+         ...updatedState,
+         address: { ...updatedState.address, [e.target.name]: e.target.value },
+       });
+     } else {
+       setUpdatedState({
+         ...updatedState,
+         [e.target.name]: e.target.value,
+       });
+     }
+   };
 
-  let handleChangeA = e => {
-    setUpdatedState({ ...updatedState, [e.target.name]: e.target.value });
-  };
-
+ 
   let handleSubmit = e => {
     e.preventDefault();
-    payload.dateOfBirth = updatedState.dateOfBirth;
-    payload.name = updatedState.name;
-    payload.email = updatedState.email;
-    payload.phoneNumber = updatedState.phoneNumber;
-    payload.gender = updatedState.gender;
-    payload.address.addressLine = updatedState.addressLine;
-    payload.address.country = updatedState.country;
-    payload.address.city = updatedState.city;
-    payload.address.pincode = updatedState.pincode;
-    console.log(payload);
-    dispatch(updateMd(payload));
+    dispatch(updateMd(updateState));
     navigate("/all-md");
   };
 
@@ -157,7 +118,9 @@ const UpdateMd = () => {
               placeholder="Enter here..."
               id="city"
               name="city"
-              value={updatedState && updatedState?.city}
+
+              value={updatedState && updatedState.address.city}
+
               onChange={handleChange}
             />
           </div>
@@ -171,7 +134,9 @@ const UpdateMd = () => {
               placeholder="Enter here..."
               id="country"
               name="country"
-              value={updatedState && updatedState?.country}
+
+              value={updatedState && updatedState.address.country}
+
               onChange={handleChange}
             />
           </div>
@@ -185,8 +150,10 @@ const UpdateMd = () => {
               pattern="[0-9]{6}"
               placeholder="Enter here..."
               id="pincode"
-              name="pincode"
-              value={updatedState && updatedState?.pincode}
+
+              name="pincode" 
+              value={updatedState && updatedState.address.pincode}
+
               onChange={handleChange}
             />
           </div>
