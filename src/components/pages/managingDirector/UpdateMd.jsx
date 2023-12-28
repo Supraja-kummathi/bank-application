@@ -11,13 +11,13 @@ const UpdateMd = () => {
   let { data } = GetMds();
   let dispatch = useDispatch();
   let [updatedState, setUpdatedState] = useState();
-
+  
   useEffect(() => {
     if (employeeId) {
-      console.log(employeeId);
-      console.log(data.data);
       let filteredData = data?.data?.filter(md => md.employeeId == employeeId);
+      
       setUpdatedState(filteredData && filteredData[0]);
+      
     }
   }, [employeeId, data]);
 
@@ -35,9 +35,10 @@ const UpdateMd = () => {
      }
    };
 
+ 
   let handleSubmit = e => {
     e.preventDefault();
-    dispatch(updateMd(updatedState));
+    dispatch(updateMd(updateState));
     navigate("/all-md");
   };
 
@@ -91,6 +92,7 @@ const UpdateMd = () => {
               onChange={handleChange}
             />
           </div>
+
           <div className="flex justify-between w-[99%] mb-4">
             <label htmlFor="branchaddress" className="text-[rgb(145,142,143)]">
               Address
@@ -100,7 +102,7 @@ const UpdateMd = () => {
               id="branchaddress"
               type="text"
               name="addressLine"
-              value={updatedState && updatedState.address.addressLine}
+              value={updatedState && updatedState?.addressLine}
               onChange={handleChange}
               cols={30}
               rows={3}
@@ -116,7 +118,9 @@ const UpdateMd = () => {
               placeholder="Enter here..."
               id="city"
               name="city"
+
               value={updatedState && updatedState.address.city}
+
               onChange={handleChange}
             />
           </div>
@@ -130,7 +134,9 @@ const UpdateMd = () => {
               placeholder="Enter here..."
               id="country"
               name="country"
+
               value={updatedState && updatedState.address.country}
+
               onChange={handleChange}
             />
           </div>
@@ -144,8 +150,10 @@ const UpdateMd = () => {
               pattern="[0-9]{6}"
               placeholder="Enter here..."
               id="pincode"
+
               name="pincode" 
               value={updatedState && updatedState.address.pincode}
+
               onChange={handleChange}
             />
           </div>
