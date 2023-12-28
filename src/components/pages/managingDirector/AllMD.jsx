@@ -18,8 +18,6 @@ const AllMD = () => {
   const [currentPage, setCurrentPage] = useState(1);
   let [loading, setLoading] = useState(false);
 
-  
-
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = state?.data?.data?.slice(
@@ -77,7 +75,7 @@ const AllMD = () => {
                 type="text"
                 onChange={e => {
                   console.log(
-                    currentItems?.filter(ele =>
+                  state?.data?.data?.filter(ele =>
                       ele.email
                         .toLowerCase()
                         .includes(e.target.value.toLowerCase())
