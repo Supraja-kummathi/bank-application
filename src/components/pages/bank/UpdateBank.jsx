@@ -11,6 +11,7 @@ const UpdateBank = () => {
   let { data } = useGetBank();
   let dispatch = useDispatch();
   let [updatedState, setUpdatedState] = useState();
+  console.log(updatedState)
   useEffect(() => {
     if (bankId) {
       let filteredData = data?.filter((bank) => bank.bankId == bankId);
@@ -18,9 +19,20 @@ const UpdateBank = () => {
     }
   }, [bankId, data]);
 
-  let handleChange = (e) => {
-    setUpdatedState({ ...updatedState, [e.target.name]: e.target.value });
+  const handleChange = (e) => {
+   if (Object.keys(updatedState.address).includes(e.target.name)) {
+      setUpdatedState({
+        ...updatedState,
+        address: { ...updatedState.address, [e.target.name]: e.target.value },
+      });
+    } else {
+      setUpdatedState({
+        ...updatedState,
+        [e.target.name]: e.target.value,
+      });
+    }
   };
+ 
 
   let handleSubmit = (e) => {
     e.preventDefault();
@@ -61,7 +73,7 @@ const UpdateBank = () => {
               cols={30}
               rows={3}
               name="addressLine"
-              value={updatedState && updatedState?.address?.addressLine}
+              value={updatedState && updatedState.address.addressLine}
               onChange={handleChange}
             />
             </div>
@@ -75,7 +87,7 @@ const UpdateBank = () => {
               placeholder="Enter here..."
               id="city"
               name="city"
-              value={updatedState && updatedState?.address?.city}
+              value={updatedState && updatedState.address.city}
               onChange={handleChange}
             />
           </div>
@@ -89,7 +101,7 @@ const UpdateBank = () => {
               placeholder="Enter here..."
               id="country"
               name="country"
-              value={updatedState && updatedState?.address?.country}
+              value={updatedState && updatedState.address.country}
               onChange={handleChange}
             />
           </div>
@@ -104,7 +116,7 @@ const UpdateBank = () => {
               placeholder="Enter here..."
               id="pincode"
               name="pincode" 
-              value={updatedState && updatedState?.address?.pincode}
+              value={updatedState && updatedState.address.pincode}
               onChange={handleChange}
             />
           </div>

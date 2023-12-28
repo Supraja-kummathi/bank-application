@@ -21,9 +21,19 @@ const UpdateMd = () => {
     }
   }, [employeeId, data]);
 
-  let handleChange = e => {
-    setUpdatedState({ ...updatedState, [e.target.name]: e.target.value });
-  };
+  const handleChange = (e) => {
+    if (Object.keys(updatedState.address).includes(e.target.name)) {
+       setUpdatedState({
+         ...updatedState,
+         address: { ...updatedState.address, [e.target.name]: e.target.value },
+       });
+     } else {
+       setUpdatedState({
+         ...updatedState,
+         [e.target.name]: e.target.value,
+       });
+     }
+   };
 
   let handleSubmit = e => {
     e.preventDefault();
@@ -94,6 +104,49 @@ const UpdateMd = () => {
               onChange={handleChange}
               cols={30}
               rows={3}
+            />
+          </div>
+          <div className="flex justify-between w-[99%] mb-4">
+            <label htmlFor="bankname" className="text-[rgb(145,142,143)]">
+              City
+            </label>
+            <input
+              className="w-[80%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
+              type="text"
+              placeholder="Enter here..."
+              id="city"
+              name="city"
+              value={updatedState && updatedState.address.city}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="flex justify-between w-[99%] mb-4">
+            <label htmlFor="bankname" className="text-[rgb(145,142,143)]">
+              Country
+            </label>
+            <input
+              className="w-[80%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
+              type="text"
+              placeholder="Enter here..."
+              id="country"
+              name="country"
+              value={updatedState && updatedState.address.country}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="flex justify-between w-[99%] mb-4">
+            <label htmlFor="bankname" className="text-[rgb(145,142,143)]">
+              Pincode
+            </label>
+            <input
+              className="w-[80%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
+              type="tel"
+              pattern="[0-9]{6}"
+              placeholder="Enter here..."
+              id="pincode"
+              name="pincode" 
+              value={updatedState && updatedState.address.pincode}
+              onChange={handleChange}
             />
           </div>
           <section className="w-[80%] flex ms-64">
