@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { userLogin } from "../../redux/reducers/auth/authSlice";
-// import { Link, useNavigate } from "react-router-dom";
+ import { userLogin } from "../../redux/reducers/auth/authSlice";
+ import { Link, useNavigate } from "react-router-dom";
 import FormComp from "../../utils/FormComp";
 import { FaLock } from "react-icons/fa";
 
 const Login = () => {
-  // const navigate = useNavigate();
-  // const { userToken } = useSelector(state => state.auth);
+   const navigate = useNavigate();
+   //const { userToken } = useSelector(state => state.auth);
   let dispatch = useDispatch();
   let [name, setName] = useState("customer login");
   let [state, setState] = useState({
@@ -19,11 +19,11 @@ const Login = () => {
     setState({ ...state, [e.target.name]: e.target.value });
   };
 
-  useEffect(() => {
-    // if (userToken) {
-    //   navigate("/adminlayout");
-    // }
-  }, [navigate, userToken]);
+  // useEffect(() => {
+  //   if (userToken) {
+  //     navigate("/adminlayout");
+  //   }
+  // }, [navigate, userToken]);
 
   let handleSubmit = e => {
     e.preventDefault();

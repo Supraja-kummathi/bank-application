@@ -58,7 +58,7 @@ export const deleteMd = createAsyncThunk("deleteMd", async employeeId => {
   try {
     console.log(employeeId);
     const { data } = await AxiosInstancePublic.delete(
-      `/managingDirectors/delete/${employeeId}`
+      `/managingDirectors/delete?managerId=${employeeId}`
     );
     return data;
   } catch (error) {

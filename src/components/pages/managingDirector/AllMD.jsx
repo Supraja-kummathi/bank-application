@@ -9,9 +9,43 @@ import { NavLink } from "react-router-dom";
 
 const AllMD = () => {
   let state = GetMds();
-  const [search, setSearch] = useState();
+
   let dispatch = useDispatch();
   console.log(state);
+
+  const [itemsPerPage, setItemsPerPage] = useState(1);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  let [loading, setLoading] = useState(false);
+
+  
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = state?.data?.data?.slice(
+    indexOfFirstItem,
+    indexOfLastItem
+  );
+
+  const totalPages = Math.ceil(state?.data?.data?.length / itemsPerPage);
+
+  const handlePageChange = pageNumber => {
+    setLoading(true);
+    setTimeout(() => {
+      setCurrentPage(pageNumber);
+      setLoading(false);
+    });
+  };
+  function prePage() {
+    if (currentPage !== 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  }
+  function nextPage() {
+    if (currentPage !== indexOfLastItem) {
+      setCurrentPage(currentPage + 1);
+    }
+  }
 
   return (
     <div className="w-[100%] p-5 h-[100%]">
@@ -23,11 +57,16 @@ const AllMD = () => {
           <header className="mx-10 my-2 w-[93%] flex justify-between items-center ">
             <div>
               Show
-              <select className="px-2 rounded-[0.25rem] border-2">
-                <option value="10">10</option>
-                <option value="5">5</option>
-                <option value="15">15</option>
-                <option value="20">20</option>
+              <select
+                className="px-2 rounded-[0.25rem] border-2"
+                onChange={e => {
+                  setItemsPerPage(e.target.value);
+                }}
+              >
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
               </select>
               entries
             </div>
@@ -37,10 +76,11 @@ const AllMD = () => {
                 className=" mx-1 px-2 border-2 rounded-[0.25rem]"
                 type="text"
                 onChange={e => {
-                  setSearch(e.target.value);
-                  setState(
-                    state?.data?.filter(ele =>
-                      ele.email.toLowerCase().includes(search.toLowerCase())
+                  console.log(
+                    currentItems?.filter(ele =>
+                      ele.email
+                        .toLowerCase()
+                        .includes(e.target.value.toLowerCase())
                     )
                   );
                 }}
@@ -94,8 +134,7 @@ const AllMD = () => {
                 </tr>
               </thead>
               <tbody>
-                {state?.data?.data?.map(data => {
-                  console.log(data.employeeId);
+                {currentItems?.map(data => {
                   return (
                     <tr className="text-xs border-b-2">
                       <td className="px-2 py-3 ">{data.name}</td>
@@ -130,7 +169,40 @@ const AllMD = () => {
               </tbody>
             </table>
           </div>
-          <footer></footer>
+          <footer>
+            <div className="mt-4 flex justify-center">
+              <ul className="flex space-x-2">
+                <li>
+                  <a href="#" onClick={prePage}>
+                    Prev
+                  </a>
+                </li>
+
+                {Array.from({ length: totalPages }, (_, index) => (
+                  <li
+                    key={index}
+                    className={`cursor-pointer ${
+                      index + 1 === currentPage
+                        ? "bg-orange-500 text-white"
+                        : "bg-orange-300 hover:bg-orange-200"
+                    } px-3 py-1 rounded`}
+                    onClick={() => handlePageChange(index + 1)}
+                  >
+                    {index + 1}
+                  </li>
+                ))}
+                <li>
+                  <a href="#" onClick={nextPage}>
+                    Next
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <p>
+              Showing {indexOfFirstItem} to {indexOfLastItem} of{" "}
+              {state?.data?.data?.length} entries
+            </p>
+          </footer>
         </section>
       )}
     </div>
