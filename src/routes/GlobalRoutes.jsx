@@ -14,18 +14,19 @@ import ForgotPassword from "../components/auth/ForgotPassword";
 import PublicRoute from "../helpers/PublicRoutes";
 import PrivateRoute from "../helpers/PrivateRoutes";
 import UpdateBank from "../components/pages/bank/UpdateBank";
+import UpdateMd from "../components/pages/managingDirector/UpdateMd";
 
 const router = createBrowserRouter([
   {
-   // path: "/adminlayout",
-    // element: <PrivateRoute><AdminLayout /></PrivateRoute>,
-   path: "/",
+    path: "/adminlayout",
+    element: <PrivateRoute><AdminLayout /></PrivateRoute>,
+    path: "/",
 
     element: <AdminLayout />,
     children: [
       {
         path: "/",
-        element:<Home />,
+        element: <Home />,
         children: [
           {
             index: true,
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
           {
             path: "/update-bank/:bankId",
             element: <UpdateBank />,
+          },
+          {
+            path: "/managingDirectors/update/:employeeId",
+            element: <UpdateMd />,
           },
           {
             path: "all-bank",
@@ -57,9 +62,16 @@ const router = createBrowserRouter([
       { path: "*", element: <h1>Page not found</h1> },
     ],
   },
-  { path: "/register", element: <PublicRoute><Register /></PublicRoute> },
+  {
+    path: "/register",
+    element: (
+      <PublicRoute>
+        <Register />
+      </PublicRoute>
+    ),
+  },
   //{ index: true, element: <PublicRoute><Login/></PublicRoute> },
-  { path:"/forgotpassword", element: <ForgotPassword /> },
+  { path: "/forgotpassword", element: <ForgotPassword /> },
 ]);
 
 export default router;
