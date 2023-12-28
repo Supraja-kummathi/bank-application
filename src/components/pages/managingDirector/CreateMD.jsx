@@ -82,7 +82,7 @@ const CreateMD = () => {
               id="name"
               name="name"
               value={state.name}
-              onChange={(e) => {
+              onChange={e => {
                 setState({ ...state, name: e.target.value });
               }}
             />
@@ -98,7 +98,7 @@ const CreateMD = () => {
               id="email"
               name="email"
               value={state.email}
-              onChange={(e) => {
+              onChange={e => {
                 setState({ ...state, email: e.target.value });
               }}
             />
@@ -115,7 +115,7 @@ const CreateMD = () => {
               id="phonenumber"
               name="phonenumber"
               value={state.phoneNumber}
-              onChange={(e) => {
+              onChange={e => {
                 setState({ ...state, phoneNumber: e.target.value });
               }}
             />
@@ -129,7 +129,7 @@ const CreateMD = () => {
               id="branchaddress"
               type="text"
               value={state.addressLine}
-              onChange={(e) => {
+              onChange={e => {
                 setState({ ...state, addressLine: e.target.value });
               }}
               cols={30}
@@ -196,7 +196,7 @@ const CreateMD = () => {
                 name="gender"
                 value="male"
                 className=" w-4 h-4"
-                onChange={(e) => {
+                onChange={e => {
                   setState({ ...state, gender: e.target.value });
                 }}
               />
@@ -209,7 +209,7 @@ const CreateMD = () => {
                 name="gender"
                 value="female"
                 className="ms-4 w-4 h-4"
-                onChange={(e) => {
+                onChange={e => {
                   setState({ ...state, gender: e.target.value });
                 }}
               />
@@ -222,7 +222,7 @@ const CreateMD = () => {
                 name="gender"
                 value="others"
                 className="ms-4 w-4 h-4"
-                onChange={(e) => {
+                onChange={e => {
                   setState({ ...state, gender: e.target.value });
                 }}
               />
@@ -239,16 +239,39 @@ const CreateMD = () => {
                 id="dob"
                 name="dob"
                 value={state.dateOfBirth}
-                onChange={(e) => {
+                onChange={e => {
                   setState({ ...state, dateOfBirth: e.target.value });
                 }}
                 className="text-base border-2 px-2 py-1 rounded-md w-[50%] "
               />
             </div>
           </section>
+          <div className="flex justify-between w-[99%] mb-4 mt-2">
+            <div>
+              <label htmlFor="name" className="text-[rgb(145,142,143)]">
+                banks
+              </label>
+            </div>
+            <select
+              className="block  w-[80%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
+              // value={query}
+              // onChange={handleQueryChange}
+              value={state.bankId}
+              onChange={e => {
+                setState({ ...state, bankId: e.target.value });
+              }}
+            >
+              <option>select bank</option>
+              {data?.length >= 0 &&
+                data?.map(bank => (
+                  <Fragment key={bank.bankId}>
+                    <option value={bank.bankId}>{bank.bankName}</option>
+                  </Fragment>
+                ))}
+            </select>
+          </div>
           <div className="flex justify-end pt-4">
             <Button type="submit" name="Create Bank"></Button>
-
           </div>
         </form>
       </section>

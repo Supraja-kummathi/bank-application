@@ -18,8 +18,8 @@ import UpdateMd from "../components/pages/managingDirector/UpdateMd";
 
 const router = createBrowserRouter([
   {
-    // path: "/adminlayout",
-    // element: <PrivateRoute><AdminLayout /></PrivateRoute>,
+    path: "/adminlayout",
+    element: <PrivateRoute><AdminLayout /></PrivateRoute>,
     path: "/",
 
     element: <AdminLayout />,
