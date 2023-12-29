@@ -33,7 +33,7 @@ const UpdateMd = () => {
          [e.target.name]: e.target.value,
        });
      }
-   };
+   };console.log(updatedState)
 
   let handleSubmit = e => {
     e.preventDefault();
@@ -159,7 +159,7 @@ const UpdateMd = () => {
                 id="male"
                 name="gender"
                 value="male"
-                checked={"Male" === updatedState?.gender}
+                checked={"male" === updatedState?.gender?.toLowerCase()}
                 className=" w-4 h-4"
                 onChange={handleChange}
               />
@@ -171,7 +171,7 @@ const UpdateMd = () => {
                 id="female"
                 name="gender"
                 value="female"
-                checked={"female" === updatedState?.gender}
+                checked={"female" === updatedState &&  updatedState?.gender}
                 className="ms-4 w-4 h-4"
                 onChange={handleChange}
               />
@@ -183,7 +183,7 @@ const UpdateMd = () => {
                 id="others"
                 name="gender"
                 value="others"
-                checked={"others" === updatedState?.gender}
+                checked={"others" === updatedState &&  updatedState?.gender}
                 className="ms-4 w-4 h-4"
                 onChange={handleChange}
               />
@@ -199,7 +199,7 @@ const UpdateMd = () => {
                 type="date"
                 id="dob"
                 name="dateOfBirth"
-                defaultValue={updatedState?.dateOfBirth?.substr(0, 10)}
+                value={updatedState && updatedState?.dateOfBirth?.substr(0, 10)}
                 onChange={handleChange}
                 className="text-base border-2 px-2 py-1 rounded-md w-[50%] "
               />

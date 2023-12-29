@@ -15,14 +15,16 @@ import PublicRoute from "../helpers/PublicRoutes";
 import PrivateRoute from "../helpers/PrivateRoutes";
 import UpdateBank from "../components/pages/bank/UpdateBank";
 import UpdateMd from "../components/pages/managingDirector/UpdateMd";
+import Landingpage from "../Landingpage";
 
 const router = createBrowserRouter([
   {
     path: "/adminlayout",
     element: <PrivateRoute><AdminLayout /></PrivateRoute>,
-    path: "/",
 
-    element: <AdminLayout />,
+    path: "/",
+    element:<Landingpage/>,
+    // element: <AdminLayout />,
     children: [
       {
         path: "/",
