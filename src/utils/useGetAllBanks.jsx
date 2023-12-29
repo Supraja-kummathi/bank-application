@@ -9,7 +9,7 @@ const useGetBank = () => {
   useEffect(() => {
     dispatch(getBank());
   }, [dispatch]);
-   return val.data
+   return val
 };
 
 export default useGetBank;

@@ -13,6 +13,7 @@ const CreateMD = () => {
   let dispatch = useDispatch();
   const navigate = useNavigate();
   let { data } = useGetBank();
+  console.log(data);
 
   // const [searchParams, setSearchParams] = useSearchParams();
   // let [query, setQuery] = React.useState(searchParams.get("bankId"));
@@ -52,9 +53,9 @@ const CreateMD = () => {
     },
   };
 
-  let handleQueryChange = e => {
-    setQuery(e.target.value);
-  };
+  // let handleQueryChange = e => {
+  //   setQuery(e.target.value);
+  // };
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -253,7 +254,7 @@ const CreateMD = () => {
               </label>
             </div>
             <select
-              className="block  w-[80%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
+              className="block  w-[80%] rounded-md border-0 py-1.5 pl-2 pr-20 text-[rgb(145,142,143)] ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
               // value={query}
               // onChange={handleQueryChange}
               value={state.bankId}
@@ -261,8 +262,8 @@ const CreateMD = () => {
                 setState({ ...state, bankId: e.target.value });
               }}
             >
-              <option>select bank</option>
-              {data?.length >= 0 &&
+              <option >select bank</option>
+              {data?.length > 0 ? <h1>loading..</h1>:
                 data?.map(bank => (
                   <Fragment key={bank.bankId}>
                     <option value={bank.bankId}>{bank.bankName}</option>
