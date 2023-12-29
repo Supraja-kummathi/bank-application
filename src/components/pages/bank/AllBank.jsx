@@ -17,7 +17,7 @@ const AllBank = () => {
     <div className="w-[100%] p-5 h-[100%]">
       <div className="pb-3 font-semibold">All Banks</div>
       {state?.status === true ? (
-        <h1>Loading</h1>
+        <Spinner/>
       ) : (
         <section className="w-full overflow-auto h-[95%] no-scrollbar">
           {state?.data?.map((user, index) => {

@@ -15,12 +15,14 @@ import { MdOutlineSearch } from "react-icons/md";
 import { FaMicrophone } from "react-icons/fa";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { IoIosArrowRoundForward } from "react-icons/io";
-
+import { FaMobileScreenButton } from "react-icons/fa6";
+import { SlCalender } from "react-icons/sl";
+import { MdPayments } from "react-icons/md";
 const Landingpage = () => {
   return (
     <>
-      <header className=" h-[21%] w-[100%] m-0">
-        <section className="flex items-center bg-[rgb(240,245,249)]  h-[30%] w-[100%] m-0">
+      <header className=" h-[15%] w-[100%] m-0">
+        <section className="flex items-center bg-[rgb(240,245,249)]  h-[35%] w-[100%] m-0">
           <div className="w-[10%] text-center border-r-2">careers</div>
           <section className="flex justify-between w-[50%]">
             <div className="pl-4">Agents</div>
@@ -49,7 +51,7 @@ const Landingpage = () => {
             </span>
           </div>
         </section>
-        <section className="flex border-2 items-center  h-[70%] w-[100%] bg-white">
+        <section className="flex border-2 items-center h-[65%] w-[100%] bg-white">
           <div className="w-[20%] text-center ">LoGo</div>
           <section className="flex items-center w-[80%] ">
             <div className="flex items-center border-r-2 pe-3">
@@ -81,7 +83,7 @@ const Landingpage = () => {
         </section>
       </header>
       <section className="w-[100%] h-[100%] flex justify-center">
-        <div className="w-[98%] h-[4.5rem] bg-[rgb(6,60,131)] absolute z-10 flex items-center">
+        <div className="w-[100%] h-[4.5rem] bg-[rgb(6,60,131)] absolute z-10 flex items-center">
           <ul className="h-[40%] flex items-center justify-between w-[72%] text-white font-semibold border-e-[0.05rem] ps-4 pe-6 border-cyan-600">
             <li>
               <Link>Accounts</Link>
@@ -126,7 +128,7 @@ const Landingpage = () => {
 
         <img src={basicimg} alt="" className="h-[50%] w-[100%] relative object-cover" />
         <section className=" w-[100%] h-[4.5rem] bg-[rgb(6,60,131)]  absolute z-10 mt-80 flex justify-center">
-          <div className="w-[92%] h-[19rem] mt-4 flex justify-between">
+          <div className="w-[92%] h-[18rem] mt-4 flex justify-between">
             <div className="w-[24%] h-[100%] bg-white">
               <h1 className="uppercase text-xl ps-2 pt-1">DIGITAL BANKING</h1>
               <p className="font-semibold text-md text-gray-400 -mt-1 ps-2">
@@ -296,17 +298,66 @@ const Landingpage = () => {
           <p className="text-gray-500 ms-8 leading-7 w-[80%] text-[0.95rem]">recieve your loan funds promptly Experience quick disbursement for immediate access to the money you need.</p>
         </div>
       </section>
-      <section className="w-[70%] h-[80%] border-2 mt-12 ms-48">
-         <div className="w-[55%]">
-          <div >
+      <section className="w-[80%] h-[80%] mt-12 ms-48 flex items-center">
+         <div className="w-[45%] h-[100%]">
+          <section>
           <h1 className="text-3xl font-semibold">Customize Your Payments</h1>
-          <p className="mt-6 leading-2">Personalize the newly-improved Payments Options From to include all your payment methods such as,easy monthly payments,credit cards </p>
-          </div>
-          <div className="h-[70%] w-[100%] border-2">
-
-          </div>
+          <p className="mt-6 leading-2 text-[0.95rem]">Personalize the newly-improved Payments Options From to include all your payment methods such as,easy monthly payments,credit cards </p>
+          </section>
+          <section className="h-[75%] w-[100%] mt-10 flex flex-col justify-between">
+             <div className="h-[30%] w-[100%] bg-white rounded-xl flex items-center">
+               <div className="w-[10%] h-[100%] flex items-center justify-center ms-8 me-2"><FaMobileScreenButton className="text-5xl" /></div>
+               <div className="w-[80%]">
+                <h1 className="font-semibold text-lg">Set daily maximum transaction limitation</h1>
+                <p className=" mt-1">The daily,weekly,monthly and yearly limits for amount of transactions and total number of transactions.</p>
+               </div>
+             </div>
+             <div className="h-[30%] w-[100%] bg-white rounded-xl flex items-center">
+               <div className="w-[10%] h-[100%] flex items-center justify-center ms-8 me-2"><SlCalender className="text-4xl" /></div>
+               <div className="w-[80%]">
+                <h1 className="font-semibold text-lg">Customize ypur next payment schedule.</h1>
+                <p className=" mt-1">The daily,weekly,monthly and yearly limits for amount of transactions and total number of transactions.</p>
+               </div>
+             </div>
+             <div className="h-[30%] w-[100%] bg-white rounded-xl flex items-center">
+               <div className="w-[10%] h-[100%] flex items-center justify-center ms-8 me-2"><MdPayments className="text-5xl" /></div>
+               <div className="w-[80%]">
+                <h1 className="font-semibold text-lg">Get latest update about your payments.</h1>
+                <p className=" mt-1">The daily,weekly,monthly and yearly limits for amount of transactions and total number of transactions.</p>
+               </div>
+             </div>
+          </section>
+         </div>
+         <div className="w-[45%] h-[100%]">
+          <img src="https://pngimg.com/d/credit_card_PNG87.png" alt="" className="h-[80%] w-[80%] mt-32 ms-16"/>
          </div>
       </section>
+      <footer className="flex items-center justify-evenly w-[100%] h-[30%] mt-14 bg-black">
+        <div className="text-white flex flex-col items-center justify-evenly h-[90%] w-[22%]">
+          <p>Home </p>
+          <p>Accounts</p>
+          <p>Transfers</p>
+          <p>Payments</p>
+        </div>
+        <div className=" text-white flex flex-col items-center justify-evenly h-[90%] w-[22%]">
+          <p>Statemets </p>
+          <p>Customer Support</p>
+          <p>FAQs</p>
+          <p>Security and Privacy</p>
+        </div>
+        <div className="text-white flex flex-col items-center justify-evenly h-[90%] w-[22%]">
+          <p>Terms and Conditions</p>
+          <p>About Us</p>
+          <p>Branch Locator</p>
+          <p>ATM Locator</p>
+        </div>
+        <div className="text-white flex flex-col items-center justify-evenly h-[90%] w-[22%]">
+          <p>Mobile Apps </p>
+          <p>News and Updates</p>
+          <p>Social Media</p>
+          <p>Feedback</p>
+        </div>
+      </footer>
     </>
   );
 };

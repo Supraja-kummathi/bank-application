@@ -23,8 +23,8 @@ const router = createBrowserRouter([
     element: <PrivateRoute><AdminLayout /></PrivateRoute>,
 
     path: "/",
-    element:<Landingpage/>,
-    // element: <AdminLayout />,
+    // element:<Landingpage/>,
+    element: <AdminLayout />,
     children: [
       {
         path: "/",
