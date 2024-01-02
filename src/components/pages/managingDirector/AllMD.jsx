@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { deleteMd } from "../../../redux/reducers/md/mdSlice";
 import { NavLink } from "react-router-dom";
+import Spinner from "../spinner/Spinner";
 
 const AllMD = () => {
   let state = GetMds();
@@ -49,7 +50,7 @@ const AllMD = () => {
     <div className="w-[100%] p-5 h-[100%]">
       <div className="pb-3 font-semibold">All MD</div>
       {state.status === true ? (
-        <h1>loading...</h1>
+        <Spinner/>
       ) : (
         <section className=" bg-white w-full overflow-auto h-[95%] no-scrollbar">
           <header className="mx-10 my-2 w-[93%] flex justify-between items-center ">

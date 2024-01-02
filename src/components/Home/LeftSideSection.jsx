@@ -17,6 +17,7 @@ const LeftSideSection = () => {
   return (
     <>
       <section className="text-sm h-[100%] w-[100%] bg-black">
+
         {user.status === true ? (
           <Spinner />
         ) : (
@@ -33,6 +34,7 @@ const LeftSideSection = () => {
             <p className="mt-1 text-[rgb(112,112,112)]">Admin</p>
           </div>
         )}
+
         {/* <li className="list-none">
         <NavLink
           to="/"
@@ -96,9 +98,11 @@ const LeftSideSection = () => {
           </li>
         </div>
 
-        <div className="ms-16 mt-[10rem]">
+
+        <div className="ms-20 mt-[18rem]">
+
           <button
-            className="fixed text-white bg-gradient-to-r from-blue-500 via-blue-700 to-blue-900 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+            className=" text-white bg-gradient-to-r from-blue-500 via-blue-700 to-blue-900 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
             onClick={() => dispatch(logout())}
           >
             Logout

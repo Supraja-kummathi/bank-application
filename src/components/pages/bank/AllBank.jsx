@@ -17,8 +17,8 @@ const AllBank = () => {
   return (
     <div className="w-[100%] p-5 h-[100%]">
       <div className="pb-3 font-semibold">All Banks</div>
-      {state?.length === 0 ? (
-        <h1>No data available</h1>
+      {state?.status === true ? (
+        <Spinner/>
       ) : (
         <section className="w-full overflow-auto h-[95%] no-scrollbar">
           {data?.map((user, index) => {
