@@ -61,7 +61,7 @@ const CreateMD = () => {
 
     dispatch(createMd(payload));
     console.log(state);
-    navigate("/all-md");
+    navigate("/adminlayout/all-md");
   };
 
   return (
@@ -147,7 +147,7 @@ const CreateMD = () => {
               id="city"
               name="city"
               value={state.city}
-              onChange={(e) => {
+              onChange={e => {
                 setState({ ...state, city: e.target.value });
               }}
             />
@@ -163,7 +163,7 @@ const CreateMD = () => {
               id="country"
               name="country"
               value={state.country}
-              onChange={(e) => {
+              onChange={e => {
                 setState({ ...state, country: e.target.value });
               }}
             />
@@ -178,9 +178,9 @@ const CreateMD = () => {
               pattern="[0-9]{6}"
               placeholder="Enter Pincode"
               id="pincode"
-              name="pincode" 
+              name="pincode"
               value={state.pincode}
-              onChange={(e) => {
+              onChange={e => {
                 setState({ ...state, pincode: e.target.value });
               }}
             />
@@ -262,8 +262,8 @@ const CreateMD = () => {
               }}
             >
               <option>select bank</option>
-              {data?.length >= 0 &&
-                data?.map(bank => (
+              {data?.data?.length >= 0 &&
+                data?.data?.map(bank => (
                   <Fragment key={bank.bankId}>
                     <option value={bank.bankId}>{bank.bankName}</option>
                   </Fragment>
@@ -271,9 +271,7 @@ const CreateMD = () => {
             </select>
           </div>
           <div className="flex justify-end pt-4">
-
             <Button type="submit" name="Create MD"></Button>
-
           </div>
         </form>
       </section>

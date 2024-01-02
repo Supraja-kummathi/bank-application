@@ -9,7 +9,7 @@ const useGetProfile = () => {
   useEffect(() => {
     dispatch(GetProfile());
   }, [dispatch]);
-  return data.userInfo;
+  return data.auth;
 };
 
 export default useGetProfile;

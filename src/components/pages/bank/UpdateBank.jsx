@@ -37,7 +37,7 @@ const UpdateBank = () => {
   let handleSubmit = (e) => {
     e.preventDefault();
     dispatch(updateBank(updatedState));
-    navigate("/all-bank");
+    navigate("/adminlayout/all-bank");
   };
   console.log(updatedState)
   return (

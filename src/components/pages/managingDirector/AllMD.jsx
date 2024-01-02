@@ -11,13 +11,12 @@ const AllMD = () => {
   let state = GetMds();
 
   let dispatch = useDispatch();
-  console.log(state);
+  let [search, setSearch] = useState(null);
 
   const [itemsPerPage, setItemsPerPage] = useState(1);
 
   const [currentPage, setCurrentPage] = useState(1);
   let [loading, setLoading] = useState(false);
-
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -41,9 +40,9 @@ const AllMD = () => {
     }
   }
   function nextPage() {
-    if (currentPage !== indexOfLastItem) {
-      setCurrentPage(currentPage + 1);
-    }
+    setCurrentPage(cur => {
+      return cur < totalPages ? cur + 1 : cur;
+    });
   }
 
   return (
@@ -75,15 +74,29 @@ const AllMD = () => {
                 className=" mx-1 px-2 border-2 rounded-[0.25rem]"
                 type="text"
                 onChange={e => {
-                  console.log(
-
-                    currentItems?.filter(ele =>
-
+                  let data = state?.data?.data?.filter(
+                    ele =>
                       ele.email
                         .toLowerCase()
+                        .includes(e.target.value.toLowerCase()) ||
+                      ele.name
+                        .toLowerCase()
                         .includes(e.target.value.toLowerCase())
-                    )
                   );
+                  for (let i = 0; i < data.length; i++) {
+                    for (let j = 0; j < currentItems.length; j++) {
+                      if (
+                        data[i].email.toLowerCase() ==
+                          currentItems[j].email.toLowerCase() ||
+                        data[i].name.toLowerCase() ==
+                          currentItems[j].name.toLowerCase()
+                      ) {
+                        data = data.toSpliced(i, 1);
+                      }
+                    }
+                  }
+
+                  e.target.value && true ? setSearch(data) : setSearch(null);
                 }}
               />
             </div>
@@ -135,6 +148,39 @@ const AllMD = () => {
                 </tr>
               </thead>
               <tbody>
+                {search?.map(data => {
+                  return (
+                    <tr className="text-xs border-b-2">
+                      <td className="px-2 py-3 ">{data.name}</td>
+                      <td className="px-2">{data.email}</td>
+                      <td className="px-2">{data.password}</td>
+                      <td className="px-2">{data.branch_name}</td>
+                      <td className="px-2">
+                        <div className="flex">
+                          <span className="px-2  text-red-500">
+                            <NavLink
+                              to={`/managingDirectors/update/${data.employeeId}`}
+                            >
+                              <BiSolidPencil />
+                            </NavLink>
+                          </span>
+                          <span className="px-2 ">
+                            <MdDelete
+                              onClick={() => {
+                                let deleteConfirm =
+                                  window.confirm("Are you sure");
+                                if (deleteConfirm === true) {
+                                  dispatch(deleteMd(data.employeeId));
+                                }
+                              }}
+                            />
+                          </span>
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                })}
+
                 {currentItems?.map(data => {
                   return (
                     <tr className="text-xs border-b-2">
@@ -170,22 +216,29 @@ const AllMD = () => {
               </tbody>
             </table>
           </div>
-          <footer>
-            <div className="mt-4 flex justify-center">
-              <ul className="flex space-x-2">
+          <footer className="mx-10 my-2 w-[93%]  flex justify-between items-center">
+            <p>
+              Showing {indexOfFirstItem} to {indexOfLastItem} of{" "}
+              {state?.data?.data?.length} entries
+            </p>
+            <div className="mt-4 flex  items-center justify-center">
+              <ul className="flex ">
                 <li>
-                  <a href="#" onClick={prePage}>
+                  <button
+                    className="text-center px-3 py-1 border-2"
+                    onClick={prePage}
+                  >
                     Prev
-                  </a>
+                  </button>
                 </li>
 
                 {Array.from({ length: totalPages }, (_, index) => (
                   <li
                     key={index}
-                    className={`cursor-pointer ${
+                    className={`cursor-pointer border-2 ${
                       index + 1 === currentPage
-                        ? "bg-orange-500 text-white"
-                        : "bg-orange-300 hover:bg-orange-200"
+                        ? "bg-blue-500 text-white"
+                        : "bg-blue-300 hover:bg-blue-200"
                     } px-3 py-1 rounded`}
                     onClick={() => handlePageChange(index + 1)}
                   >
@@ -193,16 +246,15 @@ const AllMD = () => {
                   </li>
                 ))}
                 <li>
-                  <a href="#" onClick={nextPage}>
+                  <button
+                    className="text-center px-3 py-1 border-2"
+                    onClick={nextPage}
+                  >
                     Next
-                  </a>
+                  </button>
                 </li>
               </ul>
             </div>
-            <p>
-              Showing {indexOfFirstItem} to {indexOfLastItem} of{" "}
-              {state?.data?.data?.length} entries
-            </p>
           </footer>
         </section>
       )}

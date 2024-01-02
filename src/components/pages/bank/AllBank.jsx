@@ -12,6 +12,7 @@ const AllBank = () => {
   let dispatch = useDispatch();
   let navigate = useNavigate();
   let state = useGetBank();
+  let data=state.data.data;
 
   return (
     <div className="w-[100%] p-5 h-[100%]">
@@ -20,7 +21,7 @@ const AllBank = () => {
         <h1>No data available</h1>
       ) : (
         <section className="w-full overflow-auto h-[95%] no-scrollbar">
-          {state?.data?.map((user, index) => {
+          {data?.map((user, index) => {
             return (
               <div
                 className="flex w-full bg-white px-3 pt-3 mb-6"

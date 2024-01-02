@@ -38,9 +38,12 @@ export const userLogin = createAsyncThunk(
   "/auth/login",
   async (payload, { rejectWithValue }) => {
     try {
-      const { data } = await AxiosInstancePublic.post(`/auth/login`, payload);
+      const { data } = await AxiosInstancePublic.post(
+        `/login?users=${payload.userType}`,
+        payload
+      );
       // store user's token in local storage
-      localStorage.setItem("access_token", data.access_token);
+      localStorage.setItem("access_token", data?.data?.token);
       return data;
     } catch (error) {
       // return custom error message from API if any
@@ -55,9 +58,9 @@ export const userLogin = createAsyncThunk(
 
 //?========================GETPROFILE ================================//
 
-export const GetProfile = createAsyncThunk("/auth/profile", async () => {
+export const GetProfile = createAsyncThunk("/admins/getAdmin", async () => {
   try {
-    const { data } = await AxiosInstanceProtected.get(`/auth/profile`);
+    const { data } = await AxiosInstanceProtected.get(`/admins/getAdmin`);
     return data;
   } catch (error) {
     return error.message;
