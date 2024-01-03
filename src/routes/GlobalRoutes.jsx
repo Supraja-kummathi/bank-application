@@ -21,9 +21,11 @@ import Landingpage from "../components/Landingpage/Landingpage";
 const router = createBrowserRouter([
   { path: "/", element: <Landingpage /> },
   {
+
     path: "/adminlayout",
 
     element: <AdminLayout />,
+
 
     children: [
       {
@@ -44,21 +46,25 @@ const router = createBrowserRouter([
             element: <UpdateBank />,
           },
           {
+
             path: "/adminlayout/managingDirectors/update/:employeeId",
             element: <UpdateMd />,
           },
           {
             path: "/adminlayout/all-bank",
+
             element: <AllBank />,
           },
           {
             path: "/adminlayout/create-md",
             element: <CreateMD />,
           },
+          
           {
             path: "/adminlayout/all-md",
             element: <AllMD />,
           },
+
         ],
       },
 
@@ -73,8 +79,10 @@ const router = createBrowserRouter([
       </PublicRoute>
     ),
   },
+
   { path: "/customer/login", element: <Login name="Customer" /> },
   { path: "/employee/login", element: <Login name="Employee" /> },
+
   { path: "/forgotpassword", element: <ForgotPassword /> },
 ]);
 

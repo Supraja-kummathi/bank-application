@@ -39,7 +39,9 @@ const UpdateMd = () => {
   let handleSubmit = e => {
     e.preventDefault();
     dispatch(updateMd(updatedState));
+
     navigate("/adminlayout/all-md");
+
   };
 
   return (

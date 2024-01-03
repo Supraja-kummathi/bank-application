@@ -52,7 +52,7 @@ const AllMD = () => {
       {state.status === true ? (
         <Spinner/>
       ) : (
-        <section className=" bg-white w-full overflow-auto h-[95%] no-scrollbar">
+        <section className=" bg-white w-[100%] overflow-auto h-[95%] no-scrollbar">
           <header className="mx-10 my-2 w-[93%] flex justify-between items-center ">
             <div>
               Show
@@ -224,6 +224,7 @@ const AllMD = () => {
             </p>
             <div className="mt-4 flex  items-center justify-center">
               <ul className="flex ">
+
                 <li>
                   <button
                     className="text-center px-3 py-1 border-2"
@@ -256,6 +257,7 @@ const AllMD = () => {
                 </li>
               </ul>
             </div>
+
           </footer>
         </section>
       )}

@@ -34,7 +34,9 @@ const CreateBank = () => {
     e.preventDefault();
     dispatch(createBank(payload));
     console.log(state);
+
     navigate("/adminlayout/all-bank");
+
   };
   console.log(payload)
 

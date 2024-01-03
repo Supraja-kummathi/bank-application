@@ -67,7 +67,7 @@ const CreateMD = () => {
 
   return (
     <section className="h-[100%] w-[100%] relative">
-      <section className="rounded-md border-2 py-1.5 w-[97%] bg-white absolute top-4 left-3">
+      <section className=" rounded-md border-2 w-[97%] bg-white absolute top-4 left-3">
         <div className="ps-4 py-3 uppercase font-semibold">
           Create Managing director
         </div>
@@ -267,13 +267,16 @@ const CreateMD = () => {
               {data?.data?.length >= 0 &&
                 data?.data?.map(bank => (
 
+
                   <Fragment key={bank.bankId}>
                     <option value={bank.bankId}>{bank.bankName}</option>
                   </Fragment>
                 ))}
             </select>
           </div>
+
           <div className="flex justify-end pt-4">
+
             <Button type="submit" name="Create MD"></Button>
           </div>
         </form>

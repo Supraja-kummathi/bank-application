@@ -12,7 +12,9 @@ const AllBank = () => {
   let dispatch = useDispatch();
   let navigate = useNavigate();
   let state = useGetBank();
+
   let data=state.data.data;
+
 
   return (
     <div className="w-[100%] p-5 h-[100%]">
@@ -20,11 +22,13 @@ const AllBank = () => {
       {state?.status === true ? (
         <Spinner/>
       ) : (
+
         <section className="w-full overflow-auto h-[95%] no-scrollbar">
           {data?.map((user, index) => {
+
             return (
               <div
-                className="flex w-full bg-white px-3 pt-3 mb-6"
+                className="flex w-[100%] bg-white px-3 pt-3 mb-6"
                 key={index + 1}
               >
                 <div className="w-1/3 flex flex-col">
