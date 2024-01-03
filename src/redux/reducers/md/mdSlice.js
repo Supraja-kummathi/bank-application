@@ -19,7 +19,7 @@ export const createMd = createAsyncThunk("createMd", async payload => {
   try {
     // eslint-disable-next-line no-undef
 
-    const { data } = await AxiosInstancePublic.post(
+    const { data } = await AxiosInstanceProtected.post(
       `/managingDirectors/save?bankId=${payload.bankId}`,
       payload
     );
@@ -34,7 +34,9 @@ export const createMd = createAsyncThunk("createMd", async payload => {
 export const getMd = createAsyncThunk("getMd", async () => {
   try {
     // eslint-disable-next-line no-undef
-    const { data } = await AxiosInstancePublic.get(`/managingDirectors/getAll`);
+    const { data } = await AxiosInstanceProtected.get(
+      `/managingDirectors/getAll`
+    );
     return data;
   } catch (error) {
     return error.message;
@@ -43,7 +45,7 @@ export const getMd = createAsyncThunk("getMd", async () => {
 
 export const updateMd = createAsyncThunk("updateMd", async payload => {
   try {
-    const { data } = await AxiosInstancePublic.put(
+    const { data } = await AxiosInstanceProtected.put(
       `/managingDirectors/update?managerId=${payload.employeeId}`,
       payload
     );
@@ -57,7 +59,7 @@ export const updateMd = createAsyncThunk("updateMd", async payload => {
 export const deleteMd = createAsyncThunk("deleteMd", async employeeId => {
   try {
     console.log(employeeId);
-    const { data } = await AxiosInstancePublic.delete(
+    const { data } = await AxiosInstanceProtected.delete(
       `/managingDirectors/delete?managerId=${employeeId}`
     );
     return data;

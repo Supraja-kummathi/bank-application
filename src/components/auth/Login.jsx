@@ -5,16 +5,17 @@ import { useDispatch, useSelector } from "react-redux";
 import FormComp from "../../utils/FormComp";
 import { FaLock } from "react-icons/fa";
 
-const Login = () => {
+const Login = ({name}) => {
    const navigate = useNavigate();
    //const { userToken } = useSelector(state => state.auth);
   let dispatch = useDispatch();
-  let [name, setName] = useState("customer login");
+  
   let [state, setState] = useState({
     email: "",
     password: "",
+    userType:"",
   });
-  let { email, password } = state;
+  let { email, password,userType } = state;
   let handleChange = e => {
     setState({ ...state, [e.target.name]: e.target.value });
   };
@@ -28,12 +29,12 @@ const Login = () => {
   let handleSubmit = e => {
     e.preventDefault();
     dispatch(userLogin(state));
-    console.log(state)
+ 
     navigate("/adminlayout");
    };
 
   return (
-    <FormComp name={name}>
+    <FormComp name={name + " Login"}>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           {/* <label htmlFor="email">email</label> */}
@@ -59,6 +60,13 @@ const Login = () => {
             placeholder="Password"
           />
         </div>
+        <div className="form-group" value={userType} onChange={handleChange}>
+          <label htmlFor=" userType">Choose UserType</label> <hr />
+          <input type="radio" value="employee" name="userType" />
+          emoployee
+          <input type="radio" value="customer" name="userType" />
+          customer
+        </div>
 
         <div className="form-group mx-6 pt-12 w-[88%]">
           <button
@@ -74,30 +82,30 @@ const Login = () => {
             <Link to={"/forgotpassword"}> Forgot Password?</Link>
           </span>
           <span>
-            <Link to={"/register"} >Register</Link>
+            <Link to={"/register"}>Register</Link>
           </span>
         </footer>
-        <div className="flex items-center justify-evenly pt-4 pb-10 text-[rgb(157,155,155)] text-sm">
-          <button
-            onClick={() => {
-              setName("Switch To MD Login");
-            }}
-            className="md"
-          >
-            Switch To MD Login
-          </button>
-          <button
-            onClick={() => {
-              setName("Switch To Bank Manager Login");
-            }}
-            className="manager"
-          >
-            Switch To Bank Manager Login
-          </button>
-        </div>
       </form>
     </FormComp>
   );
 };
 
 export default Login;
+{/* <div className="flex items-center justify-evenly pt-4 pb-10 text-[rgb(157,155,155)] text-sm">
+  <button
+    onClick={() => {
+      setName("Switch To MD Login");
+    }}
+    className="md"
+  >
+    Switch To MD Login
+  </button>
+  <button
+    onClick={() => {
+      setName("Switch To Bank Manager Login");
+    }}
+    className="manager"
+  >
+    Switch To Bank Manager Login
+  </button>
+</div>; */}

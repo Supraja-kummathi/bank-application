@@ -11,35 +11,37 @@ const UpdateMd = () => {
   let { data } = GetMds();
   let dispatch = useDispatch();
   let [updatedState, setUpdatedState] = useState();
-  
+
   useEffect(() => {
     if (employeeId) {
       let filteredData = data?.data?.filter(md => md.employeeId == employeeId);
-      
+
       setUpdatedState(filteredData && filteredData[0]);
-      
     }
   }, [employeeId, data]);
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     if (Object.keys(updatedState.address).includes(e.target.name)) {
-       setUpdatedState({
-         ...updatedState,
-         address: { ...updatedState.address, [e.target.name]: e.target.value },
-       });
-     } else {
-       setUpdatedState({
-         ...updatedState,
-         [e.target.name]: e.target.value,
-       });
-     }
-   };console.log(updatedState)
 
- 
+      setUpdatedState({
+        ...updatedState,
+        address: { ...updatedState.address, [e.target.name]: e.target.value },
+      });
+    } else {
+      setUpdatedState({
+        ...updatedState,
+        [e.target.name]: e.target.value,
+      });
+    }
+  };
+
+
   let handleSubmit = e => {
     e.preventDefault();
     dispatch(updateMd(updatedState));
-    navigate("/all-md");
+
+    navigate("/adminlayout/all-md");
+
   };
 
   return (
@@ -102,7 +104,7 @@ const UpdateMd = () => {
               id="branchaddress"
               type="text"
               name="addressLine"
-              value={updatedState && updatedState?.addressLine}
+              value={updatedState && updatedState?.address?.addressLine}
               onChange={handleChange}
               cols={30}
               rows={3}
@@ -118,9 +120,7 @@ const UpdateMd = () => {
               placeholder="Enter here..."
               id="city"
               name="city"
-
               value={updatedState && updatedState.address.city}
-
               onChange={handleChange}
             />
           </div>
@@ -134,9 +134,7 @@ const UpdateMd = () => {
               placeholder="Enter here..."
               id="country"
               name="country"
-
               value={updatedState && updatedState.address.country}
-
               onChange={handleChange}
             />
           </div>
@@ -150,10 +148,8 @@ const UpdateMd = () => {
               pattern="[0-9]{6}"
               placeholder="Enter here..."
               id="pincode"
-
-              name="pincode" 
+              name="pincode"
               value={updatedState && updatedState.address.pincode}
-
               onChange={handleChange}
             />
           </div>

@@ -15,44 +15,53 @@ import PublicRoute from "../helpers/PublicRoutes";
 import PrivateRoute from "../helpers/PrivateRoutes";
 import UpdateBank from "../components/pages/bank/UpdateBank";
 import UpdateMd from "../components/pages/managingDirector/UpdateMd";
-import Landingpage from "../Landingpage";
+
+import Landingpage from "../components/Landingpage/Landingpage";
 
 const router = createBrowserRouter([
+  { path: "/", element: <Landingpage /> },
   {
-    // path: "/adminlayout",
-    // element: <PrivateRoute><AdminLayout /></PrivateRoute>,
 
-    path: "/",
-    element:<Landingpage/>,
-    // element: <AdminLayout />,
+    path: "/adminlayout",
+
+    element: <AdminLayout />,
+
+
     children: [
       {
-        path: "/",
+        path: "/adminlayout",
         element: <Home />,
+
         children: [
           {
             index: true,
             element: <AdminDashboard />,
           },
           {
-            path: "/create-bank",
+            path: "/adminlayout/create-bank",
             element: <CreateBank />,
           },
           {
-            path: "/update-bank/:bankId",
+            path: "/adminlayout/update-bank/:bankId",
             element: <UpdateBank />,
           },
           {
-            path: "all-bank",
+
+            path: "/adminlayout/managingDirectors/update/:employeeId",
+            element: <UpdateMd />,
+          },
+          {
+            path: "/adminlayout/all-bank",
+
             element: <AllBank />,
           },
           {
-            path: "create-md",
+            path: "/adminlayout/create-md",
             element: <CreateMD />,
           },
           
           {
-            path: "all-md",
+            path: "/adminlayout/all-md",
             element: <AllMD />,
           },
 
@@ -70,7 +79,10 @@ const router = createBrowserRouter([
       </PublicRoute>
     ),
   },
-  { path:"/login", element: <PublicRoute><Login/></PublicRoute> },
+
+  { path: "/customer/login", element: <Login name="Customer" /> },
+  { path: "/employee/login", element: <Login name="Employee" /> },
+
   { path: "/forgotpassword", element: <ForgotPassword /> },
 ]);
 

@@ -62,7 +62,7 @@ const CreateMD = () => {
 
     dispatch(createMd(payload));
     console.log(state);
-    navigate("/all-md");
+    navigate("/adminlayout/all-md");
   };
 
   return (
@@ -148,7 +148,7 @@ const CreateMD = () => {
               id="city"
               name="city"
               value={state.city}
-              onChange={(e) => {
+              onChange={e => {
                 setState({ ...state, city: e.target.value });
               }}
             />
@@ -164,7 +164,7 @@ const CreateMD = () => {
               id="country"
               name="country"
               value={state.country}
-              onChange={(e) => {
+              onChange={e => {
                 setState({ ...state, country: e.target.value });
               }}
             />
@@ -179,9 +179,9 @@ const CreateMD = () => {
               pattern="[0-9]{6}"
               placeholder="Enter Pincode"
               id="pincode"
-              name="pincode" 
+              name="pincode"
               value={state.pincode}
-              onChange={(e) => {
+              onChange={e => {
                 setState({ ...state, pincode: e.target.value });
               }}
             />
@@ -262,19 +262,22 @@ const CreateMD = () => {
                 setState({ ...state, bankId: e.target.value });
               }}
             >
-              <option >select bank</option>
-              {data?.data?.length > 0 ? <h1>loading..</h1>:
+
+              <option>select bank</option>
+              {data?.data?.length >= 0 &&
                 data?.data?.map(bank => (
+
+
                   <Fragment key={bank.bankId}>
                     <option value={bank.bankId}>{bank.bankName}</option>
                   </Fragment>
                 ))}
             </select>
           </div>
-          <div className="flex justify-end pt-2">
+
+          <div className="flex justify-end pt-4">
 
             <Button type="submit" name="Create MD"></Button>
-
           </div>
         </form>
       </section>

@@ -7,26 +7,34 @@ import { IoMail } from "react-icons/io5";
 import useGetProfile from "../../utils/useGetProfile";
 import { useDispatch } from "react-redux";
 import { logout } from "../../redux/reducers/auth/authSlice";
+import Spinner from "../pages/spinner/Spinner";
 
 const LeftSideSection = () => {
-  // const user = useGetProfile();
+  const user = useGetProfile();
   const dispatch = useDispatch();
-  // console.log(user)
+  console.log(user)
+  
   return (
     <>
       <section className="text-sm h-[100%] w-[100%] bg-black">
-        <div className="flex flex-col items-center">
-          <img
-            src={
-              // user?.avatar ||
-              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBAK2Ud4gQr9pQFT6rc3xbeq74MhZe7bOdvQ&usqp=CAU"
-            }
-            alt=""
-            className="h-[4rem] w-[4rem] rounded-full mt-5"
-          />
-          <p className="mt-3">abcd</p>
-          <p className="mt-1 text-[rgb(112,112,112)]">Admin</p>
-        </div>
+
+        {user.status === true ? (
+          <Spinner />
+        ) : (
+          <div className="flex flex-col items-center">
+            <img
+              src={
+                // user?.avatar ||
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBAK2Ud4gQr9pQFT6rc3xbeq74MhZe7bOdvQ&usqp=CAU"
+              }
+              alt=""
+              className="h-[4rem] w-[4rem] rounded-full mt-5"
+            />
+            <p className="mt-3">{user?.userInfo?.data?.name}</p>
+            <p className="mt-1 text-[rgb(112,112,112)]">Admin</p>
+          </div>
+        )}
+
         {/* <li className="list-none">
         <NavLink
           to="/"
@@ -47,7 +55,7 @@ const LeftSideSection = () => {
         <div className="ms-16 mt-2">
           <li className="list-none text-[rgb(112,112,112)]">
             <NavLink
-              to="/create-bank"
+              to="/adminlayout/create-bank"
               className={({ isActive }) => (isActive ? "active" : "")}
             >
               Create Bank
@@ -55,7 +63,7 @@ const LeftSideSection = () => {
           </li>
           <li className="list-none mt-2 text-[rgb(112,112,112)]">
             <NavLink
-              to="/all-bank"
+              to="/adminlayout/all-bank"
               className={({ isActive }) => (isActive ? "active" : "")}
             >
               All bank
@@ -74,7 +82,7 @@ const LeftSideSection = () => {
         <div className="ms-16 mt-2">
           <li className="list-none text-[rgb(112,112,112)]">
             <NavLink
-              to="/create-md"
+              to="/adminlayout/create-md"
               className={({ isActive }) => (isActive ? "active" : "")}
             >
               Create MD
@@ -82,7 +90,7 @@ const LeftSideSection = () => {
           </li>
           <li className="list-none mt-2 text-[rgb(112,112,112)]">
             <NavLink
-              to="/all-md"
+              to="/adminlayout/all-md"
               className={({ isActive }) => (isActive ? "active" : "")}
             >
               All MD
@@ -90,7 +98,9 @@ const LeftSideSection = () => {
           </li>
         </div>
 
+
         <div className="ms-20 mt-[18rem]">
+
           <button
             className=" text-white bg-gradient-to-r from-blue-500 via-blue-700 to-blue-900 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
             onClick={() => dispatch(logout())}
