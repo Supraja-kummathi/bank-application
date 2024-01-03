@@ -11,10 +11,10 @@ const UpdateBank = () => {
   let { data } = useGetBank();
   let dispatch = useDispatch();
   let [updatedState, setUpdatedState] = useState();
-  console.log(updatedState)
+  console.log(data)
   useEffect(() => {
     if (bankId) {
-      let filteredData = data?.filter((bank) => bank.bankId == bankId);
+      let filteredData = data?.data?.filter((bank) => bank.bankId == bankId);
       setUpdatedState(filteredData && filteredData[0]);
     }
   }, [bankId, data]);
@@ -37,7 +37,7 @@ const UpdateBank = () => {
   let handleSubmit = (e) => {
     e.preventDefault();
     dispatch(updateBank(updatedState));
-    navigate("/all-bank");
+    navigate("/adminlayout/all-bank");
   };
   console.log(updatedState)
   return (

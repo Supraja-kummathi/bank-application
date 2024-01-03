@@ -15,6 +15,7 @@ export const AxiosInstancePublic = axios.create({
 export const AxiosInstanceProtected = axios.create({
   baseURL: BASE_URL ,
   headers: {
+    "Content-Type":"application/json",
     Authorization: `Bearer ${getToken()}`,
   },
 });

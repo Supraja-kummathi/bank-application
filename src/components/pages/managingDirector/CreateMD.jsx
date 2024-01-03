@@ -13,6 +13,7 @@ const CreateMD = () => {
   let dispatch = useDispatch();
   const navigate = useNavigate();
   let { data } = useGetBank();
+  console.log(data);
 
   // const [searchParams, setSearchParams] = useSearchParams();
   // let [query, setQuery] = React.useState(searchParams.get("bankId"));
@@ -52,21 +53,21 @@ const CreateMD = () => {
     },
   };
 
-  let handleQueryChange = e => {
-    setQuery(e.target.value);
-  };
+  // let handleQueryChange = e => {
+  //   setQuery(e.target.value);
+  // };
 
   const handleSubmit = e => {
     e.preventDefault();
 
     dispatch(createMd(payload));
     console.log(state);
-    navigate("/all-md");
+    navigate("/adminlayout/all-md");
   };
 
   return (
     <section className="h-[100%] w-[100%] relative">
-      <section className="rounded-md border-2 py-1.5 w-[97%] bg-white absolute top-4 left-3">
+      <section className=" rounded-md border-2 w-[97%] bg-white absolute top-4 left-3">
         <div className="ps-4 py-3 uppercase font-semibold">
           Create Managing director
         </div>
@@ -147,7 +148,7 @@ const CreateMD = () => {
               id="city"
               name="city"
               value={state.city}
-              onChange={(e) => {
+              onChange={e => {
                 setState({ ...state, city: e.target.value });
               }}
             />
@@ -163,7 +164,7 @@ const CreateMD = () => {
               id="country"
               name="country"
               value={state.country}
-              onChange={(e) => {
+              onChange={e => {
                 setState({ ...state, country: e.target.value });
               }}
             />
@@ -178,9 +179,9 @@ const CreateMD = () => {
               pattern="[0-9]{6}"
               placeholder="Enter Pincode"
               id="pincode"
-              name="pincode" 
+              name="pincode"
               value={state.pincode}
-              onChange={(e) => {
+              onChange={e => {
                 setState({ ...state, pincode: e.target.value });
               }}
             />
@@ -253,7 +254,7 @@ const CreateMD = () => {
               </label>
             </div>
             <select
-              className="block  w-[80%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
+              className="block  w-[80%] rounded-md border-0 py-1.5 pl-2 pr-20 text-[rgb(145,142,143)] ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
               // value={query}
               // onChange={handleQueryChange}
               value={state.bankId}
@@ -261,16 +262,21 @@ const CreateMD = () => {
                 setState({ ...state, bankId: e.target.value });
               }}
             >
+
               <option>select bank</option>
-              {data?.length >= 0 &&
-                data?.map(bank => (
+              {data?.data?.length >= 0 &&
+                data?.data?.map(bank => (
+
+
                   <Fragment key={bank.bankId}>
                     <option value={bank.bankId}>{bank.bankName}</option>
                   </Fragment>
                 ))}
             </select>
           </div>
+
           <div className="flex justify-end pt-4">
+
             <Button type="submit" name="Create MD"></Button>
           </div>
         </form>

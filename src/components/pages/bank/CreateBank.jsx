@@ -21,23 +21,24 @@ const CreateBank = () => {
   // let randomId = Math.round(Math.random() * 10000);
 
   let payload = {
-    bankId: Math.round(Math.random() * 100),
     bankName: state.bankName,
     address: {
-      addressId: Math.random() * 1000,
-      addressLine: state.address,
-      pincode: "qsp5160003",
-      country: "India",
-      city: "Banglore",
+      addressLine: state.addressLine,
+      pincode: state.pincode,
+      country: state.country,
+      city: state.city,
     },
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(createBank(payload));
     console.log(state);
-    navigate("/all-bank");
+
+    navigate("/adminlayout/all-bank");
+
   };
+  console.log(payload)
 
   return (
     <section className="h-[100%] w-[100%] relative">
@@ -53,8 +54,9 @@ const CreateBank = () => {
               type="text"
               placeholder="Enter bankname"
               id="bankname"
+              name="bankname"
               value={state.bankName}
-              onChange={e => {
+              onChange={(e) => {
                 setState({ ...state, bankName: e.target.value });
               }}
             />
@@ -69,8 +71,8 @@ const CreateBank = () => {
               id="branchaddress"
               name="branchaddress"
               value={state.address}
-              onChange={e => {
-                setState({ ...state, address: e.target.value });
+              onChange={(e) => {
+                setState({ ...state, addressLine: e.target.value });
               }}
               cols={30}
               rows={3}
@@ -118,7 +120,7 @@ const CreateBank = () => {
               pattern="[0-9]{6}"
               placeholder="Enter pincode"
               id="pincode"
-              name="pincode" 
+              name="pincode"
               value={state.pincode}
               onChange={(e) => {
                 setState({ ...state, pincode: e.target.value });

@@ -14,31 +14,34 @@ const UpdateMd = () => {
 
   useEffect(() => {
     if (employeeId) {
-      console.log(employeeId);
-      console.log(data.data);
       let filteredData = data?.data?.filter(md => md.employeeId == employeeId);
+
       setUpdatedState(filteredData && filteredData[0]);
     }
   }, [employeeId, data]);
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     if (Object.keys(updatedState.address).includes(e.target.name)) {
-       setUpdatedState({
-         ...updatedState,
-         address: { ...updatedState.address, [e.target.name]: e.target.value },
-       });
-     } else {
-       setUpdatedState({
-         ...updatedState,
-         [e.target.name]: e.target.value,
-       });
-     }
-   };
+
+      setUpdatedState({
+        ...updatedState,
+        address: { ...updatedState.address, [e.target.name]: e.target.value },
+      });
+    } else {
+      setUpdatedState({
+        ...updatedState,
+        [e.target.name]: e.target.value,
+      });
+    }
+  };
+
 
   let handleSubmit = e => {
     e.preventDefault();
     dispatch(updateMd(updatedState));
-    navigate("/all-md");
+
+    navigate("/adminlayout/all-md");
+
   };
 
   return (
@@ -91,6 +94,7 @@ const UpdateMd = () => {
               onChange={handleChange}
             />
           </div>
+
           <div className="flex justify-between w-[99%] mb-4">
             <label htmlFor="branchaddress" className="text-[rgb(145,142,143)]">
               Address
@@ -100,7 +104,7 @@ const UpdateMd = () => {
               id="branchaddress"
               type="text"
               name="addressLine"
-              value={updatedState && updatedState.address.addressLine}
+              value={updatedState && updatedState?.address?.addressLine}
               onChange={handleChange}
               cols={30}
               rows={3}
@@ -144,7 +148,7 @@ const UpdateMd = () => {
               pattern="[0-9]{6}"
               placeholder="Enter here..."
               id="pincode"
-              name="pincode" 
+              name="pincode"
               value={updatedState && updatedState.address.pincode}
               onChange={handleChange}
             />
@@ -159,7 +163,7 @@ const UpdateMd = () => {
                 id="male"
                 name="gender"
                 value="male"
-                checked={"Male" === updatedState?.gender}
+                checked={"male" === updatedState?.gender?.toLowerCase()}
                 className=" w-4 h-4"
                 onChange={handleChange}
               />
@@ -171,7 +175,7 @@ const UpdateMd = () => {
                 id="female"
                 name="gender"
                 value="female"
-                checked={"female" === updatedState?.gender}
+                checked={"female" === updatedState &&  updatedState?.gender}
                 className="ms-4 w-4 h-4"
                 onChange={handleChange}
               />
@@ -183,7 +187,7 @@ const UpdateMd = () => {
                 id="others"
                 name="gender"
                 value="others"
-                checked={"others" === updatedState?.gender}
+                checked={"others" === updatedState &&  updatedState?.gender}
                 className="ms-4 w-4 h-4"
                 onChange={handleChange}
               />
@@ -199,7 +203,7 @@ const UpdateMd = () => {
                 type="date"
                 id="dob"
                 name="dateOfBirth"
-                defaultValue={updatedState?.dateOfBirth?.substr(0, 10)}
+                value={updatedState && updatedState?.dateOfBirth?.substr(0, 10)}
                 onChange={handleChange}
                 className="text-base border-2 px-2 py-1 rounded-md w-[50%] "
               />

@@ -15,7 +15,7 @@ const initialState = {
 };
 
 //=================Create Bank==============/
-export const createBank = createAsyncThunk("createBank", async (payload) => {
+export const createBank = createAsyncThunk("createBank", async payload => {
   try {
     // eslint-disable-next-line no-undef
     const { data } = await AxiosInstanceProtected.post(`/banks`, payload);
@@ -28,16 +28,16 @@ export const createBank = createAsyncThunk("createBank", async (payload) => {
 export const getBank = createAsyncThunk("getBank", async () => {
   try {
     // eslint-disable-next-line no-undef
-    const { data } = await AxiosInstancePublic.get(`/banks`);
+    const { data } = await AxiosInstanceProtected.get(`/banks`);
     return data;
   } catch (error) {
     return error.message;
   }
 });
 //=================Update Bank==============/
-export const updateBank = createAsyncThunk("updateBank", async (payload) => {
+export const updateBank = createAsyncThunk("updateBank", async payload => {
   try {
-    const { data } = await AxiosInstancePublic.put(
+    const { data } = await AxiosInstanceProtected.put(
       `/banks/bankId/${payload.bankId}`,
       payload
     );
@@ -48,10 +48,12 @@ export const updateBank = createAsyncThunk("updateBank", async (payload) => {
   }
 });
 //=================Delete Bank==============/
-export const deleteBank = createAsyncThunk("deleteBank", async (bankId) => {
+export const deleteBank = createAsyncThunk("deleteBank", async bankId => {
   try {
     console.log(bankId);
-    const { data } = await AxiosInstancePublic.delete(`/banks/bankId/${bankId}`);
+    const { data } = await AxiosInstanceProtected.delete(
+      `/banks/bankId/${bankId}`
+    );
     return data;
   } catch (error) {
     return error.message;
@@ -64,10 +66,10 @@ export const bankSlice = createSlice({
   name: "bank",
   initialState,
   reducers: {},
-  extraReducers: (builder) => {
+  extraReducers: builder => {
     //REGISTER
     builder
-      .addCase(createBank.pending, (state) => {
+      .addCase(createBank.pending, state => {
         state.status = true;
         state.success = false;
       })
@@ -84,7 +86,7 @@ export const bankSlice = createSlice({
 
     // fetch bank
     builder
-      .addCase(getBank.pending, (state) => {
+      .addCase(getBank.pending, state => {
         state.status = true;
         state.success = false;
       })
@@ -101,14 +103,14 @@ export const bankSlice = createSlice({
 
     // update bank
     builder
-      .addCase(updateBank.pending, (state) => {
+      .addCase(updateBank.pending, state => {
         state.status = true;
         state.success = false;
       })
       .addCase(updateBank.fulfilled, (state, action) => {
         state.status = false;
         state.success = true;
-        state.data = state.data.map((el) =>
+        state.data = state.data.map(el =>
           action.payload.bankId === el.bankId ? action.payload : el
         );
       })
@@ -121,20 +123,20 @@ export const bankSlice = createSlice({
 
     // delete bank
     builder
-    .addCase(deleteBank.pending, (state) => {
-      state.status = true;
-      state.success = false;
-    })
-    .addCase(deleteBank.fulfilled, (state, action) => {
-      state.status = false;
-      state.success = true;
-      state.data = action.payload;
-    })
-    .addCase(deleteBank.rejected, (state, action) => {
-      state.status = false;
-      state.error = action.error.message;
-      state.success = false;
-    });
+      .addCase(deleteBank.pending, state => {
+        state.status = true;
+        state.success = false;
+      })
+      .addCase(deleteBank.fulfilled, (state, action) => {
+        state.status = false;
+        state.success = true;
+        state.data = action.payload;
+      })
+      .addCase(deleteBank.rejected, (state, action) => {
+        state.status = false;
+        state.error = action.error.message;
+        state.success = false;
+      });
   },
 });
 
