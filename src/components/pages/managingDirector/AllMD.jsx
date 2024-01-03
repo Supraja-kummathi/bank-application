@@ -53,7 +53,7 @@ const AllMD = () => {
       {state.status === true ? (
         <Spinner/>
       ) : (
-        <section className=" bg-white w-full overflow-auto h-[95%] no-scrollbar">
+        <section className=" bg-white w-[100%] overflow-auto h-[95%] no-scrollbar">
           <header className="mx-10 my-2 w-[93%] flex justify-between items-center ">
             <div>
               Show
@@ -171,8 +171,12 @@ const AllMD = () => {
               </tbody>
             </table>
           </div>
-          <footer>
-            <div className="mt-4 flex justify-center">
+          <footer className="flex mt-10 w-[90%] justify-between ms-12">
+          <p>
+              Showing {indexOfFirstItem} to {indexOfLastItem} of{" "}
+              {state?.data?.data?.length} entries
+            </p>
+            <div className="flex justify-center">
               <ul className="flex space-x-2">
                 <li>
                   <a href="#" onClick={prePage}>
@@ -200,10 +204,7 @@ const AllMD = () => {
                 </li>
               </ul>
             </div>
-            <p>
-              Showing {indexOfFirstItem} to {indexOfLastItem} of{" "}
-              {state?.data?.data?.length} entries
-            </p>
+          
           </footer>
         </section>
       )}

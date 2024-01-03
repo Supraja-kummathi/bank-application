@@ -38,7 +38,7 @@ const UpdateMd = () => {
  
   let handleSubmit = e => {
     e.preventDefault();
-    dispatch(updateMd(updateState));
+    dispatch(updateMd(updatedState));
     navigate("/all-md");
   };
 
