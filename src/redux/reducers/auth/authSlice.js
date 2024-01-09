@@ -61,6 +61,7 @@ export const userLogin = createAsyncThunk(
 export const GetProfile = createAsyncThunk("/admins/getAdmin", async () => {
   try {
     const { data } = await AxiosInstanceProtected.get(`/admins/getAdmin`);
+    console.log(data)
     return data;
   } catch (error) {
     return error.message;

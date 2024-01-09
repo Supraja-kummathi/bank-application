@@ -74,7 +74,7 @@ export const mdSlice = createSlice({
   name: "bank",
   initialState,
   reducers: {},
-  extraReducers: builder => {
+  extraReducers:builder => {
     //REGISTER
     builder
       .addCase(createMd.pending, state => {

@@ -1,8 +1,8 @@
 import { useState } from "react";
 // import { v4 as uuidv4 } from "uuid";
-import Button from "../../../utilities/Button";
+import Button from "../../../../utilities/Button";
 import { useDispatch } from "react-redux";
-import { createBank } from "../../../redux/reducers/bank/bankSlice";
+import { createBank } from "../../../../redux/reducers/bank/bankSlice";
 import { useNavigate } from "react-router-dom";
 const CreateBank = () => {
   let dispatch = useDispatch();

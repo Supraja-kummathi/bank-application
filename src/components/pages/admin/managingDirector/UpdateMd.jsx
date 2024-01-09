@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import GetMds from "../../../utils/GetMds";
+import GetMds from "../../../../utils/GetMds";
 import { useDispatch } from "react-redux";
-import { updateMd } from "../../../redux/reducers/md/mdSlice";
-import Button from "../../../utilities/Button";
+import { updateMd } from "../../../../redux/reducers/md/mdSlice";
+import Button from "../../../../utilities/Button";
 
 const UpdateMd = () => {
   let { employeeId } = useParams();

@@ -27,10 +27,10 @@ const Navbar = () => {
               <input
                 type="text"
                 placeholder="Search..."
-                className="border-2 p-2 rounded-full ps-4 w-[15rem]"
+                className="border-2 p-1 rounded-full ps-4 w-[15rem]"
               />
             </span>
-            <span className="relative top-3 text-xl right-[2rem] text-slate-500">
+            <span className="relative top-2 text-xl right-[2rem] text-slate-500">
               <IoIosSearch />
             </span>
           </div>

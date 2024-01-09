@@ -1,17 +1,18 @@
 import { useDispatch } from "react-redux";
-import useBankState from "./useBankState";
 import { useEffect } from "react";
+import useBankState from "./useBankState";
 import { getBank } from "../redux/reducers/bank/bankSlice";
 
-const useGetBank = () => {
+
+const useGetBanks = () => {
   const dispatch = useDispatch();
-  const val = useBankState();
+  const bank = useBankState();  
   useEffect(() => {
     dispatch(getBank());
   }, [dispatch]);
 
-   return val.bank
+   return bank
 
 };
 
-export default useGetBank;
+export default useGetBanks;

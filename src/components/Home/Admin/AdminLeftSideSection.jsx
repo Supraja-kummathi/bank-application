@@ -4,12 +4,12 @@ import { RiDashboard3Line } from "react-icons/ri";
 import { CiBank } from "react-icons/ci";
 import { RiArrowDropRightLine } from "react-icons/ri";
 import { IoMail } from "react-icons/io5";
-import useGetProfile from "../../utils/useGetProfile";
+import useGetProfile from "../../../utils/useGetProfile";
 import { useDispatch } from "react-redux";
-import { logout } from "../../redux/reducers/auth/authSlice";
-import Spinner from "../pages/spinner/Spinner";
+import { logout } from "../../../redux/reducers/auth/authSlice";
+import Spinner from "../../pages/spinner/Spinner";
 
-const LeftSideSection = () => {
+const AdminLeftSideSection = () => {
   const user = useGetProfile();
   const dispatch = useDispatch();
   console.log(user)
@@ -102,7 +102,7 @@ const LeftSideSection = () => {
         <div className="ms-20 mt-[18rem]">
 
           <button
-            className=" text-white bg-gradient-to-r from-blue-500 via-blue-700 to-blue-900 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+            className=" text-white bg-gradient-to-r from-blue-500 via-blue-700 to-blue-900 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-4 py-2 text-center"
             onClick={() => dispatch(logout())}
           >
             Logout
@@ -113,4 +113,4 @@ const LeftSideSection = () => {
   );
 };
 
-export default LeftSideSection;
+export default AdminLeftSideSection;
