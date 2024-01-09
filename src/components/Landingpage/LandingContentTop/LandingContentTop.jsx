@@ -1,0 +1,19 @@
+import React from 'react'
+import LandingTopNav from './LandingTopNav'
+import LandingTopFooter from './LandingTopFooter'
+
+const LandingTopMain = () => {
+  return (
+    <section className="w-[100%] h-[100%] flex justify-center">
+     <LandingTopNav/>   
+    <img
+    src=""
+      alt=""
+      className="h-[50%] w-[100%] relative object-cover"
+    />
+   <LandingTopFooter/>
+    </section>
+  )
+}
+
+export default LandingTopMain

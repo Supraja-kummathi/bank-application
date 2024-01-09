@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { useDispatch } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
-import useGetBank from "../../../utils/useGetAllBanks";
-import { updateBank } from "../../../redux/reducers/bank/bankSlice";
+import useGetBank from "../../../../utils/useGetAllBanks";
+import { updateBank } from "../../../../redux/reducers/bank/bankSlice";
+
 
 const UpdateBank = () => {
   let { bankId } = useParams();
@@ -11,7 +12,7 @@ const UpdateBank = () => {
   let { data } = useGetBank();
   let dispatch = useDispatch();
   let [updatedState, setUpdatedState] = useState();
-  console.log(data)
+
   useEffect(() => {
     if (bankId) {
       let filteredData = data?.data?.filter((bank) => bank.bankId == bankId);

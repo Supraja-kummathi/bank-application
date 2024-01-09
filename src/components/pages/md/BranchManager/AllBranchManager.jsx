@@ -1,32 +1,45 @@
 import { TbArrowsDownUp } from "react-icons/tb";
-import GetMds from "../../../utils/GetMds";
+import GetMds from "../../../../utils/GetMds";
 import { MdDelete } from "react-icons/md";
 import { BiSolidPencil } from "react-icons/bi";
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { deleteMd } from "../../../redux/reducers/md/mdSlice";
+import { deleteMd } from "../../../../redux/reducers/md/mdSlice";
 import { NavLink } from "react-router-dom";
-import Spinner from "../spinner/Spinner";
+import Spinner from "../../spinner/Spinner";
+import { deleteBranchManager, getBranchManager } from "../../../../redux/reducers/branchmanager/branchManagerSlice";
+import useBranchState from "../../../../utils/useBranchState";
 
-const AllMD = () => {
-  let state = GetMds();
 
+const AllBranchManager = () => {
+  
   let dispatch = useDispatch();
   let [search, setSearch] = useState(null);
-
   const [itemsPerPage, setItemsPerPage] = useState(1);
-
   const [currentPage, setCurrentPage] = useState(1);
-  let [loading, setLoading] = useState(false);
+  
+  let data = useBranchState();
+  let [bankId, setBankId] = useState(null);
+  let [state, setState] = useState(null);
+  useEffect(() => {
+    setBankId(data && data?.data?.data?.bankId);
+  }, [data, bankId]); 
 
+  console.log(state)
+  useLayoutEffect(() => {
+    if (bankId) {
+      let test = dispatch(getBranchManager(bankId));
+       test.unwrap().then((x) => {setState(x.data)});
+    }
+  }, [bankId]);
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = state?.data?.data?.slice(
+  const currentItems = state?.slice(
     indexOfFirstItem,
     indexOfLastItem
   );
 
-  const totalPages = Math.ceil(state?.data?.data?.length / itemsPerPage);
+  const totalPages = Math.ceil(state?.length / itemsPerPage);
 
   const handlePageChange = pageNumber => {
     setLoading(true);
@@ -48,8 +61,8 @@ const AllMD = () => {
 
   return (
     <div className="w-[100%] p-5 h-[100%]">
-      <div className="pb-3 font-semibold">All MD</div>
-      {state.status === true ? (
+      <div className="pb-3 font-semibold">All Branch Managers</div>
+      {state?.length<=0 ? (
         <Spinner/>
       ) : (
         <section className=" bg-white w-[100%] overflow-auto h-[95%] no-scrollbar">
@@ -160,7 +173,7 @@ const AllMD = () => {
                         <div className="flex">
                           <span className="px-2  text-red-500">
                             <NavLink
-                              to={`/managingDirectors/update/${data.employeeId}`}
+                              to={`/adminlayout/managingDirectors/update/${data.employeeId}`}
                             >
                               <BiSolidPencil />
                             </NavLink>
@@ -193,7 +206,7 @@ const AllMD = () => {
                         <div className="flex">
                           <span className="px-2  text-red-500">
                             <NavLink
-                              to={`/managingDirectors/update/${data.employeeId}`}
+                              to={`/mdlayout/branchManager/update/${data.employeeId}`}
                             >
                               <BiSolidPencil />
                             </NavLink>
@@ -204,7 +217,7 @@ const AllMD = () => {
                                 let deleteConfirm =
                                   window.confirm("Are you sure");
                                 if (deleteConfirm === true) {
-                                  dispatch(deleteMd(data.employeeId));
+                                  dispatch(deleteBranchManager(data.employeeId));
                                 }
                               }}
                             />
@@ -220,7 +233,7 @@ const AllMD = () => {
           <footer className="mx-10 my-2 w-[93%]  flex justify-between items-center">
             <p>
               Showing {indexOfFirstItem} to {indexOfLastItem} of{" "}
-              {state?.data?.data?.length} entries
+              {state?.length} entries
             </p>
             <div className="mt-4 flex  items-center justify-center">
               <ul className="flex ">
@@ -265,4 +278,4 @@ const AllMD = () => {
   );
 };
 
-export default AllMD;
+export default AllBranchManager;

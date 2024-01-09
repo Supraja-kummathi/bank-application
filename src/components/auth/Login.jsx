@@ -13,7 +13,7 @@ const Login = ({name}) => {
   let [state, setState] = useState({
     email: "",
     password: "",
-    userType:"",
+    userType:name,
   });
   let { email, password,userType } = state;
   let handleChange = e => {
@@ -30,11 +30,11 @@ const Login = ({name}) => {
     e.preventDefault();
     dispatch(userLogin(state));
  
-    navigate("/adminlayout");
+    navigate("/mdlayout");
    };
 
   return (
-    <FormComp name={name + " Login"}>
+    <FormComp name={name + "Login"}>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           {/* <label htmlFor="email">email</label> */}
@@ -60,13 +60,15 @@ const Login = ({name}) => {
             placeholder="Password"
           />
         </div>
-        <div className="form-group" value={userType} onChange={handleChange}>
-          <label htmlFor=" userType">Choose UserType</label> <hr />
+        {/* <div className="form-group pt-3" value={userType} onChange={handleChange}>
+          <label htmlFor=" userType" className="ps-6">Choose UserType</label>
+          <div>
           <input type="radio" value="employee" name="userType" />
           emoployee
           <input type="radio" value="customer" name="userType" />
           customer
-        </div>
+          </div>
+        </div> */}
 
         <div className="form-group mx-6 pt-12 w-[88%]">
           <button
@@ -81,9 +83,9 @@ const Login = ({name}) => {
           <span className="me-4">
             <Link to={"/forgotpassword"}> Forgot Password?</Link>
           </span>
-          <span>
+          {/* <span>
             <Link to={"/register"}>Register</Link>
-          </span>
+          </span> */}
         </footer>
       </form>
     </FormComp>
