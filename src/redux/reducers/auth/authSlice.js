@@ -1,4 +1,4 @@
-/* eslint-disable no-undef */
+/ eslint-disable no-undef /
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { AxiosInstanceProtected, AxiosInstancePublic } from "./../../../axios/AxiosInstance";
 

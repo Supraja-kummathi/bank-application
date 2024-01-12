@@ -4,7 +4,9 @@ import Home from "../components/Home/Admin/AdminHome";
 import CreateBank from "../components/pages/admin/bank/CreateBank";
 import AllBank from "../components/pages/admin/bank/AllBank";
 import CreateMD from "../components/pages/admin/managingDirector/CreateMD";
+
 import AllMD from "./../components/pages/admin/managingDirector/AllMD";
+
 import Register from "./../components/auth/Register";
 import Login from "../components/auth/Login";
 import AdminDashboard from "../components/pages/admin/AdminDashboard/AdminDashboard";
@@ -32,15 +34,18 @@ import SavingsAccount from "../components/BankManager/SavingsAccount";
 import CurrentAccount from "../components/BankManager/CurrentAccount";
 import LoanAccount from "../components/BankManager/LoanAccount";
 
+
 const router = createBrowserRouter([
-  { path: "/", element: <Landingpage /> },
+  { path: "/", element: <Landingpage />},
   {
     path: "/adminlayout",
     element: <AdminLayout />,
     children: [
       {
         path: "/adminlayout",
+
         element: <Home />,
+
         children: [
           {
             index: true,
@@ -95,31 +100,38 @@ const router = createBrowserRouter([
             element: <CreateBranch />,
           },
           {
-            path: "/mdlayout/update-bank/:bankId",
-            element: <UpdateBank />,
+            path: "/mdlayout/update-branch/:branchId",
+            element: <UpdateBranch />,
           },
           {
             path: "/mdlayout/all-branches",
-
             element: <AllBranches />,
           },
           {
             path: "/mdlayout/create-branchManager",
             element: <CreateBranchManager />,
           },
-          // {
-          //   path: "/mdlayout/managingDirectors/update/:employeeId",
-          //   element: <UpdateBankManager />,
-          // },
+          {
+            path: "/mdlayout/branchManager/update/:employeeId",
+            element: <UpdateBranchManager />,
+          },
           {
             path: "/mdlayout/all-branchManager",
             element: <AllBranchManager />,
           },
-        ],
-      },
-
-      { path: "*", element: <h1>Page not found</h1> },
-    ],
+          {
+            path: "/mdlayout/loan-approvals",
+            element: <LoanApprovals />,
+          },
+          {
+            path: "/mdlayout/card-approvals",
+            element: <CardApprovals />,
+          },
+          {
+            path: "/mdlayout/all-branchManager",
+            element: <AllBranchManager />,
+          },
+    ]}]
   },
   {
     path: "/bankmanager",
@@ -190,6 +202,7 @@ const router = createBrowserRouter([
             path: "/bankmanager/all-md",
             element: <AllMD />,
           },
+
         ],
       },
 
@@ -205,8 +218,8 @@ const router = createBrowserRouter([
     ),
   },
 
-  { path: "/customer/login", element: <Login name="Customer" /> },
-  { path: "/employee/login", element: <Login name="Employee" /> },
+  { path: "/customer/login", element: <Login name="customer" /> },
+  { path: "/employee/login", element: <Login name="employee" /> },
 
   { path: "/forgotpassword", element: <ForgotPassword /> },
 ]);

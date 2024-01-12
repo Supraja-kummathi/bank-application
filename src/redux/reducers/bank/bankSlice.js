@@ -41,8 +41,8 @@ export const updateBank = createAsyncThunk("updateBank", async payload => {
       `/banks/bankId/${payload.bankId}`,
       payload
     );
-    console.log(data);
-    return data;
+    // console.log(data);
+    return data.payload;
   } catch (error) {
     return error.message;
   }

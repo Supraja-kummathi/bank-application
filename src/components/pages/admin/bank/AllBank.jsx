@@ -12,7 +12,7 @@ const AllBank = () => {
   let dispatch = useDispatch();
   let navigate = useNavigate();
   let state = useGetBank();
-
+  console.log(state)
   let data=state.data.data;
 
 

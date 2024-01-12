@@ -124,7 +124,7 @@ const AllMD = () => {
                   </th>
                   <th>
                     <div className="w-20% flex justify-between align-center px-2">
-                      <span>Password</span>
+                      <span>Bankname</span>
                       <span>
                         <TbArrowsDownUp />
                       </span>

@@ -11,7 +11,7 @@ const UpdateBank = () => {
   let { data } = useGetBank();
   let dispatch = useDispatch();
   let [updatedState, setUpdatedState] = useState();
-  console.log(data)
+
   useEffect(() => {
     if (bankId) {
       let filteredData = data?.data?.filter((bank) => bank.bankId == bankId);

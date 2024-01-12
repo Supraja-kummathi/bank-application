@@ -11,9 +11,8 @@ import Spinner from "../../pages/spinner/Spinner";
 
 const AdminLeftSideSection = () => {
   const user = useGetProfile();
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-  console.log(user);
+  const dispatch = useDispatch();
 
   return (
     <>

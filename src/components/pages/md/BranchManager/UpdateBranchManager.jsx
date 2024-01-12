@@ -1,73 +1,47 @@
-import React, { Fragment, useEffect } from "react";
-import { useState } from "react";
-
-import { v4 as uuidv4 } from "uuid";
-
-import Button from "../../../../utilities/Button";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { createMd } from "../../../../redux/reducers/md/mdSlice";
-import useGetBank from "../../../../utils/useGetAllBanks";
+import Button from "../../../../utilities/Button";
+import { getBranchManagerById, updateBranchManager } from "../../../../redux/reducers/branchmanager/branchManagerSlice";
 
-const CreateMD = () => {
+const UpdateBranchManager = () => {
+  let { employeeId } = useParams();
+  let navigate = useNavigate();
   let dispatch = useDispatch();
-  const navigate = useNavigate();
-  let { data } = useGetBank();
-  console.log(data);
+  let [updatedState, setUpdatedState] = useState();
+  useEffect(() => {
+  dispatch(getBranchManagerById(employeeId))
+  .then((x) => setUpdatedState(x.payload.data));
+  }, [employeeId]);
 
-  // const [searchParams, setSearchParams] = useSearchParams();
-  // let [query, setQuery] = React.useState(searchParams.get("bankId"));
-  // console.log(query);
 
-  // useEffect(() => {
-  //   setSearchParams({ bankId: query });
-  // }, [query]);
-
-  const [state, setState] = useState({
-    name: "",
-    phoneNumber: "",
-    email: "",
-    gender: "",
-    dateOfBirth: "",
-    addressLine: "",
-    pincode: "",
-    country: "",
-    city: "",
-  });
-
-  let payload = {
-    name: state.name,
-    phoneNumber: state.phoneNumber,
-    email: state.email,
-    gender: state.gender,
-    dateOfBirth: state.dateOfBirth,
-    bankId: state.bankId,
-    address: {
-      addressId: Math.random() * 1000,
-      addressLine: state.addressLine,
-      pincode: "qsp5160003",
-      country: "India",
-      city: "Banglore",
-    },
+  const handleChange = (e) => {
+   if (Object.keys(updatedState.address).includes(e.target.name)) {
+      setUpdatedState({
+        ...updatedState,
+        address: { ...updatedState.address, [e.target.name]: e.target.value },
+      });
+    } else {
+      setUpdatedState({
+        ...updatedState,
+        [e.target.name]: e.target.value,
+      });
+    }
   };
 
-  // let handleQueryChange = e => {
-  //   setQuery(e.target.value);
-  // };
 
-  const handleSubmit = e => {
+  let handleSubmit = e => {
     e.preventDefault();
-
-    dispatch(createMd(payload));
-    console.log(state);
-    navigate("/adminlayout/all-md");
+    dispatch(updateBranchManager(updatedState));
+    navigate("/mdlayout/all-branchManager");
+    toast.success("updated successfully")
   };
 
   return (
-    <section className="h-[99%] w-[100%] relative">
-      <section className=" rounded-md border-2 w-[97%] bg-white absolute top-4 left-3">
+    <section className="h-[100%] w-[100%] relative">
+      <section className="rounded-md border-2 py-1.5 w-[97%] bg-white absolute top-4 left-3">
         <div className="ps-4 py-3 uppercase font-semibold">
-          Create Managing director
+          Update Branch Manager
         </div>
         <form className="p-2 ps-4" onSubmit={handleSubmit}>
           <div className="flex justify-between w-[99%] mb-4">
@@ -80,10 +54,8 @@ const CreateMD = () => {
               placeholder="Enter Name"
               id="name"
               name="name"
-              value={state.name}
-              onChange={e => {
-                setState({ ...state, name: e.target.value });
-              }}
+              value={updatedState && updatedState.name}
+              onChange={handleChange}
             />
           </div>
           <div className="flex justify-between w-[99%] mb-4">
@@ -96,10 +68,8 @@ const CreateMD = () => {
               placeholder="Enter Email"
               id="email"
               name="email"
-              value={state.email}
-              onChange={e => {
-                setState({ ...state, email: e.target.value });
-              }}
+              value={updatedState && updatedState.email}
+              onChange={handleChange}
             />
           </div>
           <div className="flex justify-between w-[99%] mb-4">
@@ -110,15 +80,14 @@ const CreateMD = () => {
               className=" w-[80%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
               type="tel"
               pattern="[0-9]{10}"
-              placeholder="Enter Phonenumber"
-              id="phonenumber"
-              name="phonenumber"
-              value={state.phoneNumber}
-              onChange={e => {
-                setState({ ...state, phoneNumber: e.target.value });
-              }}
+              placeholder="Enter Name"
+              id="name"
+              name="phoneNumber"
+              value={updatedState && updatedState.phoneNumber}
+              onChange={handleChange}
             />
           </div>
+
           <div className="flex justify-between w-[99%] mb-4">
             <label htmlFor="branchaddress" className="text-[rgb(145,142,143)]">
               Address
@@ -127,10 +96,9 @@ const CreateMD = () => {
               className="w-[80%] rounded-md border-0 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
               id="branchaddress"
               type="text"
-              value={state.addressLine}
-              onChange={e => {
-                setState({ ...state, addressLine: e.target.value });
-              }}
+              name="addressLine"
+              value={updatedState && updatedState?.address?.addressLine}
+              onChange={handleChange}
               cols={30}
               rows={3}
             />
@@ -142,13 +110,11 @@ const CreateMD = () => {
             <input
               className="w-[80%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
               type="text"
-              placeholder="Enter City"
+              placeholder="Enter here..."
               id="city"
               name="city"
-              value={state.city}
-              onChange={e => {
-                setState({ ...state, city: e.target.value });
-              }}
+              value={updatedState && updatedState.address.city}
+              onChange={handleChange}
             />
           </div>
           <div className="flex justify-between w-[99%] mb-4">
@@ -158,13 +124,11 @@ const CreateMD = () => {
             <input
               className="w-[80%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
               type="text"
-              placeholder="Enter Country"
+              placeholder="Enter here..."
               id="country"
               name="country"
-              value={state.country}
-              onChange={e => {
-                setState({ ...state, country: e.target.value });
-              }}
+              value={updatedState && updatedState.address.country}
+              onChange={handleChange}
             />
           </div>
           <div className="flex justify-between w-[99%] mb-4">
@@ -175,13 +139,11 @@ const CreateMD = () => {
               className="w-[80%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
               type="tel"
               pattern="[0-9]{6}"
-              placeholder="Enter Pincode"
+              placeholder="Enter here..."
               id="pincode"
               name="pincode"
-              value={state.pincode}
-              onChange={e => {
-                setState({ ...state, pincode: e.target.value });
-              }}
+              value={updatedState && updatedState.address.pincode}
+              onChange={handleChange}
             />
           </div>
           <section className="w-[80%] flex ms-64">
@@ -194,10 +156,9 @@ const CreateMD = () => {
                 id="male"
                 name="gender"
                 value="male"
+                checked={"male" === updatedState?.gender?.toLowerCase()}
                 className=" w-4 h-4"
-                onChange={e => {
-                  setState({ ...state, gender: e.target.value });
-                }}
+                onChange={handleChange}
               />
               <label htmlFor="male" className="ms-2">
                 MALE
@@ -207,10 +168,9 @@ const CreateMD = () => {
                 id="female"
                 name="gender"
                 value="female"
+                checked={"female" === updatedState &&  updatedState?.gender}
                 className="ms-4 w-4 h-4"
-                onChange={e => {
-                  setState({ ...state, gender: e.target.value });
-                }}
+                onChange={handleChange}
               />
               <label htmlFor="female" className="ms-2">
                 FEMALE
@@ -220,10 +180,9 @@ const CreateMD = () => {
                 id="others"
                 name="gender"
                 value="others"
+                checked={"others" === updatedState &&  updatedState?.gender}
                 className="ms-4 w-4 h-4"
-                onChange={e => {
-                  setState({ ...state, gender: e.target.value });
-                }}
+                onChange={handleChange}
               />
               <label htmlFor="others" className="ms-2">
                 OTHERS
@@ -236,41 +195,15 @@ const CreateMD = () => {
               <input
                 type="date"
                 id="dob"
-                name="dob"
-                value={state.dateOfBirth}
-                onChange={e => {
-                  setState({ ...state, dateOfBirth: e.target.value });
-                }}
+                name="dateOfBirth"
+                value={updatedState && updatedState?.dateOfBirth?.substr(0, 10)}
+                onChange={handleChange}
                 className="text-base border-2 px-2 py-1 rounded-md w-[50%] "
               />
             </div>
           </section>
-          <div className="flex justify-between w-[99%] mb-4 mt-2">
-            <div>
-              <label htmlFor="name" className="text-[rgb(145,142,143)]">
-                banks
-              </label>
-            </div>
-            <select
-              className="block  w-[80%] rounded-md border-0 py-1.5 pl-2 pr-20 text-[rgb(145,142,143)] ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
-              value={state.bankId}
-              onChange={e => {
-                setState({ ...state, bankId: e.target.value });
-              }}
-            >
-              <option>select bank</option>
-              {data?.data?.length >= 0 &&
-                data?.data?.map(bank => (
-                  <Fragment key={bank.bankId}>
-                    <option value={bank.bankId}>{bank.bankName}</option>
-                  </Fragment>
-                ))}
-            </select>
-          </div>
-
           <div className="flex justify-end pt-4">
-
-            <Button type="submit" name="Create MD"></Button>
+            <Button type="submit" name="Update BM"></Button>
           </div>
         </form>
       </section>
@@ -278,4 +211,4 @@ const CreateMD = () => {
   );
 };
 
-export default CreateMD;
+export default UpdateBranchManager;

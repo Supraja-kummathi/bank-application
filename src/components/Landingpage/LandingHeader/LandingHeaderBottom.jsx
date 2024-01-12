@@ -18,10 +18,10 @@ const LandingHeaderBottom = () => {
         <div className="flex items-center px-3">
           Locate Us <IoIosArrowDown className=" ml-2 pl-2 text-2xl" />
         </div>
-        <div className="flex items-center w-[50%] h-[60%]">
+        <div className="flex items-center w-[60%] h-[60%]">
           <input
             type="search"
-            className="w-[100%] ml-2 border-2 rounded-full py-1 border-blue-700 px-3 placeholder-black focus:outline-none"
+            className="w-[100%] ml-2 border-2 rounded-full py-[0.35rem] border-blue-700 px-3 placeholder-black focus:outline-none"
             placeholder="Search for Products, Services .."
           />
           <span className="relative right-[4.9rem] rounded-full ">

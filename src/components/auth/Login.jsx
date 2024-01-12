@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { userLogin } from "../../redux/reducers/auth/authSlice";
@@ -57,7 +58,7 @@ const Login = ({ name }) => {
           />
         </div>
         <div className="form-group">
-          {/* <label htmlFor="password">password</label> */}
+          {/* <label htmlFor="password">password</label>*/}
           <input
             type="password"
             className="form-control p-2 border-b-2 w-[88%] mx-6"
