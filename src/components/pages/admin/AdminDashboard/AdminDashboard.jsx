@@ -1,11 +1,12 @@
 import React from 'react'
 
-const AdminDashboard = () => {
+const AdminDashboard = ({name}) => {
   return (
-    <div className='h-[100%]'>
-      AdminDashboard
+    <div>
+      {name}
     </div>
   )
 }
 
 export default AdminDashboard
+

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { FaEdit } from "react-icons/fa";
 import { useDispatch } from "react-redux";
-import { deleteBank, getBank } from "../../../redux/reducers/bank/bankSlice";
+import { deleteBank, getBank } from "../../../../redux/reducers/bank/bankSlice";
 import { RxCross2 } from "react-icons/rx";
 import { MdOutlineArrowDropDown } from "react-icons/md";
-import Spinner from "../spinner/Spinner";
+import Spinner from "../../spinner/Spinner";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import useGetBank from "../../../utils/useGetAllBanks";
+import useGetBank from "../../../../utils/useGetAllBanks";
 
 const AllBank = () => {
   let dispatch = useDispatch();
@@ -57,7 +57,7 @@ const AllBank = () => {
                       </div>
                     </section>
                     <div className="p-2 font-semibold text-[rgba(136,136,136)]">
-                      <NavLink to={`/update-bank/${user.bankId}`}>
+                      <NavLink to={`/adminlayout/update-bank/${user.bankId}`}>
                         <FaEdit className="text-2xl" />
                       </NavLink>
 

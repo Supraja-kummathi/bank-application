@@ -1,15 +1,15 @@
 import { TbArrowsDownUp } from "react-icons/tb";
-import GetMds from "../../../utils/GetMds";
+//import GetMds from "../../../../utils/GetMds";
 import { MdDelete } from "react-icons/md";
 import { BiSolidPencil } from "react-icons/bi";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { deleteMd } from "../../../redux/reducers/md/mdSlice";
+// import { deleteMd } from "../../../../redux/reducers/md/mdSlice";
 import { NavLink } from "react-router-dom";
-import Spinner from "../spinner/Spinner";
+import Spinner from "../pages/spinner/Spinner";
 
-const AllMD = () => {
-  let state = GetMds();
+const LoanAccount = () => {
+  let state = null; //GetMds();
 
   let dispatch = useDispatch();
   let [search, setSearch] = useState(null);
@@ -47,17 +47,25 @@ const AllMD = () => {
   }
 
   return (
-    <div className="w-[100%] p-5 h-[100%]">
-      <div className="pb-3 font-semibold">All MD</div>
-      {state.status === true ? (
-        <Spinner/>
+    <div className="w-[98%] h-[100%]">
+      <div className="flex items-center justify-between pt-3 px-5">
+        <p className="font-semibold">Loan Accounts</p>
+        <NavLink
+          to="/bankmanager/create-account "
+          className="bg-gray-300 rounded py-2 px-3"
+        >
+          Loan Account
+        </NavLink>
+      </div>
+      {state?.status === true ? (
+        <Spinner />
       ) : (
-        <section className=" bg-white w-[100%] overflow-auto h-[95%] no-scrollbar">
-          <header className="mx-10 my-2 w-[93%] flex justify-between items-center ">
+        <section className=" bg-white w-[98%] h-[90%] no-scrollbar ms-5">
+          <header className="mx-10 my-2 w-[93%] flex justify-between items-center pt-4 ">
             <div>
               Show
               <select
-                className="px-2 rounded-[0.25rem] border-2"
+                className=" mx-1 px-2 rounded-[0.25rem] border-2"
                 onChange={e => {
                   setItemsPerPage(e.target.value);
                 }}
@@ -102,7 +110,7 @@ const AllMD = () => {
               />
             </div>
           </header>
-          <div className="mx-12 w-[91%]">
+          <div className="mx-8 w-[95%]">
             <table style={{ tableLayout: "fixed", width: "100%" }}>
               <thead>
                 <tr className="border-b-2">
@@ -160,7 +168,7 @@ const AllMD = () => {
                         <div className="flex">
                           <span className="px-2  text-red-500">
                             <NavLink
-                              to={`/managingDirectors/update/${data.employeeId}`}
+                              to={`/adminlayout/managingDirectors/update/${data.employeeId}`}
                             >
                               <BiSolidPencil />
                             </NavLink>
@@ -224,7 +232,6 @@ const AllMD = () => {
             </p>
             <div className="mt-4 flex  items-center justify-center">
               <ul className="flex ">
-
                 <li>
                   <button
                     className="text-center px-3 py-1 border-2"
@@ -257,7 +264,6 @@ const AllMD = () => {
                 </li>
               </ul>
             </div>
-
           </footer>
         </section>
       )}
@@ -265,4 +271,4 @@ const AllMD = () => {
   );
 };
 
-export default AllMD;
+export default LoanAccount;

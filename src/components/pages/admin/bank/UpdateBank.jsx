@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { useDispatch } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
-import useGetBank from "../../../utils/useGetAllBanks";
-import { updateBank } from "../../../redux/reducers/bank/bankSlice";
+import useGetBank from "../../../../utils/useGetAllBanks";
+import { updateBank } from "../../../../redux/reducers/bank/bankSlice";
 
 const UpdateBank = () => {
   let { bankId } = useParams();
@@ -36,7 +36,8 @@ const UpdateBank = () => {
 
   let handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(updateBank(updatedState));
+    let r = dispatch(updateBank(updatedState));
+    console.log(r);
     navigate("/adminlayout/all-bank");
   };
   console.log(updatedState)

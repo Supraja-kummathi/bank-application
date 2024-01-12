@@ -1,9 +1,7 @@
 /* eslint-disable no-undef */
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import {
-  AxiosInstanceProtected,
-  AxiosInstancePublic,
-} from "./../../../axios/AxiosInstance";
+import { AxiosInstanceProtected, AxiosInstancePublic } from "./../../../axios/AxiosInstance";
+
 
 //LOCAL_STORAGE
 // initialize userToken from local storage
@@ -44,7 +42,8 @@ export const userLogin = createAsyncThunk(
       );
       // store user's token in local storage
       localStorage.setItem("access_token", data?.data?.token);
-      return data;
+      console.log(localStorage.getItem("access_token"));
+      return data.data;
     } catch (error) {
       // return custom error message from API if any
       if (error.response && error.response.data.message) {
@@ -104,7 +103,7 @@ export const authSlice = createSlice({
       .addCase(userLogin.fulfilled, (state, { payload }) => {
         state.loading = false;
         state.status = false;
-        state.userInfo = payload;
+        state.userInfo = payload.data;
         state.userToken = payload.userToken;
       })
       .addCase(userLogin.rejected, (state, { payload }) => {
