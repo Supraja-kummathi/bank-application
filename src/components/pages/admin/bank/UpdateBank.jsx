@@ -5,7 +5,6 @@ import { useParams, useNavigate } from "react-router-dom";
 import useGetBank from "../../../../utils/useGetAllBanks";
 import { updateBank } from "../../../../redux/reducers/bank/bankSlice";
 
-
 const UpdateBank = () => {
   let { bankId } = useParams();
   let navigate = useNavigate();
@@ -37,7 +36,8 @@ const UpdateBank = () => {
 
   let handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(updateBank(updatedState));
+    let r = dispatch(updateBank(updatedState));
+    console.log(r);
     navigate("/adminlayout/all-bank");
   };
   console.log(updatedState)

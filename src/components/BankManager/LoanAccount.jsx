@@ -1,21 +1,15 @@
 import { TbArrowsDownUp } from "react-icons/tb";
-import GetMds from "../../../../utils/GetMds";
+//import GetMds from "../../../../utils/GetMds";
 import { MdDelete } from "react-icons/md";
 import { BiSolidPencil } from "react-icons/bi";
-<<<<<<< HEAD
 import { useEffect, useState } from "react";
-=======
-import { useEffect, useLayoutEffect, useState } from "react";
->>>>>>> 2827ee8e27a404ecb8f83de50ba85571bdffd276
 import { useDispatch } from "react-redux";
-import { deleteMd } from "../../../../redux/reducers/md/mdSlice";
+// import { deleteMd } from "../../../../redux/reducers/md/mdSlice";
 import { NavLink } from "react-router-dom";
-import Spinner from "../../spinner/Spinner";
-<<<<<<< HEAD
+import Spinner from "../pages/spinner/Spinner";
 
-
-const AllBranchManager = () => {
-  let state = GetMds();
+const LoanAccount = () => {
+  let state = null; //GetMds();
 
   let dispatch = useDispatch();
   let [search, setSearch] = useState(null);
@@ -28,45 +22,11 @@ const AllBranchManager = () => {
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = state?.data?.data?.slice(
-=======
-import { deleteBranchManager, getBranchManager } from "../../../../redux/reducers/branchmanager/branchManagerSlice";
-import useBranchState from "../../../../utils/useBranchState";
-
-
-const AllBranchManager = () => {
-  
-  let dispatch = useDispatch();
-  let [search, setSearch] = useState(null);
-  const [itemsPerPage, setItemsPerPage] = useState(1);
-  const [currentPage, setCurrentPage] = useState(1);
-  
-  let data = useBranchState();
-  let [bankId, setBankId] = useState(null);
-  let [state, setState] = useState(null);
-  useEffect(() => {
-    setBankId(data && data?.data?.data?.bankId);
-  }, [data, bankId]); 
-
-  console.log(state)
-  useLayoutEffect(() => {
-    if (bankId) {
-      let test = dispatch(getBranchManager(bankId));
-       test.unwrap().then((x) => {setState(x.data)});
-    }
-  }, [bankId]);
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = state?.slice(
->>>>>>> 2827ee8e27a404ecb8f83de50ba85571bdffd276
     indexOfFirstItem,
     indexOfLastItem
   );
 
-<<<<<<< HEAD
   const totalPages = Math.ceil(state?.data?.data?.length / itemsPerPage);
-=======
-  const totalPages = Math.ceil(state?.length / itemsPerPage);
->>>>>>> 2827ee8e27a404ecb8f83de50ba85571bdffd276
 
   const handlePageChange = pageNumber => {
     setLoading(true);
@@ -87,21 +47,25 @@ const AllBranchManager = () => {
   }
 
   return (
-    <div className="w-[100%] p-5 h-[100%]">
-      <div className="pb-3 font-semibold">All Branch Managers</div>
-<<<<<<< HEAD
-      {state.status === true ? (
-=======
-      {state?.length<=0 ? (
->>>>>>> 2827ee8e27a404ecb8f83de50ba85571bdffd276
-        <Spinner/>
+    <div className="w-[98%] h-[100%]">
+      <div className="flex items-center justify-between pt-3 px-5">
+        <p className="font-semibold">Loan Accounts</p>
+        <NavLink
+          to="/bankmanager/create-account "
+          className="bg-gray-300 rounded py-2 px-3"
+        >
+          Loan Account
+        </NavLink>
+      </div>
+      {state?.status === true ? (
+        <Spinner />
       ) : (
-        <section className=" bg-white w-[100%] overflow-auto h-[95%] no-scrollbar">
-          <header className="mx-10 my-2 w-[93%] flex justify-between items-center ">
+        <section className=" bg-white w-[98%] h-[90%] no-scrollbar ms-5">
+          <header className="mx-10 my-2 w-[93%] flex justify-between items-center pt-4 ">
             <div>
               Show
               <select
-                className="px-2 rounded-[0.25rem] border-2"
+                className=" mx-1 px-2 rounded-[0.25rem] border-2"
                 onChange={e => {
                   setItemsPerPage(e.target.value);
                 }}
@@ -146,7 +110,7 @@ const AllBranchManager = () => {
               />
             </div>
           </header>
-          <div className="mx-12 w-[91%]">
+          <div className="mx-8 w-[95%]">
             <table style={{ tableLayout: "fixed", width: "100%" }}>
               <thead>
                 <tr className="border-b-2">
@@ -237,11 +201,7 @@ const AllBranchManager = () => {
                         <div className="flex">
                           <span className="px-2  text-red-500">
                             <NavLink
-<<<<<<< HEAD
                               to={`/managingDirectors/update/${data.employeeId}`}
-=======
-                              to={`/mdlayout/branchManager/update/${data.employeeId}`}
->>>>>>> 2827ee8e27a404ecb8f83de50ba85571bdffd276
                             >
                               <BiSolidPencil />
                             </NavLink>
@@ -252,11 +212,7 @@ const AllBranchManager = () => {
                                 let deleteConfirm =
                                   window.confirm("Are you sure");
                                 if (deleteConfirm === true) {
-<<<<<<< HEAD
                                   dispatch(deleteMd(data.employeeId));
-=======
-                                  dispatch(deleteBranchManager(data.employeeId));
->>>>>>> 2827ee8e27a404ecb8f83de50ba85571bdffd276
                                 }
                               }}
                             />
@@ -272,15 +228,10 @@ const AllBranchManager = () => {
           <footer className="mx-10 my-2 w-[93%]  flex justify-between items-center">
             <p>
               Showing {indexOfFirstItem} to {indexOfLastItem} of{" "}
-<<<<<<< HEAD
               {state?.data?.data?.length} entries
-=======
-              {state?.length} entries
->>>>>>> 2827ee8e27a404ecb8f83de50ba85571bdffd276
             </p>
             <div className="mt-4 flex  items-center justify-center">
               <ul className="flex ">
-
                 <li>
                   <button
                     className="text-center px-3 py-1 border-2"
@@ -313,7 +264,6 @@ const AllBranchManager = () => {
                 </li>
               </ul>
             </div>
-
           </footer>
         </section>
       )}
@@ -321,4 +271,4 @@ const AllBranchManager = () => {
   );
 };
 
-export default AllBranchManager;
+export default LoanAccount;

@@ -14,14 +14,11 @@ import { MdApproval } from "react-icons/md";
 import { MdAccountCircle } from "react-icons/md";
 import { FaHandHoldingDollar } from "react-icons/fa6";
 import { LiaIdCardSolid } from "react-icons/lia";
-import useGetMd from "../../../utils/useGetMd";
-//import { getMdProfile } from "../../../redux/reducers/branch/branchSlice";
 
 const MdLeftsideSection = () => {
-  let navigate =useNavigate()
+  const user = useGetProfile();
   const dispatch = useDispatch();
-  let user=useGetMd();
-  //const user = useGetProfile();
+  const navigate = useNavigate();
   console.log(user);
 
   const [Branch, setBranch] = useState(false);
@@ -33,11 +30,11 @@ const MdLeftsideSection = () => {
 
   return (
     <>
-      <section className="text-sm h-[100%] w-[100%] bg-black flex flex-col justify-between">
+      <section className="text-sm h-[100%] w-[100%] bg-black">
         {user.status === true ? (
           <Spinner />
         ) : (
-          <div className="flex flex-col items-center h-[28%]">
+          <div className="flex flex-col items-center">
             <img
               src={
                 // user?.avatar ||
@@ -46,16 +43,15 @@ const MdLeftsideSection = () => {
               alt=""
               className="h-[4rem] w-[4rem] rounded-full mt-5"
             />
-            <p className="mt-3">{user?.data?.data?.role}</p>
-            <p className="mt-1 text-[rgb(112,112,112)]"></p>
+            <p className="mt-3">{user?.userInfo?.data?.name}</p>
+            <p className="mt-1 text-[rgb(112,112,112)]">Admin</p>
           </div>
         )}
-        <section className="h-[75%]">
-        <div className="flex ms-8">
-          <NavLink to="/mdlayout" >
+        <div className="flex mt-8 ms-8">
+          <NavLink to="/mdlayout">
             <div className="flex ">
-            <RiDashboard3Fill className="me-3 mt-[0.15rem]"/>
-            <p> DashBoard</p>
+              <RiDashboard3Fill className="me-3 mt-[0.15rem]" />
+              <p> DashBoard</p>
             </div>
           </NavLink>
         </div>
@@ -63,7 +59,7 @@ const MdLeftsideSection = () => {
         <div
           className="flex mt-3 items-center justify-between w-[90%]"
           onClick={() =>
-            setBranch((e) => {
+            setBranch(e => {
               setBankManager(false);
               setAccounts(false);
               setApprovals(false);
@@ -71,7 +67,10 @@ const MdLeftsideSection = () => {
             })
           }
         >
-          <p className="ms-8 flex"><CiBank className="me-3 text-[0.98rem]" />Branch</p>
+          <p className="ms-8 flex">
+            <CiBank className="me-3 text-[0.98rem]" />
+            Branch
+          </p>
           <span>
             {Branch ? (
               <RiArrowDropDownLine className="text-2xl" />
@@ -81,7 +80,7 @@ const MdLeftsideSection = () => {
           </span>
         </div>
         {Branch && (
-          <div className="ms-14 mt-2">
+          <div className="ms-10 mt-2">
             <li className="list-none text-[rgb(112,112,112)]">
               <NavLink
                 to="/mdlayout/create-branch"
@@ -103,7 +102,7 @@ const MdLeftsideSection = () => {
         <div
           className="flex mt-3 items-center justify-between w-[90%]"
           onClick={() =>
-            setBankManager((e) => {
+            setBankManager(e => {
               setBranch(false);
               setAccounts(false);
               setApprovals(false);
@@ -113,7 +112,9 @@ const MdLeftsideSection = () => {
             })
           }
         >
-          <p className="ms-8 flex "><GrUserManager className="me-3" /> Branch Manager</p>
+          <p className="ms-8 flex ">
+            <GrUserManager className="me-3" /> Branch Manager
+          </p>
           <span>
             {BankManager ? (
               <RiArrowDropDownLine className="text-2xl" />
@@ -123,7 +124,7 @@ const MdLeftsideSection = () => {
           </span>
         </div>
         {BankManager && (
-          <div className="ms-14 mt-2">
+          <div className="ms-10 mt-2">
             <li className="list-none text-[rgb(112,112,112)]">
               <NavLink
                 to="/mdlayout/create-branchManager"
@@ -145,7 +146,7 @@ const MdLeftsideSection = () => {
         <div
           className="flex mt-3 items-center justify-between w-[90%]"
           onClick={() =>
-            setApprovals((e) => {
+            setApprovals(e => {
               setBranch(false);
               setBankManager(false);
               setAccounts(false);
@@ -155,7 +156,10 @@ const MdLeftsideSection = () => {
             })
           }
         >
-          <p className="ms-8 flex"><MdApproval className="me-3" />Approvals</p>
+          <p className="ms-8 flex">
+            <MdApproval className="me-3" />
+            Approvals
+          </p>
           <span>
             {Approvals ? (
               <RiArrowDropDownLine className="text-2xl" />
@@ -165,10 +169,10 @@ const MdLeftsideSection = () => {
           </span>
         </div>
         {Approvals && (
-          <div className="ms-14 mt-2">
+          <div className="ms-10 mt-2">
             <li className="list-none text-[rgb(112,112,112)]">
               <NavLink
-                to="/mdlayout/loan-approvals"
+                to="/mdlayout/create-branchManager"
                 className={({ isActive }) => (isActive ? "active" : "")}
               >
                 Loan Approvals
@@ -176,7 +180,7 @@ const MdLeftsideSection = () => {
             </li>
             <li className="list-none mt-2 text-[rgb(112,112,112)]">
               <NavLink
-                to="/mdlayout/card-approvals"
+                to="/mdlayout/all-branchManager"
                 className={({ isActive }) => (isActive ? "active" : "")}
               >
                 Card Approvals
@@ -187,7 +191,7 @@ const MdLeftsideSection = () => {
         <div
           className="flex mt-3 items-center justify-between w-[90%]"
           onClick={() =>
-            setAccounts((e) => {
+            setAccounts(e => {
               setBranch(false);
               setBankManager(false);
               setApprovals(false);
@@ -197,7 +201,10 @@ const MdLeftsideSection = () => {
             })
           }
         >
-          <p className="ms-8 flex"><MdAccountCircle className="me-3" />Accounts</p>
+          <p className="ms-8 flex">
+            <MdAccountCircle className="me-3" />
+            Accounts
+          </p>
           <span>
             {Accounts ? (
               <RiArrowDropDownLine className="text-2xl" />
@@ -207,7 +214,7 @@ const MdLeftsideSection = () => {
           </span>
         </div>
         {Accounts && (
-          <div className="ms-14 mt-2">
+          <div className="ms-10 mt-2">
             <li className="list-none text-[rgb(112,112,112)]">
               <NavLink
                 to="/mdlayout/create-branchManager"
@@ -245,7 +252,7 @@ const MdLeftsideSection = () => {
         <div
           className="flex mt-3 items-center justify-between w-[90%]"
           onClick={() =>
-            setLoans((e) => {
+            setLoans(e => {
               setBranch(false);
               setBankManager(false);
               setApprovals(false);
@@ -255,7 +262,10 @@ const MdLeftsideSection = () => {
             })
           }
         >
-          <p className="ms-8 flex"><FaHandHoldingDollar className="me-3" />Loans</p>
+          <p className="ms-8 flex">
+            <FaHandHoldingDollar className="me-3" />
+            Loans
+          </p>
           <span>
             {Loans ? (
               <RiArrowDropDownLine className="text-2xl" />
@@ -265,7 +275,7 @@ const MdLeftsideSection = () => {
           </span>
         </div>
         {Loans && (
-          <div className="ms-14 mt-2">
+          <div className="ms-10 mt-2">
             <li className="list-none text-[rgb(112,112,112)]">
               <NavLink
                 to="/mdlayout/create-branchManager"
@@ -311,7 +321,7 @@ const MdLeftsideSection = () => {
         <div
           className="flex mt-3 items-center justify-between w-[90%]"
           onClick={() =>
-            setCards((e) => {
+            setCards(e => {
               setBranch(false);
               setBankManager(false);
               setApprovals(false);
@@ -322,7 +332,10 @@ const MdLeftsideSection = () => {
             })
           }
         >
-          <p className="ms-8 flex"><LiaIdCardSolid className="me-3 mt-[0.15rem] text-[0.95rem]" />Cards</p>
+          <p className="ms-8 flex">
+            <LiaIdCardSolid className="me-3 mt-[0.15rem] text-[0.95rem]" />
+            Cards
+          </p>
           <span>
             {Cards ? (
               <RiArrowDropDownLine className="text-2xl" />
@@ -332,7 +345,7 @@ const MdLeftsideSection = () => {
           </span>
         </div>
         {Cards && (
-          <div className="ms-14 mt-2">
+          <div className="ms-10 mt-2">
             <li className="list-none text-[rgb(112,112,112)]">
               <NavLink
                 to="/mdlayout/create-branchManager"
@@ -359,14 +372,14 @@ const MdLeftsideSection = () => {
             </li>
           </div>
         )}
-</section>
-        <div className="text-center">
+
+        <div className="text-center fixed left-24">
           <button
             className=" text-white bg-gradient-to-r from-blue-500 via-blue-700 to-blue-900 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-3 py-1.5 text-center"
-            onClick={() => 
-              
-              {dispatch(logout()); navigate("/")
-              }}
+            onClick={() => {
+              dispatch(logout());
+              navigate("/");
+            }}
           >
             Logout
           </button>

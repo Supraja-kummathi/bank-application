@@ -4,6 +4,18 @@ import Button from "../../../../utilities/Button";
 import { useDispatch } from "react-redux";
 import { createBank } from "../../../../redux/reducers/bank/bankSlice";
 import { useNavigate } from "react-router-dom";
+<<<<<<< HEAD
+const CreateBranch = () => {
+  let dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [state, setState] = useState({
+    branchName: "",
+    phoneNumber: "",
+    email: "",
+    address: "",
+    addressId: "",
+=======
 import { createBranch } from "../../../../redux/reducers/branch/branchSlice";
 import useGetMd from "../../../../utils/useGetMd";
 
@@ -17,6 +29,7 @@ const CreateBranch = () => {
     branchEmail: "",
     branchPhoneNumber: "",
     branchType: "",
+>>>>>>> 2827ee8e27a404ecb8f83de50ba85571bdffd276
     addressLine: "",
     pincode: "",
     country: "",
@@ -24,11 +37,17 @@ const CreateBranch = () => {
   });
 
   let payload = {
+<<<<<<< HEAD
+    bankName: state.branchName,
+    phoneNumber: state.phoneNumber,
+    email: state.email,
+=======
     branchName: state.branchName,
     branchPhoneNumber: state.branchPhoneNumber,
     branchEmail: state.branchEmail,
     branchType: state.branchType,
     bankId: "",
+>>>>>>> 2827ee8e27a404ecb8f83de50ba85571bdffd276
     address: {
       addressLine: state.addressLine,
       pincode: state.pincode,
@@ -39,8 +58,14 @@ const CreateBranch = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+<<<<<<< HEAD
+    dispatch(createBank(payload));
+    console.log(state);
+
+=======
     payload.bankId = data.data.bankId;
     dispatch(createBranch(payload));
+>>>>>>> 2827ee8e27a404ecb8f83de50ba85571bdffd276
     navigate("/mdlayout/all-branches");
   };
 
@@ -66,23 +91,40 @@ const CreateBranch = () => {
             />
           </div>
           <div className="flex justify-between w-[99%] mb-4">
+<<<<<<< HEAD
+            <label htmlFor="email" className="text-[rgb(145,142,143)]">
+            Email
+=======
             <label htmlFor="branchEmail" className="text-[rgb(145,142,143)]">
               Email
+>>>>>>> 2827ee8e27a404ecb8f83de50ba85571bdffd276
             </label>
             <input
               className="w-[80%] rounded-md border-0 py-1.5 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
               type="email"
               placeholder="Enter Email"
+<<<<<<< HEAD
+              id="email"
+              name="email"
+              value={state.email}
+              onChange={e => {
+                setState({ ...state, email: e.target.value });
+=======
               id="branchEmail"
               name="branchEmail"
               value={state.branchEmail}
               onChange={(e) => {
                 setState({ ...state, branchEmail: e.target.value });
+>>>>>>> 2827ee8e27a404ecb8f83de50ba85571bdffd276
               }}
             />
           </div>
           <div className="flex justify-between w-[99%] mb-4">
+<<<<<<< HEAD
+            <label htmlFor="name" className="text-[rgb(145,142,143)]">
+=======
             <label htmlFor="branchPhoneNumber" className="text-[rgb(145,142,143)]">
+>>>>>>> 2827ee8e27a404ecb8f83de50ba85571bdffd276
               Phone number
             </label>
             <input
@@ -90,23 +132,40 @@ const CreateBranch = () => {
               type="tel"
               pattern="[0-9]{10}"
               placeholder="Enter Phonenumber"
+<<<<<<< HEAD
+              id="phonenumber"
+              name="phonenumber"
+              value={state.phoneNumber}
+              onChange={e => {
+                setState({ ...state, phoneNumber: e.target.value });
+=======
               id="branchPhoneNumber"
               name="branchPhoneNumber"
               value={state.branchPhoneNumber}
               onChange={(e) => {
                 setState({ ...state,branchPhoneNumber: e.target.value });
+>>>>>>> 2827ee8e27a404ecb8f83de50ba85571bdffd276
               }}
             />
           </div>
           <div className="flex justify-between w-[99%] mb-4">
+<<<<<<< HEAD
+            <label htmlFor="branchaddress" className="text-[rgb(145,142,143)]">
+=======
             <label htmlFor="addressLine" className="text-[rgb(145,142,143)]">
+>>>>>>> 2827ee8e27a404ecb8f83de50ba85571bdffd276
               Main Branch Address
             </label>
             <textarea
               className="p-2 w-[80%] rounded-md border-0 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
               type="text"
+<<<<<<< HEAD
+              id="branchaddress"
+              name="branchaddress"
+=======
               id=" addressLine"
               name="addressLine"
+>>>>>>> 2827ee8e27a404ecb8f83de50ba85571bdffd276
               value={state.address}
               onChange={(e) => {
                 setState({ ...state, addressLine: e.target.value });
@@ -116,7 +175,11 @@ const CreateBranch = () => {
             />
           </div>
           <div className="flex justify-between w-[99%] mb-4">
+<<<<<<< HEAD
+            <label htmlFor="bankname" className="text-[rgb(145,142,143)]">
+=======
             <label htmlFor="city" className="text-[rgb(145,142,143)]">
+>>>>>>> 2827ee8e27a404ecb8f83de50ba85571bdffd276
               City
             </label>
             <input
@@ -132,7 +195,11 @@ const CreateBranch = () => {
             />
           </div>
           <div className="flex justify-between w-[99%] mb-4">
+<<<<<<< HEAD
+            <label htmlFor="bankname" className="text-[rgb(145,142,143)]">
+=======
             <label htmlFor="country" className="text-[rgb(145,142,143)]">
+>>>>>>> 2827ee8e27a404ecb8f83de50ba85571bdffd276
               Country
             </label>
             <input
@@ -148,7 +215,11 @@ const CreateBranch = () => {
             />
           </div>
           <div className="flex justify-between w-[99%] mb-4">
+<<<<<<< HEAD
+            <label htmlFor="bankname" className="text-[rgb(145,142,143)]">
+=======
             <label htmlFor="pincode" className="text-[rgb(145,142,143)]">
+>>>>>>> 2827ee8e27a404ecb8f83de50ba85571bdffd276
               Pincode
             </label>
             <input
@@ -164,6 +235,11 @@ const CreateBranch = () => {
               }}
             />
           </div>
+<<<<<<< HEAD
+
+          <div className="flex justify-end pt-4">
+            <Button type="submit" name="Create Bank"></Button>
+=======
           <div className="flex justify-between w-[99%] mb-4">
             <label htmlFor="branch_type" className="text-[rgb(145,142,143)]">
               Branch type
@@ -185,6 +261,7 @@ const CreateBranch = () => {
           </div>
           <div className="flex justify-end pt-4">
             <Button type="submit" name="Create Branch"></Button>
+>>>>>>> 2827ee8e27a404ecb8f83de50ba85571bdffd276
           </div>
         </form>
       </section>

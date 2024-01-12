@@ -11,14 +11,12 @@ import Spinner from "../../pages/spinner/Spinner";
 
 const AdminLeftSideSection = () => {
   const user = useGetProfile();
-  const navigate=useNavigate()
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-  console.log(user)
-  
+
   return (
     <>
       <section className="text-sm h-[100%] w-[100%] bg-black">
-
         {user.status === true ? (
           <Spinner />
         ) : (
@@ -99,12 +97,13 @@ const AdminLeftSideSection = () => {
           </li>
         </div>
 
-
         <div className="ms-20 mt-[18rem]">
-
           <button
             className=" text-white bg-gradient-to-r from-blue-500 via-blue-700 to-blue-900 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-4 py-2 text-center"
-            onClick={() => {dispatch(logout());navigate("/")}}
+            onClick={() => {
+              dispatch(logout());
+              navigate("/");
+            }}
           >
             Logout
           </button>
