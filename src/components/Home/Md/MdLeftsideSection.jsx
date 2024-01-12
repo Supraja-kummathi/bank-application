@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { CiBank } from "react-icons/ci";
 import { RiArrowDropRightLine, RiDashboard2Fill } from "react-icons/ri";
 import { RiArrowDropDownLine } from "react-icons/ri";
@@ -18,11 +18,11 @@ import useGetMd from "../../../utils/useGetMd";
 //import { getMdProfile } from "../../../redux/reducers/branch/branchSlice";
 
 const MdLeftsideSection = () => {
-  
+  let navigate =useNavigate()
   const dispatch = useDispatch();
   let user=useGetMd();
   //const user = useGetProfile();
-  // console.log(use);
+  console.log(user);
 
   const [Branch, setBranch] = useState(false);
   const [BankManager, setBankManager] = useState(false);
@@ -46,8 +46,8 @@ const MdLeftsideSection = () => {
               alt=""
               className="h-[4rem] w-[4rem] rounded-full mt-5"
             />
-            <p className="mt-3">{user?.data?.data?.name}</p>
-            <p className="mt-1 text-[rgb(112,112,112)]">Admin</p>
+            <p className="mt-3">{user?.data?.data?.role}</p>
+            <p className="mt-1 text-[rgb(112,112,112)]"></p>
           </div>
         )}
         <section className="h-[75%]">
@@ -363,7 +363,10 @@ const MdLeftsideSection = () => {
         <div className="text-center">
           <button
             className=" text-white bg-gradient-to-r from-blue-500 via-blue-700 to-blue-900 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-3 py-1.5 text-center"
-            onClick={() => dispatch(logout())}
+            onClick={() => 
+              
+              {dispatch(logout()); navigate("/")
+              }}
           >
             Logout
           </button>

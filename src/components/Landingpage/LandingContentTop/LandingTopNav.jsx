@@ -39,7 +39,7 @@ const LandingTopNav = () => {
             <span>
               <input
                 type="text"
-                className=" p-2 ps-10 w-[16rem] h-[100%] bg-[rgb(6,60,131)]  focus:outline-none"
+                className="p-2 ps-10 w-[16rem] h-[100%] bg-[rgb(6,60,131)]  focus:outline-none"
               />
             </span>
           </div>

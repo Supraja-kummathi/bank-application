@@ -1,21 +1,22 @@
+
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
- import { userLogin } from "../../redux/reducers/auth/authSlice";
- import { Link, useNavigate } from "react-router-dom";
+import { userLogin } from "../../redux/reducers/auth/authSlice";
+import { Link, useNavigate } from "react-router-dom";
 import FormComp from "../../utils/FormComp";
 import { FaLock } from "react-icons/fa";
 
-const Login = ({name}) => {
-   const navigate = useNavigate();
-   //const { userToken } = useSelector(state => state.auth);
+const Login = ({ name }) => {
+  const navigate = useNavigate();
+  //const { userToken } = useSelector(state => state.auth);
   let dispatch = useDispatch();
-  
+
   let [state, setState] = useState({
     email: "",
     password: "",
-    userType:name,
+    userType: name,
   });
-  let { email, password,userType } = state;
+  let { email, password, userType } = state;
   let handleChange = e => {
     setState({ ...state, [e.target.name]: e.target.value });
   };
@@ -28,10 +29,18 @@ const Login = ({name}) => {
 
   let handleSubmit = e => {
     e.preventDefault();
-    dispatch(userLogin(state));
- 
-    navigate("/mdlayout");
-   };
+    let data = dispatch(userLogin(state));
+    data.unwrap().then(x => {
+      console.log(x);
+      localStorage.setItem("access_token", x.token);
+      if (x.role == "ADMIN") {
+        window.location.assign("/adminlayout");
+      }
+      if (x.role == "MANAGING_DIRECTOR") {
+        window.location.assign("/mdlayout");
+      }
+    });
+  };
 
   return (
     <FormComp name={name + "Login"}>
@@ -49,7 +58,7 @@ const Login = ({name}) => {
           />
         </div>
         <div className="form-group">
-          {/* <label htmlFor="password">password</label> */}
+          {/* <label htmlFor="password">password</label>*/}
           <input
             type="password"
             className="form-control p-2 border-b-2 w-[88%] mx-6"
@@ -93,7 +102,8 @@ const Login = ({name}) => {
 };
 
 export default Login;
-{/* <div className="flex items-center justify-evenly pt-4 pb-10 text-[rgb(157,155,155)] text-sm">
+{
+  /* <div className="flex items-center justify-evenly pt-4 pb-10 text-[rgb(157,155,155)] text-sm">
   <button
     onClick={() => {
       setName("Switch To MD Login");
@@ -110,4 +120,5 @@ export default Login;
   >
     Switch To Bank Manager Login
   </button>
-</div>; */}
+</div>; */
+}

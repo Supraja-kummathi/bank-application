@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { RiDashboard3Line } from "react-icons/ri";
 import { CiBank } from "react-icons/ci";
 import { RiArrowDropRightLine } from "react-icons/ri";
@@ -11,6 +11,7 @@ import Spinner from "../../pages/spinner/Spinner";
 
 const AdminLeftSideSection = () => {
   const user = useGetProfile();
+  const navigate=useNavigate()
   const dispatch = useDispatch();
   console.log(user)
   
@@ -103,7 +104,7 @@ const AdminLeftSideSection = () => {
 
           <button
             className=" text-white bg-gradient-to-r from-blue-500 via-blue-700 to-blue-900 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-4 py-2 text-center"
-            onClick={() => dispatch(logout())}
+            onClick={() => {dispatch(logout());navigate("/")}}
           >
             Logout
           </button>
