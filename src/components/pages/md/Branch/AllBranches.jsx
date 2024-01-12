@@ -40,7 +40,7 @@ const AllBranches = () => {
                     <div className="p-3 pl-4 font-bold">
                       Branch Name: {user.branchName}
                     </div>
-                    <div className="p-3 pl-4 font-bold">Branch Location: {user.address.city} </div>
+                    {/* <div className="p-3 pl-4 font-bold">Branch Location: {user.address.city} </div> */}
                     <div className="p-3 pl-4 font-bold">IFSC Code: {user.ifsc} </div>
                     <div className="p-3 pl-4 font-bold">Branch Manager:</div>
                   </div>
@@ -85,7 +85,7 @@ const AllBranches = () => {
                         Branch Address
                       </div>
                       <div className="ms-2 font-semibold text-[rgba(136,136,136) w-[98%] h-[10vh]">
-                        {user.address.addressLine}, {user.address.pincode} , {user.address.country}, {user.address.pincode} 
+                        {/* {user.address.addressLine} , {user.address.country}, {user.address.pincode}  */}
                       </div>
                     </div>
                   </div>

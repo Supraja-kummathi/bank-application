@@ -2,7 +2,7 @@ import React from 'react'
 
 const LandingApplyOnline = () => {
   return (
-    <section className="mb-12 flex  flex-col justify-center items-center w-[100%] h-[60%] ">
+    <section className="mb-12 flex flex-col justify-center items-center w-[100%] h-[60%] -mt-10">
     <h1 className="text-center text-[2rem] font-bold pb-3">
       <span>Apply </span>
       <span className=" text-orange-500"> Online</span>

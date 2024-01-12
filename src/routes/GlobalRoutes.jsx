@@ -139,8 +139,8 @@ const router = createBrowserRouter([
     ),
   },
 
-  { path: "/customer/login", element: <Login name="Customer" /> },
-  { path: "/employee/login", element: <Login name="Employee" /> },
+  { path: "/customer/login", element: <Login name="customer" /> },
+  { path: "/employee/login", element: <Login name="employee" /> },
 
   { path: "/forgotpassword", element: <ForgotPassword /> },
 ]);
