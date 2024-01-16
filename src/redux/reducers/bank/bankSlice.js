@@ -28,7 +28,17 @@ export const createBank = createAsyncThunk("createBank", async payload => {
 export const getBank = createAsyncThunk("getBank", async () => {
   try {
     // eslint-disable-next-line no-undef
-    const { data } = await AxiosInstanceProtected.get(`/banks`);
+    const { data } = await AxiosInstanceProtected.get(`/banks/getAll`);
+    return data;
+  } catch (error) {
+    return error.message;
+  }
+});
+
+//=================get by BankId==============/
+export const getBankById = createAsyncThunk("getBankById", async bankId => {
+  try {
+    const { data } = await AxiosInstanceProtected.get(`/banks/bankId/${bankId}`);
     return data;
   } catch (error) {
     return error.message;
@@ -41,7 +51,6 @@ export const updateBank = createAsyncThunk("updateBank", async payload => {
       `/banks/bankId/${payload.bankId}`,
       payload
     );
-    // console.log(data);
     return data.payload;
   } catch (error) {
     return error.message;
@@ -96,6 +105,24 @@ export const bankSlice = createSlice({
         state.data = action.payload;
       })
       .addCase(getBank.rejected, (state, action) => {
+        state.status = false;
+        state.error = action.error.message;
+        state.success = false;
+      });
+
+      
+    // get bank by id
+    builder
+      .addCase(getBankById.pending, (state) => {
+        state.status = true;
+        state.success = false;
+      })
+      .addCase(getBankById.fulfilled, (state, action) => {
+        state.status = false;
+        state.success = true;
+        state.data = action.payload;
+      })
+      .addCase(getBankById.rejected, (state, action) => {
         state.status = false;
         state.error = action.error.message;
         state.success = false;

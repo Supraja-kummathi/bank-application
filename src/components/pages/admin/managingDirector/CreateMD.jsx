@@ -1,27 +1,25 @@
 import React, { Fragment, useEffect } from "react";
 import { useState } from "react";
-
-import { v4 as uuidv4 } from "uuid";
-
 import Button from "../../../../utilities/Button";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { createMd } from "../../../../redux/reducers/md/mdSlice";
-import useGetBank from "../../../../utils/useGetAllBanks";
+import {
+  createMd,
+  getAllUnassigned,
+} from "../../../../redux/reducers/md/mdSlice";
+import { Country, State, City } from "country-state-city";
+// console.log(Country.getCountryByCode(cou));
 
 const CreateMD = () => {
   let dispatch = useDispatch();
   const navigate = useNavigate();
-  let { data } = useGetBank();
-  console.log(data);
+  let [bank, setBank] = useState(null);
+  let [cou, setCon] = useState(null);
+  useEffect(() => {
+    dispatch(getAllUnassigned()).then(x => setBank(x.payload.data));
+  }, []);
 
-  // const [searchParams, setSearchParams] = useSearchParams();
-  // let [query, setQuery] = React.useState(searchParams.get("bankId"));
-  // console.log(query);
-
-  // useEffect(() => {
-  //   setSearchParams({ bankId: query });
-  // }, [query]);
+ 
 
   const [state, setState] = useState({
     name: "",
@@ -124,7 +122,7 @@ const CreateMD = () => {
               Address
             </label>
             <textarea
-              className="w-[80%] rounded-md border-0 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
+              className="w-[80%] px-2 rounded-md border-0 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
               id="branchaddress"
               type="text"
               value={state.addressLine}
@@ -135,38 +133,59 @@ const CreateMD = () => {
               rows={3}
             />
           </div>
-          <div className="flex justify-between w-[99%] mb-4">
-            <label htmlFor="bankname" className="text-[rgb(145,142,143)]">
-              City
-            </label>
-            <input
-              className="w-[80%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
-              type="text"
-              placeholder="Enter City"
-              id="city"
-              name="city"
-              value={state.city}
-              onChange={e => {
-                setState({ ...state, city: e.target.value });
-              }}
-            />
-          </div>
+
           <div className="flex justify-between w-[99%] mb-4">
             <label htmlFor="bankname" className="text-[rgb(145,142,143)]">
               Country
             </label>
-            <input
+
+            <select
               className="w-[80%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
-              type="text"
-              placeholder="Enter Country"
-              id="country"
               name="country"
+              id="country"
               value={state.country}
               onChange={e => {
+                console.log(e.target.value);
+                setCon(
+                  Country.getAllCountries().filter(ele => {
+                    return ele.name == e.target.value;
+                  })[0].isoCode
+                );
                 setState({ ...state, country: e.target.value });
               }}
-            />
+            >
+              <option disabled value="" className="text-gray-400">
+                -- Select The Country --
+              </option>
+              {Country.getAllCountries().map(city => {
+                return <option value={city.name}>{city.name}</option>;
+              })}
+            </select>
           </div>
+
+          <div className="flex justify-between w-[99%] mb-4">
+            <label htmlFor="bankname" className="text-[rgb(145,142,143)]">
+              City
+            </label>
+
+            <select
+              className="w-[80%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
+              name="city"
+              id="city"
+              value={state.city}
+              onChange={e => {
+                setState({ ...state, city: e.target.value });
+              }}
+            >
+              <option disabled value="" className="text-gray-400">
+                -- Select The City --
+              </option>
+              {City.getCitiesOfCountry(cou).map(city => {
+                return <option value={city.name}>{city.name}</option>;
+              })}
+            </select>
+          </div>
+
           <div className="flex justify-between w-[99%] mb-4">
             <label htmlFor="bankname" className="text-[rgb(145,142,143)]">
               Pincode
@@ -252,15 +271,15 @@ const CreateMD = () => {
               </label>
             </div>
             <select
-              className="block  w-[80%] rounded-md border-0 py-1.5 pl-2 pr-20 text-[rgb(145,142,143)] ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
+              className="block  w-[80%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
               value={state.bankId}
               onChange={e => {
                 setState({ ...state, bankId: e.target.value });
               }}
             >
-              <option>select bank</option>
-              {data?.data?.length >= 0 &&
-                data?.data?.map(bank => (
+              <option disabled value="" selected>-- Select Bank --</option>
+              {bank?.length >= 0 &&
+                bank?.map(bank => (
                   <Fragment key={bank.bankId}>
                     <option value={bank.bankId}>{bank.bankName}</option>
                   </Fragment>
@@ -269,7 +288,6 @@ const CreateMD = () => {
           </div>
 
           <div className="flex justify-end pt-4">
-
             <Button type="submit" name="Create MD"></Button>
           </div>
         </form>

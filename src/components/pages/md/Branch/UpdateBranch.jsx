@@ -6,11 +6,11 @@ import Button from "../../../../utilities/Button";
 import toast from 'react-hot-toast';
 
 const UpdateBranch = () => {
-  
   let { branchId } = useParams();
   let navigate = useNavigate();
   let dispatch = useDispatch();
   let [updatedState, setUpdatedState] = useState();
+  
   useEffect(() => {
   dispatch(getBranchById(branchId))
   .then((x) => setUpdatedState(x.payload.data));

@@ -1,28 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import GetMds from "../../../../utils/GetMds";
 import { useDispatch } from "react-redux";
-import { updateMd } from "../../../../redux/reducers/md/mdSlice";
+import { getMdById, updateMd } from "../../../../redux/reducers/md/mdSlice";
 import Button from "../../../../utilities/Button";
 
 const UpdateMd = () => {
   let { employeeId } = useParams();
   let navigate = useNavigate();
-  let { data } = GetMds();
   let dispatch = useDispatch();
   let [updatedState, setUpdatedState] = useState();
 
   useEffect(() => {
-    if (employeeId) {
-      let filteredData = data?.data?.filter(md => md.employeeId == employeeId);
-
-      setUpdatedState(filteredData && filteredData[0]);
-    }
-  }, [employeeId, data]);
+    dispatch(getMdById(employeeId)).then(x => setUpdatedState(x.payload.data));
+  }, [employeeId]);
 
   const handleChange = e => {
     if (Object.keys(updatedState.address).includes(e.target.name)) {
-
       setUpdatedState({
         ...updatedState,
         address: { ...updatedState.address, [e.target.name]: e.target.value },
@@ -35,13 +28,10 @@ const UpdateMd = () => {
     }
   };
 
-
   let handleSubmit = e => {
     e.preventDefault();
     dispatch(updateMd(updatedState));
-
     navigate("/adminlayout/all-md");
-
   };
 
   return (
@@ -175,7 +165,7 @@ const UpdateMd = () => {
                 id="female"
                 name="gender"
                 value="female"
-                checked={"female" === updatedState &&  updatedState?.gender}
+                checked={"female" === updatedState && updatedState?.gender}
                 className="ms-4 w-4 h-4"
                 onChange={handleChange}
               />
@@ -187,7 +177,7 @@ const UpdateMd = () => {
                 id="others"
                 name="gender"
                 value="others"
-                checked={"others" === updatedState &&  updatedState?.gender}
+                checked={"others" === updatedState && updatedState?.gender}
                 className="ms-4 w-4 h-4"
                 onChange={handleChange}
               />

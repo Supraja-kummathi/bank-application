@@ -14,7 +14,7 @@ const AllMD = () => {
   let dispatch = useDispatch();
   let [search, setSearch] = useState(null);
 
-  const [itemsPerPage, setItemsPerPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(2);
 
   const [currentPage, setCurrentPage] = useState(1);
   let [loading, setLoading] = useState(false);
@@ -25,8 +25,17 @@ const AllMD = () => {
     indexOfFirstItem,
     indexOfLastItem
   );
-
+  const [data, setData] = useState([{ currentItems }]); // Your initial data
+  console.log(data);
+  const [isAscending, setIsAscending] = useState(true);
   const totalPages = Math.ceil(state?.data?.data?.length / itemsPerPage);
+
+  const handleToggleSort = () => {
+    setIsAscending(!isAscending);
+    // Sort the data directly in the state array
+    setData(data.sort((a, b) => (isAscending ? a - b : b - a)));
+    console.log("currentItems:", currentItems);
+  };
 
   const handlePageChange = pageNumber => {
     setLoading(true);
@@ -50,7 +59,7 @@ const AllMD = () => {
     <div className="w-[100%] p-5 h-[100%]">
       <div className="pb-3 font-semibold">All MD</div>
       {state.status === true ? (
-        <Spinner/>
+        <Spinner />
       ) : (
         <section className=" bg-white w-[100%] overflow-auto h-[95%] no-scrollbar">
           <header className="mx-10 my-2 w-[93%] flex justify-between items-center ">
@@ -62,10 +71,10 @@ const AllMD = () => {
                   setItemsPerPage(e.target.value);
                 }}
               >
-                <option value="1">1</option>
                 <option value="2">2</option>
-                <option value="3">3</option>
                 <option value="4">4</option>
+                <option value="6">6</option>
+                <option value="8">8</option>
               </select>
               entries
             </div>
@@ -109,9 +118,9 @@ const AllMD = () => {
                   <th className="py-2">
                     <div className="w-20% flex justify-between align-center px-2">
                       <span>Manager Name</span>
-                      <span>
+                      <button onClick={handleToggleSort}>
                         <TbArrowsDownUp />
-                      </span>
+                      </button>
                     </div>
                   </th>
                   <th>
@@ -160,10 +169,10 @@ const AllMD = () => {
                         <div className="flex">
                           <span className="px-2  text-red-500">
                             <NavLink
-                              to={`/adminlayout/managingDirectors/update/${data.employeeId}`}
+                              to={`/adminlayout/update-md/${data.employeeId}`}
                             >
                               <BiSolidPencil />
-                            </NavLink>
+                            </NavLink>{" "}
                           </span>
                           <span className="px-2 ">
                             <MdDelete
@@ -193,7 +202,7 @@ const AllMD = () => {
                         <div className="flex">
                           <span className="px-2  text-red-500">
                             <NavLink
-                              to={`/managingDirectors/update/${data.employeeId}`}
+                              to={`/adminlayout/update-md/${data.employeeId}`}
                             >
                               <BiSolidPencil />
                             </NavLink>
@@ -219,12 +228,15 @@ const AllMD = () => {
           </div>
           <footer className="mx-10 my-2 w-[93%]  flex justify-between items-center">
             <p>
-              Showing {indexOfFirstItem} to {indexOfLastItem} of{" "}
+              Showing {indexOfFirstItem + 1} to{" "}
+              {indexOfLastItem < state?.data?.data?.length
+                ? indexOfLastItem
+                : state?.data?.data?.length}{" "}
+              of
               {state?.data?.data?.length} entries
             </p>
             <div className="mt-4 flex  items-center justify-center">
               <ul className="flex ">
-
                 <li>
                   <button
                     className="text-center px-3 py-1 border-2"
@@ -257,7 +269,6 @@ const AllMD = () => {
                 </li>
               </ul>
             </div>
-
           </footer>
         </section>
       )}

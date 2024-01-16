@@ -20,11 +20,39 @@ export const createMd = createAsyncThunk("createMd", async payload => {
     // eslint-disable-next-line no-undef
 
     const { data } = await AxiosInstanceProtected.post(
-      `/managingDirectors/save?bankId=${payload.bankId}`,
+      `/managingDirectors?bankId=${payload.bankId}`,
       payload
     );
     console.log(data);
 
+    return data;
+  } catch (error) {
+    return error.message;
+  }
+});
+
+//=================Fetch all unassigned==============/
+export const getAllUnassigned = createAsyncThunk(
+  "getAllUnassigned",
+  async () => {
+    try {
+      const { data } = await AxiosInstanceProtected.get(
+        `/banks/getAllUnAssigned`
+      );
+      return data;
+    } catch (error) {
+      return error.message;
+    }
+  }
+);
+
+//=================get by BankId==============/
+export const getMdById = createAsyncThunk("getMdById", async employeeId => {
+  try {
+    const { data } = await AxiosInstanceProtected.get(
+      `/managingDirectors/getManagingDirectorById?managingDirectorId=${employeeId}`
+    );
+    console.log(data);
     return data;
   } catch (error) {
     return error.message;
@@ -35,7 +63,7 @@ export const getMd = createAsyncThunk("getMd", async () => {
   try {
     // eslint-disable-next-line no-undef
     const { data } = await AxiosInstanceProtected.get(
-      `/managingDirectors/getAll`
+      `/managingDirectors/getAllManagingDirector`
     );
     return data;
   } catch (error) {
@@ -46,10 +74,9 @@ export const getMd = createAsyncThunk("getMd", async () => {
 export const updateMd = createAsyncThunk("updateMd", async payload => {
   try {
     const { data } = await AxiosInstanceProtected.put(
-      `/managingDirectors/update?managerId=${payload.employeeId}`,
+      `/managingDirectors?managerId=${payload.employeeId}`,
       payload
     );
-    console.log(data);
     return data;
   } catch (error) {
     return error.message;
@@ -58,9 +85,8 @@ export const updateMd = createAsyncThunk("updateMd", async payload => {
 
 export const deleteMd = createAsyncThunk("deleteMd", async employeeId => {
   try {
-    console.log(employeeId);
     const { data } = await AxiosInstanceProtected.delete(
-      `/managingDirectors/delete?managerId=${employeeId}`
+      `/managingDirectors/removeManagingDirector?managerId=${employeeId}`
     );
     return data;
   } catch (error) {
@@ -74,7 +100,7 @@ export const mdSlice = createSlice({
   name: "bank",
   initialState,
   reducers: {},
-  extraReducers:builder => {
+  extraReducers: builder => {
     //REGISTER
     builder
       .addCase(createMd.pending, state => {
@@ -88,6 +114,23 @@ export const mdSlice = createSlice({
         state.data.push(action.payload);
       })
       .addCase(createMd.rejected, (state, action) => {
+        state.status = false;
+        state.error = action.error.message;
+        state.success = false;
+      });
+
+    // fetch all unassigned
+    builder
+      .addCase(getAllUnassigned.pending, state => {
+        state.status = true;
+        state.success = false;
+      })
+      .addCase(getAllUnassigned.fulfilled, (state, action) => {
+        state.status = false;
+        state.success = true;
+        state.data = action.payload;
+      })
+      .addCase(getAllUnassigned.rejected, (state, action) => {
         state.status = false;
         state.error = action.error.message;
         state.success = false;
@@ -109,6 +152,23 @@ export const mdSlice = createSlice({
         state.error = action.error.message;
         state.success = false;
       });
+
+    //    // get bank by id
+    // builder
+    // .addCase(getMdById.pending, (state) => {
+    //   state.status = true;
+    //   state.success = false;
+    // })
+    // .addCase(getMdById.fulfilled, (state, action) => {
+    //   state.status = false;
+    //   state.success = true;
+    //   state.data = action.payload;
+    // })
+    // .addCase(getMdById.rejected, (state, action) => {
+    //   state.status = false;
+    //   state.error = action.error.message;
+    //   state.success = false;
+    // });
 
     // update bank
     builder

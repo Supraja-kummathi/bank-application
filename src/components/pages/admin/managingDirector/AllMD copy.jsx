@@ -2,43 +2,31 @@ import { TbArrowsDownUp } from "react-icons/tb";
 import GetMds from "../../../../utils/GetMds";
 import { MdDelete } from "react-icons/md";
 import { BiSolidPencil } from "react-icons/bi";
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { deleteMd } from "../../../../redux/reducers/md/mdSlice";
 import { NavLink } from "react-router-dom";
 import Spinner from "../../spinner/Spinner";
-import { deleteBranchManager, getBranchManager } from "../../../../redux/reducers/branchmanager/branchManagerSlice";
-import useBranchState from "../../../../utils/useBranchState";
 
+const AllMD = () => {
+  let state = GetMds();
 
-const AllBranchManager = () => {
-  
   let dispatch = useDispatch();
   let [search, setSearch] = useState(null);
-  const [itemsPerPage, setItemsPerPage] = useState(1);
-  const [currentPage, setCurrentPage] = useState(1);
-  
-  let data = useBranchState();
-  let [bankId, setBankId] = useState(null);
-  let [state, setState] = useState(null);
-  useEffect(() => {
-    setBankId(data && data?.data?.data?.bankId);
-  }, [data, bankId]); 
 
-  useLayoutEffect(() => {
-    if (bankId) {
-      let test = dispatch(getBranchManager(bankId));
-       test.unwrap().then((x) => {setState(x.data)});
-    }
-  }, [bankId]);
+  const [itemsPerPage, setItemsPerPage] = useState(2);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  let [loading, setLoading] = useState(false);
+
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = state?.slice(
+  const currentItems = state?.data?.data?.slice(
     indexOfFirstItem,
     indexOfLastItem
   );
 
-  const totalPages = Math.ceil(state?.length / itemsPerPage);
+  const totalPages = Math.ceil(state?.data?.data?.length / itemsPerPage);
 
   const handlePageChange = pageNumber => {
     setLoading(true);
@@ -60,9 +48,9 @@ const AllBranchManager = () => {
 
   return (
     <div className="w-[100%] p-5 h-[100%]">
-      <div className="pb-3 font-semibold">All Branch Managers</div>
-      {state?.length<=0 ? (
-        <Spinner/>
+      <div className="pb-3 font-semibold">All MD</div>
+      {state.status === true ? (
+        <Spinner />
       ) : (
         <section className=" bg-white w-[100%] overflow-auto h-[95%] no-scrollbar">
           <header className="mx-10 my-2 w-[93%] flex justify-between items-center ">
@@ -74,10 +62,10 @@ const AllBranchManager = () => {
                   setItemsPerPage(e.target.value);
                 }}
               >
-                <option value="1">1</option>
                 <option value="2">2</option>
-                <option value="3">3</option>
                 <option value="4">4</option>
+                <option value="6">6</option>
+                <option value="8">8</option>
               </select>
               entries
             </div>
@@ -136,7 +124,7 @@ const AllBranchManager = () => {
                   </th>
                   <th>
                     <div className="w-20% flex justify-between align-center px-2">
-                      <span>Password</span>
+                      <span>Bankname</span>
                       <span>
                         <TbArrowsDownUp />
                       </span>
@@ -172,10 +160,10 @@ const AllBranchManager = () => {
                         <div className="flex">
                           <span className="px-2  text-red-500">
                             <NavLink
-                              to={`/adminlayout/managingDirectors/update/${data.employeeId}`}
+                              to={`/adminlayout/update-md/${data.employeeId}`}
                             >
                               <BiSolidPencil />
-                            </NavLink>
+                            </NavLink>{" "}
                           </span>
                           <span className="px-2 ">
                             <MdDelete
@@ -205,7 +193,7 @@ const AllBranchManager = () => {
                         <div className="flex">
                           <span className="px-2  text-red-500">
                             <NavLink
-                              to={`/mdlayout/branchManager/update/${data.employeeId}`}
+                              to={`/adminlayout/update-md/${data.employeeId}`}
                             >
                               <BiSolidPencil />
                             </NavLink>
@@ -216,7 +204,7 @@ const AllBranchManager = () => {
                                 let deleteConfirm =
                                   window.confirm("Are you sure");
                                 if (deleteConfirm === true) {
-                                  dispatch(deleteBranchManager(data.employeeId));
+                                  dispatch(deleteMd(data.employeeId));
                                 }
                               }}
                             />
@@ -231,12 +219,15 @@ const AllBranchManager = () => {
           </div>
           <footer className="mx-10 my-2 w-[93%]  flex justify-between items-center">
             <p>
-              Showing {indexOfFirstItem} to {indexOfLastItem} of{" "}
-              {state?.length} entries
+              Showing {indexOfFirstItem + 1} to{" "}
+              {indexOfLastItem < state?.data?.data?.length
+                ? indexOfLastItem
+                : state?.data?.data?.length}{" "}
+              of
+              {state?.data?.data?.length} entries
             </p>
             <div className="mt-4 flex  items-center justify-center">
               <ul className="flex ">
-
                 <li>
                   <button
                     className="text-center px-3 py-1 border-2"
@@ -269,7 +260,6 @@ const AllBranchManager = () => {
                 </li>
               </ul>
             </div>
-
           </footer>
         </section>
       )}
@@ -277,4 +267,4 @@ const AllBranchManager = () => {
   );
 };
 
-export default AllBranchManager;
+export default AllMD;
