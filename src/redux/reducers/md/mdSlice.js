@@ -20,7 +20,7 @@ export const createMd = createAsyncThunk("createMd", async payload => {
     // eslint-disable-next-line no-undef
 
     const { data } = await AxiosInstanceProtected.post(
-      `/managingDirectors/save?bankId=${payload.bankId}`,
+      `/managingDirectors?bankId=${payload.bankId}`,
       payload
     );
     console.log(data);
@@ -32,6 +32,7 @@ export const createMd = createAsyncThunk("createMd", async payload => {
 });
 
 //=================Fetch all unassigned==============/
+<<<<<<< HEAD
 export const getAllUnassigned = createAsyncThunk("getAllUnassigned", async ()=> {
   try {
     const { data } = await AxiosInstanceProtected.get(
@@ -39,11 +40,36 @@ export const getAllUnassigned = createAsyncThunk("getAllUnassigned", async ()=> 
     );  
     return data;
 
+=======
+export const getAllUnassigned = createAsyncThunk(
+  "getAllUnassigned",
+  async () => {
+    try {
+      const { data } = await AxiosInstanceProtected.get(
+        `/banks/getAllUnAssigned`
+      );
+      return data;
+    } catch (error) {
+      return error.message;
+    }
+  }
+);
+
+//=================get by BankId==============/
+export const getMdById = createAsyncThunk("getMdById", async employeeId => {
+  try {
+    const { data } = await AxiosInstanceProtected.get(
+      `/managingDirectors/getManagingDirectorById?managingDirectorId=${employeeId}`
+    );
+    console.log(data);
+    return data;
+>>>>>>> ef045e2e40959f916a69d7972c08eeed4ac67696
   } catch (error) {
     return error.message;
   }
 });
 
+<<<<<<< HEAD
 //=================get by BankId==============/
 // export const getMdById = createAsyncThunk("getMdById", async (employeeId) => {
 //   try {
@@ -55,11 +81,13 @@ export const getAllUnassigned = createAsyncThunk("getAllUnassigned", async ()=> 
 //   }
 // });
 
+=======
+>>>>>>> ef045e2e40959f916a69d7972c08eeed4ac67696
 export const getMd = createAsyncThunk("getMd", async () => {
   try {
     // eslint-disable-next-line no-undef
     const { data } = await AxiosInstanceProtected.get(
-      `/managingDirectors/getAll`
+      `/managingDirectors/getAllManagingDirector`
     );
     return data;
   } catch (error) {
@@ -70,7 +98,7 @@ export const getMd = createAsyncThunk("getMd", async () => {
 export const updateMd = createAsyncThunk("updateMd", async payload => {
   try {
     const { data } = await AxiosInstanceProtected.put(
-      `/managingDirectors/update?managerId=${payload.employeeId}`,
+      `/managingDirectors?managerId=${payload.employeeId}`,
       payload
     );
     return data;
@@ -96,7 +124,7 @@ export const mdSlice = createSlice({
   name: "bank",
   initialState,
   reducers: {},
-  extraReducers:builder => {
+  extraReducers: builder => {
     //REGISTER
     builder
       .addCase(createMd.pending, state => {
@@ -115,6 +143,7 @@ export const mdSlice = createSlice({
         state.success = false;
       });
 
+<<<<<<< HEAD
        // fetch all unassigned 
     builder
     .addCase(getAllUnassigned.pending, (state) => {
@@ -131,6 +160,24 @@ export const mdSlice = createSlice({
       state.error = action.error.message;
       state.success = false;
     });
+=======
+    // fetch all unassigned
+    builder
+      .addCase(getAllUnassigned.pending, state => {
+        state.status = true;
+        state.success = false;
+      })
+      .addCase(getAllUnassigned.fulfilled, (state, action) => {
+        state.status = false;
+        state.success = true;
+        state.data = action.payload;
+      })
+      .addCase(getAllUnassigned.rejected, (state, action) => {
+        state.status = false;
+        state.error = action.error.message;
+        state.success = false;
+      });
+>>>>>>> ef045e2e40959f916a69d7972c08eeed4ac67696
 
     // fetch bank
     builder

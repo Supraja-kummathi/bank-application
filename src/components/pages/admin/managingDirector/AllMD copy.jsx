@@ -25,17 +25,8 @@ const AllMD = () => {
     indexOfFirstItem,
     indexOfLastItem
   );
-  const [data, setData] = useState([{ currentItems }]); // Your initial data
-  console.log(data);
-  const [isAscending, setIsAscending] = useState(true);
-  const totalPages = Math.ceil(state?.data?.data?.length / itemsPerPage);
 
-  const handleToggleSort = () => {
-    setIsAscending(!isAscending);
-    // Sort the data directly in the state array
-    setData(data.sort((a, b) => (isAscending ? a - b : b - a)));
-    console.log("currentItems:", currentItems);
-  };
+  const totalPages = Math.ceil(state?.data?.data?.length / itemsPerPage);
 
   const handlePageChange = pageNumber => {
     setLoading(true);
@@ -118,9 +109,9 @@ const AllMD = () => {
                   <th className="py-2">
                     <div className="w-20% flex justify-between align-center px-2">
                       <span>Manager Name</span>
-                      <button onClick={handleToggleSort}>
+                      <span>
                         <TbArrowsDownUp />
-                      </button>
+                      </span>
                     </div>
                   </th>
                   <th>
@@ -159,7 +150,6 @@ const AllMD = () => {
               </thead>
               <tbody>
                 {search?.map(data => {
-                  console.log(data);
                   return (
                     <tr className="text-xs border-b-2">
                       <td className="px-2 py-3 ">{data.name}</td>
@@ -169,18 +159,12 @@ const AllMD = () => {
                       <td className="px-2">
                         <div className="flex">
                           <span className="px-2  text-red-500">
-<<<<<<< HEAD
-                          <NavLink to={`/adminlayout/update-md/${data.employeeId}`}>
-                        <BiSolidPencil />
-                      </NavLink>                                                      </span>
-=======
                             <NavLink
                               to={`/adminlayout/update-md/${data.employeeId}`}
                             >
                               <BiSolidPencil />
                             </NavLink>{" "}
                           </span>
->>>>>>> ef045e2e40959f916a69d7972c08eeed4ac67696
                           <span className="px-2 ">
                             <MdDelete
                               onClick={() => {

@@ -28,7 +28,17 @@ export const createBank = createAsyncThunk("createBank", async payload => {
 export const getBank = createAsyncThunk("getBank", async () => {
   try {
     // eslint-disable-next-line no-undef
-    const { data } = await AxiosInstanceProtected.get(`/banks`);
+    const { data } = await AxiosInstanceProtected.get(`/banks/getAll`);
+    return data;
+  } catch (error) {
+    return error.message;
+  }
+});
+
+//=================get by BankId==============/
+export const getBankById = createAsyncThunk("getBankById", async bankId => {
+  try {
+    const { data } = await AxiosInstanceProtected.get(`/banks/bankId/${bankId}`);
     return data;
   } catch (error) {
     return error.message;

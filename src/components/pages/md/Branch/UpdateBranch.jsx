@@ -10,7 +10,10 @@ const UpdateBranch = () => {
   let navigate = useNavigate();
   let dispatch = useDispatch();
   let [updatedState, setUpdatedState] = useState();
+<<<<<<< HEAD
   let [cou, setCon] = useState(null);
+=======
+>>>>>>> ef045e2e40959f916a69d7972c08eeed4ac67696
   
   useEffect(() => {
   dispatch(getBranchById(branchId))

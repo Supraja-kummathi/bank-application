@@ -3,6 +3,7 @@ import React from 'react'
 import LandingTopNav from './LandingTopNav'
 import LandingTopFooter from './LandingTopFooter'
 import basicimg from "../../../images/basicimg.png"
+<<<<<<< HEAD
 =======
 import React from "react";
 import LandingTopNav from "./LandingTopNav";
@@ -10,6 +11,8 @@ import LandingTopFooter from "./LandingTopFooter";
 
 import basicimg from "../../../images/basicimg.png";
 >>>>>>> c4dd0a41e2af559c844d67607e26d0ae45f4e245
+=======
+>>>>>>> ef045e2e40959f916a69d7972c08eeed4ac67696
 
 const LandingTopMain = () => {
   return (

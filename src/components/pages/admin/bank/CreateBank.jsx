@@ -5,7 +5,10 @@ import { useDispatch } from "react-redux";
 import { createBank } from "../../../../redux/reducers/bank/bankSlice";
 import { useNavigate } from "react-router-dom";
 import { Country, State, City } from "country-state-city";
+<<<<<<< HEAD
 
+=======
+>>>>>>> ef045e2e40959f916a69d7972c08eeed4ac67696
 const CreateBank = () => {
   let dispatch = useDispatch();
   const navigate = useNavigate();
@@ -32,15 +35,14 @@ const CreateBank = () => {
     },
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
     dispatch(createBank(payload));
     console.log(state);
 
     navigate("/adminlayout/all-bank");
-
   };
-  console.log(payload)
+  console.log(payload);
 
   return (
     <section className="h-[100%] w-[100%] relative">
@@ -58,7 +60,7 @@ const CreateBank = () => {
               id="bankname"
               name="bankname"
               value={state.bankName}
-              onChange={(e) => {
+              onChange={e => {
                 setState({ ...state, bankName: e.target.value });
               }}
             />
@@ -72,8 +74,8 @@ const CreateBank = () => {
               type="text"
               id="branchaddress"
               name="branchaddress"
-              value={state.address}
-              onChange={(e) => {
+              value={state.address.addressLine}
+              onChange={e => {
                 setState({ ...state, addressLine: e.target.value });
               }}
               cols={30}
@@ -81,7 +83,11 @@ const CreateBank = () => {
             />
           </div>
           <div className="flex justify-between w-[99%] mb-4">
+<<<<<<< HEAD
             <label htmlFor="country" className="text-[rgb(145,142,143)]">
+=======
+            <label htmlFor="bankname" className="text-[rgb(145,142,143)]">
+>>>>>>> ef045e2e40959f916a69d7972c08eeed4ac67696
               Country
             </label>
 
@@ -100,10 +106,43 @@ const CreateBank = () => {
                 setState({ ...state, country: e.target.value });
               }}
             >
+<<<<<<< HEAD
+=======
+              <option disabled value="" className="text-gray-400">
+                -- Select The Country --
+              </option>
+>>>>>>> ef045e2e40959f916a69d7972c08eeed4ac67696
               {Country.getAllCountries().map(city => {
                 return <option value={city.name}>{city.name}</option>;
               })}
             </select>
+<<<<<<< HEAD
+=======
+          </div>
+
+          <div className="flex justify-between w-[99%] mb-4">
+            <label htmlFor="bankname" className="text-[rgb(145,142,143)]">
+              City
+            </label>
+
+            <select
+              className="w-[80%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
+              name="city"
+              id="city"
+              value={state.city}
+              onChange={e => {
+                setState({ ...state, city: e.target.value });
+              }}
+            >
+              {" "}
+              <option disabled value="" className="text-gray-400">
+                -- Select The City --
+              </option>
+              {City.getCitiesOfCountry(cou).map(city => {
+                return <option value={city.name}>{city.name}</option>;
+              })}
+            </select>
+>>>>>>> ef045e2e40959f916a69d7972c08eeed4ac67696
           </div>
 
           <div className="flex justify-between w-[99%] mb-4">
@@ -138,7 +177,7 @@ const CreateBank = () => {
               id="pincode"
               name="pincode"
               value={state.pincode}
-              onChange={(e) => {
+              onChange={e => {
                 setState({ ...state, pincode: e.target.value });
               }}
             />
