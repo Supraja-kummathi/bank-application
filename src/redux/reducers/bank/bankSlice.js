@@ -137,6 +137,7 @@ export const bankSlice = createSlice({
       .addCase(updateBank.fulfilled, (state, action) => {
         state.status = false;
         state.success = true;
+        
         state.data = state.data.map(el =>
           action.payload.bankId === el.bankId ? action.payload : el
         );

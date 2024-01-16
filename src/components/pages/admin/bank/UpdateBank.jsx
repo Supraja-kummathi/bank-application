@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import { getBankById, updateBank } from "../../../../redux/reducers/bank/bankSlice";
 
-
 const UpdateBank = () => {
   let { bankId } = useParams();
   let navigate = useNavigate();
@@ -32,7 +31,8 @@ useEffect(() => {
 
   let handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(updateBank(updatedState));
+    let r = dispatch(updateBank(updatedState));
+    console.log(r);
     navigate("/adminlayout/all-bank");
   };
 
