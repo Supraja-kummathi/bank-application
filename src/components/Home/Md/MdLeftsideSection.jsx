@@ -16,23 +16,13 @@ import { FaHandHoldingDollar } from "react-icons/fa6";
 import { LiaIdCardSolid } from "react-icons/lia";
 
 const MdLeftsideSection = () => {
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> ef045e2e40959f916a69d7972c08eeed4ac67696
-  let navigate =useNavigate()
-  const dispatch = useDispatch();
-  let user=useGetMd();
+
   //const user = useGetProfile();
-<<<<<<< HEAD
-=======
+
   const user = useGetProfile();
   const dispatch = useDispatch();
   const navigate = useNavigate();
->>>>>>> c4dd0a41e2af559c844d67607e26d0ae45f4e245
-=======
->>>>>>> ef045e2e40959f916a69d7972c08eeed4ac67696
-  console.log(user);
+
 
   const [Branch, setBranch] = useState(false);
   const [BankManager, setBankManager] = useState(false);
@@ -56,18 +46,13 @@ const MdLeftsideSection = () => {
               alt=""
               className="h-[4rem] w-[4rem] rounded-full mt-5"
             />
-<<<<<<< HEAD
-<<<<<<< HEAD
-            <p className="mt-3">{user?.data?.data?.role}</p>
-            <p className="mt-1 text-[rgb(112,112,112)]"></p>
-=======
+
             <p className="mt-3">{user?.userInfo?.data?.name}</p>
             <p className="mt-1 text-[rgb(112,112,112)]">Admin</p>
->>>>>>> c4dd0a41e2af559c844d67607e26d0ae45f4e245
-=======
+
             <p className="mt-3">{user?.data?.data?.role}</p>
             <p className="mt-1 text-[rgb(112,112,112)]"></p>
->>>>>>> ef045e2e40959f916a69d7972c08eeed4ac67696
+
           </div>
         )}
         <div className="flex mt-8 ms-8">
@@ -399,23 +384,13 @@ const MdLeftsideSection = () => {
         <div className="text-center fixed left-24">
           <button
             className=" text-white bg-gradient-to-r from-blue-500 via-blue-700 to-blue-900 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-3 py-1.5 text-center"
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> ef045e2e40959f916a69d7972c08eeed4ac67696
+
             onClick={() => 
               
               {dispatch(logout()); navigate("/")
               }}
-<<<<<<< HEAD
-=======
-            onClick={() => {
-              dispatch(logout());
-              navigate("/");
-            }}
->>>>>>> c4dd0a41e2af559c844d67607e26d0ae45f4e245
-=======
->>>>>>> ef045e2e40959f916a69d7972c08eeed4ac67696
+
+
           >
             Logout
           </button>

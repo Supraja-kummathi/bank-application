@@ -1,12 +1,4 @@
 import React from 'react'
-<<<<<<< HEAD
-
-const ManagingDirectorDashboard = ({name}) => {
-  return (
-    <div>
-      {name}
-    </div>
-=======
 import { IoMdArrowDropup } from "react-icons/io";
 import { IoMdArrowDropdown } from "react-icons/io";
 import ManagingDirector from './ManagingDirector';
@@ -80,7 +72,7 @@ const ManagingDirectorDashboard = ({name}) => {
        <ManagingDirector/>
        </section>
     </section>
->>>>>>> 2827ee8e27a404ecb8f83de50ba85571bdffd276
+
   )
 }
 

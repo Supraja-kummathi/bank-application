@@ -35,15 +35,7 @@ export const getBank = createAsyncThunk("getBank", async () => {
   }
 });
 
-//=================get by BankId==============/
-export const getBankById = createAsyncThunk("getBankById", async bankId => {
-  try {
-    const { data } = await AxiosInstanceProtected.get(`/banks/bankId/${bankId}`);
-    return data;
-  } catch (error) {
-    return error.message;
-  }
-});
+
 
 //=================get by BankId==============/
 export const getBankById = createAsyncThunk("getBankById", async bankId => {

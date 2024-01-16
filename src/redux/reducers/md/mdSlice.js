@@ -32,15 +32,7 @@ export const createMd = createAsyncThunk("createMd", async payload => {
 });
 
 //=================Fetch all unassigned==============/
-<<<<<<< HEAD
-export const getAllUnassigned = createAsyncThunk("getAllUnassigned", async ()=> {
-  try {
-    const { data } = await AxiosInstanceProtected.get(
-      `/banks/getAllUnAssigned`
-    );  
-    return data;
 
-=======
 export const getAllUnassigned = createAsyncThunk(
   "getAllUnassigned",
   async () => {
@@ -63,26 +55,12 @@ export const getMdById = createAsyncThunk("getMdById", async employeeId => {
     );
     console.log(data);
     return data;
->>>>>>> ef045e2e40959f916a69d7972c08eeed4ac67696
+
   } catch (error) {
     return error.message;
   }
 });
 
-<<<<<<< HEAD
-//=================get by BankId==============/
-// export const getMdById = createAsyncThunk("getMdById", async (employeeId) => {
-//   try {
-//     const { data } = await AxiosInstanceProtected.get(`/managingDirectors/getMD/${employeeId}`);
-//     console.log(data)
-//     return data;
-//   } catch (error) {
-//     return error.message;
-//   }
-// });
-
-=======
->>>>>>> ef045e2e40959f916a69d7972c08eeed4ac67696
 export const getMd = createAsyncThunk("getMd", async () => {
   try {
     // eslint-disable-next-line no-undef
@@ -143,24 +121,7 @@ export const mdSlice = createSlice({
         state.success = false;
       });
 
-<<<<<<< HEAD
-       // fetch all unassigned 
-    builder
-    .addCase(getAllUnassigned.pending, (state) => {
-      state.status = true;
-      state.success = false;
-    })
-    .addCase(getAllUnassigned.fulfilled, (state, action) => {
-      state.status = false;
-      state.success = true;
-      state.data = action.payload;
-    })
-    .addCase(getAllUnassigned.rejected, (state, action) => {
-      state.status = false;
-      state.error = action.error.message;
-      state.success = false;
-    });
-=======
+
     // fetch all unassigned
     builder
       .addCase(getAllUnassigned.pending, state => {
@@ -177,7 +138,7 @@ export const mdSlice = createSlice({
         state.error = action.error.message;
         state.success = false;
       });
->>>>>>> ef045e2e40959f916a69d7972c08eeed4ac67696
+
 
     // fetch bank
     builder

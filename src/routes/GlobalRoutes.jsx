@@ -33,6 +33,10 @@ import AllAccounts from "../components/BankManager/AllAccounts";
 import SavingsAccount from "../components/BankManager/SavingsAccount";
 import CurrentAccount from "../components/BankManager/CurrentAccount";
 import LoanAccount from "../components/BankManager/LoanAccount";
+import UpdateBranch from "../components/pages/md/Branch/UpdateBranch";
+import UpdateBranchManager from './../components/pages/md/BranchManager/UpdateBranchManager';
+import LoanApprovals from './../components/pages/md/Approvals/LoanApprovals';
+import CardApprovals from './../components/pages/md/Approvals/CardApprovals';
 
 
 const router = createBrowserRouter([

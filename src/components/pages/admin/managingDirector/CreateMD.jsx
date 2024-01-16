@@ -3,36 +3,27 @@ import { useState } from "react";
 import Button from "../../../../utilities/Button";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-<<<<<<< HEAD
-import { createMd, getAllUnassigned } from "../../../../redux/reducers/md/mdSlice";
 
-=======
 import {
   createMd,
   getAllUnassigned,
 } from "../../../../redux/reducers/md/mdSlice";
 import { Country, State, City } from "country-state-city";
 // console.log(Country.getCountryByCode(cou));
->>>>>>> ef045e2e40959f916a69d7972c08eeed4ac67696
+
 
 const CreateMD = () => {
   let dispatch = useDispatch();
   const navigate = useNavigate();
   let [bank, setBank] = useState(null);
-<<<<<<< HEAD
-  useEffect(() => {
-      dispatch(getAllUnassigned()).then((x) => setBank(x.payload.data));
-  
-  }, []);
 
-=======
   let [cou, setCon] = useState(null);
   useEffect(() => {
     dispatch(getAllUnassigned()).then(x => setBank(x.payload.data));
   }, []);
 
  
->>>>>>> ef045e2e40959f916a69d7972c08eeed4ac67696
+
 
   const [state, setState] = useState({
     name: "",
@@ -290,11 +281,9 @@ const CreateMD = () => {
                 setState({ ...state, bankId: e.target.value });
               }}
             >
-<<<<<<< HEAD
-              <option>select bank</option>
-=======
+
               <option disabled value="" selected>-- Select Bank --</option>
->>>>>>> ef045e2e40959f916a69d7972c08eeed4ac67696
+
               {bank?.length >= 0 &&
                 bank?.map(bank => (
                   <Fragment key={bank.bankId}>

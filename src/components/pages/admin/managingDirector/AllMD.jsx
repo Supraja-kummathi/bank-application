@@ -169,18 +169,14 @@ const AllMD = () => {
                       <td className="px-2">
                         <div className="flex">
                           <span className="px-2  text-red-500">
-<<<<<<< HEAD
-                          <NavLink to={`/adminlayout/update-md/${data.employeeId}`}>
-                        <BiSolidPencil />
-                      </NavLink>                                                      </span>
-=======
+
                             <NavLink
                               to={`/adminlayout/update-md/${data.employeeId}`}
                             >
                               <BiSolidPencil />
                             </NavLink>{" "}
                           </span>
->>>>>>> ef045e2e40959f916a69d7972c08eeed4ac67696
+
                           <span className="px-2 ">
                             <MdDelete
                               onClick={() => {

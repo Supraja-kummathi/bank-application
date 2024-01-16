@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
-<<<<<<< HEAD
-import {updateMd } from "../../../../redux/reducers/md/mdSlice";
-=======
+
 import { getMdById, updateMd } from "../../../../redux/reducers/md/mdSlice";
->>>>>>> ef045e2e40959f916a69d7972c08eeed4ac67696
+
 import Button from "../../../../utilities/Button";
 
 const UpdateMd = () => {
@@ -14,15 +12,11 @@ const UpdateMd = () => {
   let dispatch = useDispatch();
 //   let [updatedState, setUpdatedState] = useState();
 
-<<<<<<< HEAD
-// useEffect(() => {
-//  dispatch(getMdById(employeeId)).then((x) => setUpdatedState(x.payload.data));
-//   }, [employeeId]);
-=======
+
   useEffect(() => {
     dispatch(getMdById(employeeId)).then(x => setUpdatedState(x.payload.data));
   }, [employeeId]);
->>>>>>> ef045e2e40959f916a69d7972c08eeed4ac67696
+
 
   const handleChange = e => {
     if (Object.keys(updatedState.address).includes(e.target.name)) {
