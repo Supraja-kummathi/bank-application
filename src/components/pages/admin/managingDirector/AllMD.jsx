@@ -150,6 +150,7 @@ const AllMD = () => {
               </thead>
               <tbody>
                 {search?.map(data => {
+                  console.log(data);
                   return (
                     <tr className="text-xs border-b-2">
                       <td className="px-2 py-3 ">{data.name}</td>
@@ -159,12 +160,9 @@ const AllMD = () => {
                       <td className="px-2">
                         <div className="flex">
                           <span className="px-2  text-red-500">
-                            <NavLink
-                              to={`/adminlayout/managingDirectors/update/${data.employeeId}`}
-                            >
-                              <BiSolidPencil />
-                            </NavLink>
-                          </span>
+                          <NavLink to={`/adminlayout/update-md/${data.employeeId}`}>
+                        <BiSolidPencil />
+                      </NavLink>                                                      </span>
                           <span className="px-2 ">
                             <MdDelete
                               onClick={() => {
@@ -193,7 +191,7 @@ const AllMD = () => {
                         <div className="flex">
                           <span className="px-2  text-red-500">
                             <NavLink
-                              to={`/managingDirectors/update/${data.employeeId}`}
+                              to={`/adminlayout/update-md/${data.employeeId}`}
                             >
                               <BiSolidPencil />
                             </NavLink>

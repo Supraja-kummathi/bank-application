@@ -25,7 +25,6 @@ const AllBranchManager = () => {
     setBankId(data && data?.data?.data?.bankId);
   }, [data, bankId]); 
 
-  console.log(state)
   useLayoutEffect(() => {
     if (bankId) {
       let test = dispatch(getBranchManager(bankId));
@@ -137,7 +136,7 @@ const AllBranchManager = () => {
                   </th>
                   <th>
                     <div className="w-20% flex justify-between align-center px-2">
-                      <span>Password</span>
+                      <span>Branch Name</span>
                       <span>
                         <TbArrowsDownUp />
                       </span>
@@ -145,7 +144,7 @@ const AllBranchManager = () => {
                   </th>
                   <th>
                     <div className="w-20% flex justify-between align-center px-2">
-                      <span>Branch Name</span>
+                      <span>Location</span>
                       <span>
                         <TbArrowsDownUp />
                       </span>

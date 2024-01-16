@@ -1,24 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import GetMds from "../../../../utils/GetMds";
 import { useDispatch } from "react-redux";
-import { updateMd } from "../../../../redux/reducers/md/mdSlice";
+import {updateMd } from "../../../../redux/reducers/md/mdSlice";
 import Button from "../../../../utilities/Button";
 
 const UpdateMd = () => {
   let { employeeId } = useParams();
   let navigate = useNavigate();
-  let { data } = GetMds();
   let dispatch = useDispatch();
-  let [updatedState, setUpdatedState] = useState();
+//   let [updatedState, setUpdatedState] = useState();
 
-  useEffect(() => {
-    if (employeeId) {
-      let filteredData = data?.data?.filter(md => md.employeeId == employeeId);
-
-      setUpdatedState(filteredData && filteredData[0]);
-    }
-  }, [employeeId, data]);
+// useEffect(() => {
+//  dispatch(getMdById(employeeId)).then((x) => setUpdatedState(x.payload.data));
+//   }, [employeeId]);
 
   const handleChange = e => {
     if (Object.keys(updatedState.address).includes(e.target.name)) {
@@ -39,7 +33,6 @@ const UpdateMd = () => {
   let handleSubmit = e => {
     e.preventDefault();
     dispatch(updateMd(updatedState));
-
     navigate("/adminlayout/all-md");
 
   };

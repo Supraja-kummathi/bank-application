@@ -2,7 +2,7 @@ import React from 'react'
 
 const LandingFooter = () => {
   return (
-    <footer className="flex items-center justify-evenly w-[100%] h-[30%] mt-14 bg-black">
+    <footer className="flex items-center justify-evenly w-[100%] h-[30%] mt-24 bg-black">
         <div className="text-white flex flex-col justify-evenly h-[90%] w-[22%] ms-36">
           <p>Home </p>
           <p>Accounts</p>

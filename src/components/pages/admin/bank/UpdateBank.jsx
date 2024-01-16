@@ -1,24 +1,19 @@
 import { useEffect, useState } from "react";
-import { v4 as uuidv4 } from "uuid";
 import { useDispatch } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
-import useGetBank from "../../../../utils/useGetAllBanks";
-import { updateBank } from "../../../../redux/reducers/bank/bankSlice";
+import { getBankById, updateBank } from "../../../../redux/reducers/bank/bankSlice";
 
 
 const UpdateBank = () => {
   let { bankId } = useParams();
   let navigate = useNavigate();
-  let { data } = useGetBank();
   let dispatch = useDispatch();
-  let [updatedState, setUpdatedState] = useState();
+ let [updatedState, setUpdatedState] = useState();
 
-  useEffect(() => {
-    if (bankId) {
-      let filteredData = data?.data?.filter((bank) => bank.bankId == bankId);
-      setUpdatedState(filteredData && filteredData[0]);
-    }
-  }, [bankId, data]);
+useEffect(() => {
+ dispatch(getBankById(bankId)).then((x) => setUpdatedState(x.payload.data));
+  }, [bankId]);
+
 
   const handleChange = (e) => {
    if (Object.keys(updatedState.address).includes(e.target.name)) {
@@ -40,7 +35,7 @@ const UpdateBank = () => {
     dispatch(updateBank(updatedState));
     navigate("/adminlayout/all-bank");
   };
-  console.log(updatedState)
+
   return (
     <>
       <section className="h-[100%] w-[100%] relative">
@@ -54,7 +49,7 @@ const UpdateBank = () => {
               </label>
 
               <input
-                className="w-[80%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
+                className="w-[80%] pointer-events-none opacity-40 cursor-not-allowed rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
                 type="text"
                 placeholder="Enter here..."
                 id="bankname"
@@ -69,8 +64,8 @@ const UpdateBank = () => {
             </label>
 
             <textarea
-              className="w-[80%] rounded-md border-0 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
-              id="branchaddress"
+              className="w-[80%] pt-1 ps-2 rounded-md border-0 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
+              id="adress"
               cols={30}
               rows={3}
               name="addressLine"
@@ -79,7 +74,7 @@ const UpdateBank = () => {
             />
             </div>
             <div className="flex justify-between w-[99%] mb-4">
-            <label htmlFor="bankname" className="text-[rgb(145,142,143)]">
+            <label htmlFor="city" className="text-[rgb(145,142,143)]">
               City
             </label>
             <input
@@ -93,7 +88,7 @@ const UpdateBank = () => {
             />
           </div>
           <div className="flex justify-between w-[99%] mb-4">
-            <label htmlFor="bankname" className="text-[rgb(145,142,143)]">
+            <label htmlFor="country" className="text-[rgb(145,142,143)]">
               Country
             </label>
             <input
@@ -107,7 +102,7 @@ const UpdateBank = () => {
             />
           </div>
           <div className="flex justify-between w-[99%] mb-4">
-            <label htmlFor="bankname" className="text-[rgb(145,142,143)]">
+            <label htmlFor="pincode" className="text-[rgb(145,142,143)]">
               Pincode
             </label>
             <input
@@ -123,7 +118,7 @@ const UpdateBank = () => {
           </div>
           <div className="flex justify-end pt-4">
               <button className="text-white border-2 border-orange-400 bg-orange-400 hover:bg-white hover:text-orange-500 hover:border-2 hover:border-orange-500 focus:ring-4 focus:outline-none focus:ring-orange-300 dark:focus:ring-orange-800 font-medium rounded-md text-sm px-5 py-2.5 text-center me-2 mb-2">
-                updateBank
+                update Bank
               </button>
             </div>
           </form>

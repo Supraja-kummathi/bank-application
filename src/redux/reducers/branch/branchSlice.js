@@ -34,7 +34,7 @@ export const createBranch = createAsyncThunk(
 export const getMdProfile = createAsyncThunk("getMdProfile", async () => {
   try {
     const { data } = await AxiosInstanceProtected.get(
-      `/managingDirectors/getMD`
+      `/managingDirectors/getManaginDirector`
     );
 
     return data;

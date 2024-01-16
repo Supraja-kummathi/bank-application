@@ -1,27 +1,20 @@
 import React, { Fragment, useEffect } from "react";
 import { useState } from "react";
-
-import { v4 as uuidv4 } from "uuid";
-
 import Button from "../../../../utilities/Button";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { createMd } from "../../../../redux/reducers/md/mdSlice";
-import useGetBank from "../../../../utils/useGetAllBanks";
+import { createMd, getAllUnassigned } from "../../../../redux/reducers/md/mdSlice";
+
 
 const CreateMD = () => {
   let dispatch = useDispatch();
   const navigate = useNavigate();
-  let { data } = useGetBank();
-  console.log(data);
+  let [bank, setBank] = useState(null);
+  useEffect(() => {
+      dispatch(getAllUnassigned()).then((x) => setBank(x.payload.data));
+  
+  }, []);
 
-  // const [searchParams, setSearchParams] = useSearchParams();
-  // let [query, setQuery] = React.useState(searchParams.get("bankId"));
-  // console.log(query);
-
-  // useEffect(() => {
-  //   setSearchParams({ bankId: query });
-  // }, [query]);
 
   const [state, setState] = useState({
     name: "",
@@ -259,8 +252,8 @@ const CreateMD = () => {
               }}
             >
               <option>select bank</option>
-              {data?.data?.length >= 0 &&
-                data?.data?.map(bank => (
+              {bank?.length >= 0 &&
+                bank?.map(bank => (
                   <Fragment key={bank.bankId}>
                     <option value={bank.bankId}>{bank.bankName}</option>
                   </Fragment>

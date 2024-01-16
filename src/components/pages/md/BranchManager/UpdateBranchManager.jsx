@@ -3,11 +3,12 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import Button from "../../../../utilities/Button";
 import { getBranchManagerById, updateBranchManager } from "../../../../redux/reducers/branchmanager/branchManagerSlice";
-
+import { Country, State, City } from "country-state-city";
 const UpdateBranchManager = () => {
   let { employeeId } = useParams();
   let navigate = useNavigate();
   let dispatch = useDispatch();
+  let [cou, setCon] = useState(null);
   let [updatedState, setUpdatedState] = useState();
   useEffect(() => {
   dispatch(getBranchManagerById(employeeId))
@@ -103,34 +104,49 @@ const UpdateBranchManager = () => {
               rows={3}
             />
           </div>
-          <div className="flex justify-between w-[99%] mb-4">
-            <label htmlFor="bankname" className="text-[rgb(145,142,143)]">
-              City
-            </label>
-            <input
-              className="w-[80%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
-              type="text"
-              placeholder="Enter here..."
-              id="city"
-              name="city"
-              value={updatedState && updatedState.address.city}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="flex justify-between w-[99%] mb-4">
-            <label htmlFor="bankname" className="text-[rgb(145,142,143)]">
+          {/* <div className="flex justify-between w-[99%] mb-4">
+            <label htmlFor="country" className="text-[rgb(145,142,143)]">
               Country
             </label>
-            <input
+            <select
               className="w-[80%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
-              type="text"
-              placeholder="Enter here..."
-              id="country"
               name="country"
-              value={updatedState && updatedState.address.country}
-              onChange={handleChange}
-            />
-          </div>
+              id="country"
+              value={updatedState.country}
+              onChange={e => {
+                setCon(
+                  Country?.getAllCountries().filter(ele => {
+                    return ele.name == e.target.value;
+                  })[0].isoCode
+                );
+                setUpdatedState({ ...updatedState, country: e.target.value });
+              }}
+            >
+              {Country?.getAllCountries().map(city => {
+                return <option value={city.name}>{city.name}</option>;
+              })}
+            </select>
+          </div> */}
+
+          {/* <div className="flex justify-between w-[99%] mb-4">
+            <label htmlFor="city" className="text-[rgb(145,142,143)]">
+              City
+            </label>
+
+            <select
+              className="w-[80%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
+              name="city"
+              id="city"
+              value={updatedState.city}
+              onChange={e => {
+                setUpdatedState({ ...updatedState, city: e.target.value });
+              }}
+            >
+              {City?.getCitiesOfCountry(cou).map(city => {
+                return <option value={city.name}>{city.name}</option>;
+              })}
+            </select>
+          </div> */}
           <div className="flex justify-between w-[99%] mb-4">
             <label htmlFor="bankname" className="text-[rgb(145,142,143)]">
               Pincode

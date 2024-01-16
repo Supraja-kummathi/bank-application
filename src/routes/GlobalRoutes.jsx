@@ -53,19 +53,17 @@ const router = createBrowserRouter([
             element: <UpdateBank />,
           },
           {
-            path: "/adminlayout/managingDirectors/update/:employeeId",
-            element: <UpdateMd />,
-          },
-          {
             path: "/adminlayout/all-bank",
-
             element: <AllBank />,
           },
           {
             path: "/adminlayout/create-md",
             element: <CreateMD />,
           },
-
+          {
+            path:"/adminlayout/update-md/:employeeId",
+            element: <UpdateMd />,
+          },
           {
             path: "/adminlayout/all-md",
             element: <AllMD/> ,
@@ -139,8 +137,8 @@ const router = createBrowserRouter([
     ),
   },
 
-  { path: "/customer/login", element: <Login name="Customer" /> },
-  { path: "/employee/login", element: <Login name="Employee" /> },
+  { path: "/customer/login", element: <Login name="customer" /> },
+  { path: "/employee/login", element: <Login name="employee" /> },
 
   { path: "/forgotpassword", element: <ForgotPassword /> },
 ]);
